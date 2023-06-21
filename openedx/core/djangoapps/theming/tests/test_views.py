@@ -101,10 +101,9 @@ class TestThemingViews(TestCase):
         assert response.url == "/static/images/logo.png"
 
     @override_settings(
-        STORAGES = {
-            "staticfiles": {
-                "BACKEND": "openedx.core.storage.DevelopmentStorage",
-            },
+        STORAGES={
+            **settings.STORAGES,
+            "staticfiles": {"BACKEND": "openedx.core.storage.DevelopmentStorage"},
         }
     )
     def test_asset_with_theme(self):
