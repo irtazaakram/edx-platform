@@ -18,7 +18,7 @@ from openedx.core.djangoapps.plugins.constants import ProjectType, SettingsType
 from .production import *  # pylint: disable=wildcard-import, unused-wildcard-import
 
 # Don't use S3 in devstack, fall back to filesystem
-del STORAGES["DEFAULT"]["BACKEND"]
+del STORAGES["default"]["BACKEND"]
 ORA2_FILEUPLOAD_BACKEND = 'django'
 
 

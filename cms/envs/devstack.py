@@ -10,7 +10,7 @@ from corsheaders.defaults import default_headers as corsheaders_default_headers
 from .production import *  # pylint: disable=wildcard-import, unused-wildcard-import
 
 # Don't use S3 in devstack, fall back to filesystem
-del STORAGES["DEFAULT"]["BACKEND"]
+del STORAGES["default"]["BACKEND"]
 COURSE_IMPORT_EXPORT_STORAGE = 'django.core.files.storage.FileSystemStorage'
 USER_TASKS_ARTIFACT_STORAGE = COURSE_IMPORT_EXPORT_STORAGE
 

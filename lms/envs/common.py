@@ -1960,7 +1960,7 @@ TRANSLATORS_GUIDE = 'https://edx.readthedocs.org/projects/edx-developer-guide/en
 # S3BotoStorage insists on a timeout for uploaded assets. We should make it
 # permanent instead, but rather than trying to figure out exactly where that
 # setting is, I'm just bumping the expiration time to something absurd (100
-# years). This is only used if STORAGES["DEFAULT"]["BACKEND"] is overriden to use S3
+# years). This is only used if STORAGES["default"]["BACKEND"] is overriden to use S3
 # in the global settings.py
 AWS_QUERYSTRING_EXPIRE = 10 * 365 * 24 * 60 * 60  # 10 years
 AWS_SES_REGION_NAME = 'us-east-1'

@@ -735,7 +735,7 @@ DEFAULT_TEMPLATE_ENGINE = TEMPLATES[0]
 # S3BotoStorage insists on a timeout for uploaded assets. We should make it
 # permanent instead, but rather than trying to figure out exactly where that
 # setting is, I'm just bumping the expiration time to something absurd (100
-# years). This is only used if STORAGES["DEFAULT"]["BACKEND"] is overriden to use S3
+# years). This is only used if STORAGES["default"]["BACKEND"] is overriden to use S3
 # in the global settings.py
 AWS_SES_REGION_NAME = 'us-east-1'
 AWS_SES_REGION_ENDPOINT = 'email.us-east-1.amazonaws.com'
