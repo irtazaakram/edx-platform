@@ -1930,7 +1930,6 @@ CERTIFICATE_TEMPLATE_LANGUAGES = {
 }
 
 USE_I18N = True
-USE_L10N = True
 
 STATICI18N_FILENAME_FUNCTION = 'statici18n.utils.legacy_filename'
 STATICI18N_ROOT = PROJECT_ROOT / "static"
@@ -1961,7 +1960,7 @@ TRANSLATORS_GUIDE = 'https://edx.readthedocs.org/projects/edx-developer-guide/en
 # S3BotoStorage insists on a timeout for uploaded assets. We should make it
 # permanent instead, but rather than trying to figure out exactly where that
 # setting is, I'm just bumping the expiration time to something absurd (100
-# years). This is only used if DEFAULT_FILE_STORAGE is overriden to use S3
+# years). This is only used if STORAGES["DEFAULT"]["BACKEND"] is overriden to use S3
 # in the global settings.py
 AWS_QUERYSTRING_EXPIRE = 10 * 365 * 24 * 60 * 60  # 10 years
 AWS_SES_REGION_NAME = 'us-east-1'
@@ -2263,7 +2262,14 @@ PIPELINE = {
     'UGLIFYJS_BINARY': 'node_modules/.bin/uglifyjs',
 }
 
-STATICFILES_STORAGE = 'openedx.core.storage.ProductionStorage'
+STORAGES = {
+    "default": {
+        "BACKEND": 'django.core.files.storage.FileSystemStorage',
+    },
+    "staticfiles": {
+        "BACKEND": 'openedx.core.storage.ProductionStorage',
+    },
+}
 STATICFILES_STORAGE_KWARGS = {}
 
 # List of finder classes that know how to find static files in various locations.
@@ -5069,9 +5075,6 @@ VIDEO_UPLOAD_PIPELINE = {
     'BUCKET': '',
     'ROOT_PATH': '',
 }
-
-############### Settings for django file storage ##################
-DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
 
 ### Proctoring configuration (redirct URLs and keys shared between systems) ####
 PROCTORING_BACKENDS = {

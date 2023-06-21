@@ -18,7 +18,7 @@ from openedx.core.djangoapps.plugins.constants import ProjectType, SettingsType
 from .production import *  # pylint: disable=wildcard-import, unused-wildcard-import
 
 # Don't use S3 in devstack, fall back to filesystem
-del DEFAULT_FILE_STORAGE
+del STORAGES["DEFAULT"]["BACKEND"]
 ORA2_FILEUPLOAD_BACKEND = 'django'
 
 
@@ -121,7 +121,7 @@ def should_show_debug_toolbar(request):  # lint-amnesty, pylint: disable=missing
 ########################### PIPELINE #################################
 
 PIPELINE['PIPELINE_ENABLED'] = False
-STATICFILES_STORAGE = 'openedx.core.storage.DevelopmentStorage'
+STORAGES["staticfiles"]["BACKEND"] = 'openedx.core.storage.DevelopmentStorage'
 
 # Revert to the default set of finders as we don't want the production pipeline
 STATICFILES_FINDERS = [

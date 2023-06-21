@@ -70,7 +70,7 @@ STATICFILES_DIRS = [
     (TEST_ROOT / "staticfiles" / "lms").abspath(),
 ]
 
-DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
+STORAGES["default"]["BACKEND"] = "django.core.files.storage.FileSystemStorage"
 MEDIA_ROOT = TEST_ROOT / "uploads"
 
 # Webpack loader must use webpack output setting

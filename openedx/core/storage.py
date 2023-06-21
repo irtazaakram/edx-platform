@@ -53,7 +53,7 @@ class ProductionMixin(
     We use this version on production.
     """
     def __init__(self, *args, **kwargs):
-        kwargs.update(settings.STATICFILES_STORAGE_KWARGS.get(settings.STATICFILES_STORAGE, {}))
+        kwargs.update(settings.STATICFILES_STORAGE_KWARGS.get(settings.STORAGES['staticfiles']['BACKEND'], {}))
         super().__init__(*args, **kwargs)  # lint-amnesty, pylint: disable=super-with-arguments
 
 

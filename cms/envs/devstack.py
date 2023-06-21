@@ -10,7 +10,7 @@ from corsheaders.defaults import default_headers as corsheaders_default_headers
 from .production import *  # pylint: disable=wildcard-import, unused-wildcard-import
 
 # Don't use S3 in devstack, fall back to filesystem
-del DEFAULT_FILE_STORAGE
+del STORAGES["DEFAULT"]["BACKEND"]
 COURSE_IMPORT_EXPORT_STORAGE = 'django.core.files.storage.FileSystemStorage'
 USER_TASKS_ARTIFACT_STORAGE = COURSE_IMPORT_EXPORT_STORAGE
 
@@ -53,7 +53,7 @@ FRONTEND_REGISTER_URL = LMS_ROOT_URL + '/register'
 
 # Skip packaging and optimization in development
 PIPELINE['PIPELINE_ENABLED'] = False
-STATICFILES_STORAGE = 'openedx.core.storage.DevelopmentStorage'
+STORAGES["staticfiles"]["BACKEND"] = 'openedx.core.storage.DevelopmentStorage'
 
 # Revert to the default set of finders as we don't want the production pipeline
 STATICFILES_FINDERS = [
