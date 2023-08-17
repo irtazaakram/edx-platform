@@ -20,7 +20,7 @@ class AjaxExceptionMiddleware(MiddlewareMixin):
         Processes CommentClientRequestErrors in ajax requests. If the request is an ajax request,
         returns a http response that encodes the error as json
         """
-        if isinstance(exception, CommentClientRequestError) and request.is_ajax():
+        if isinstance(exception, CommentClientRequestError) and request.accepts("application/json"):
             try:
                 return JsonError(json.loads(str(exception)), exception.status_code)
             except ValueError:
