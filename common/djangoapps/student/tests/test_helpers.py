@@ -30,7 +30,7 @@ class TestLoginHelper(TestCase):
     @staticmethod
     def _add_session(request):
         """Annotate the request object with a session"""
-        middleware = SessionMiddleware()
+        middleware = SessionMiddleware('mock-response')
         middleware.process_request(request)
         request.session.save()
 

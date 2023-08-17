@@ -29,7 +29,7 @@ class UserMessagesTestCase(TestCase):
         self.request = RequestFactory().request()
         self.request.session = {}
         self.request.user = self.student
-        MessageMiddleware().process_request(self.request)
+        MessageMiddleware('mock-response').process_request(self.request)
 
     @ddt.data(
         ('Rock & Roll', '<div class="message-content">Rock &amp; Roll</div>'),

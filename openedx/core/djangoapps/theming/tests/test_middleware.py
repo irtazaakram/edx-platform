@@ -26,7 +26,7 @@ class TestCurrentSiteThemeMiddleware(TestCase):
         """
         super().setUp()
 
-        self.site_theme_middleware = CurrentSiteThemeMiddleware()
+        self.site_theme_middleware = CurrentSiteThemeMiddleware('mock-response')
         self.user = UserFactory.create()
 
     def create_mock_get_request(self, qs_theme=None):
@@ -49,7 +49,7 @@ class TestCurrentSiteThemeMiddleware(TestCase):
         request.user = self.user
         request.site, __ = Site.objects.get_or_create(domain='test', name='test')
         request.session = {}
-        MessageMiddleware().process_request(request)
+        MessageMiddleware('mock-response').process_request(request)
 
     @override_settings(DEFAULT_SITE_THEME=TEST_THEME_NAME)
     def test_default_site_theme(self):

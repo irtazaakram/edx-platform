@@ -19,7 +19,7 @@ class TrackMiddlewareTestCase(TestCase):
 
     def setUp(self):
         super().setUp()
-        self.track_middleware = TrackMiddleware()
+        self.track_middleware = TrackMiddleware('mock-response')
         self.request_factory = RequestFactory()
 
         patcher = patch('common.djangoapps.track.views.server_track')
@@ -156,7 +156,7 @@ class TrackMiddlewareTestCase(TestCase):
 
     def test_request_with_session(self):
         request = self.request_factory.get('/courses/')
-        SessionMiddleware().process_request(request)
+        SessionMiddleware('mock-response').process_request(request)
         request.session.save()
         session_key = request.session.session_key
         expected_session_key = self.track_middleware.substitute_session_key(session_key)
