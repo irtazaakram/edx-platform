@@ -30,7 +30,7 @@ jobs:
           --health-timeout 5s
           --health-retries 3
       mysql:
-        image: mysql:${{ matrix.mysql-version }}
+        image: mysql:8
         ports:
           - 3306:3306
         env:
