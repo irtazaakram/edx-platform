@@ -174,7 +174,7 @@ class TestSafeSessionProcessResponse(TestSafeSessionsLogMixin, TestCase):
         if set_session_cookie:
             self.client.response.cookies[settings.SESSION_COOKIE_NAME] = "some_session_id"
 
-        response = SafeSessionMiddleware().process_response(self.request, self.client.response)
+        response = SafeSessionMiddleware('mock-response').process_response(self.request, self.client.response)
         assert response.status_code == 200
 
     def assert_response_with_delete_cookie(
@@ -489,7 +489,7 @@ class TestSafeSessionMiddleware(TestSafeSessionsLogMixin, CacheIsolationTestCase
 
         with self.assert_no_warning_logged():
             with patch('openedx.core.djangoapps.safe_sessions.middleware.set_custom_attribute') as mock_attr:
-                response = SafeSessionMiddleware().process_response(self.request, self.client.response)
+                response = SafeSessionMiddleware('mock-response').process_response(self.request, self.client.response)
         assert response.status_code == 200
         assert 'safe_sessions.user_mismatch' not in [call.args[0] for call in mock_attr.call_args_list]
 
