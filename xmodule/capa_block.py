@@ -1878,7 +1878,7 @@ class ProblemBlock(
         """
         Returns time duration nicely formated, e.g. "3 minutes 4 seconds"
         """
-        # Here _ is the N variant ngettext that does pluralization with a 3-arg call
+        # Here _ is the N variant ungettext that does pluralization with a 3-arg call
         ngettext = self.runtime.service(self, "i18n").ngettext
         hours = num_seconds // 3600
         sub_hour = num_seconds % 3600
