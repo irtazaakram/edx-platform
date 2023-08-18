@@ -241,7 +241,7 @@ class TestExpectedErrorMiddleware(unittest.TestCase):
     @patch('openedx.core.lib.request_utils.set_custom_attribute')
     @patch('openedx.core.lib.request_utils.log')
     def test_process_exception_no_expected_errors(self, mock_logger, mock_set_custom_attribute):
-        ExpectedErrorMiddleware('mock-response').process_exception(self.mock_request, self.mock_exception)
+        ExpectedErrorMiddleware(get_response='mock-response').process_exception(self.mock_request, self.mock_exception)
 
         mock_logger.info.assert_not_called()
         mock_set_custom_attribute.assert_not_called()
@@ -253,7 +253,7 @@ class TestExpectedErrorMiddleware(unittest.TestCase):
         self, expected_errors_setting, mock_logger, mock_set_custom_attribute,
     ):
         with override_settings(EXPECTED_ERRORS=expected_errors_setting):
-            ExpectedErrorMiddleware('mock-response').process_exception(self.mock_request, self.mock_exception)
+            ExpectedErrorMiddleware(get_response='mock-response').process_exception(self.mock_request, self.mock_exception)
 
         mock_logger.info.assert_not_called()
         mock_set_custom_attribute.assert_not_called()
@@ -265,7 +265,7 @@ class TestExpectedErrorMiddleware(unittest.TestCase):
     @patch('openedx.core.lib.request_utils.set_custom_attribute')
     @patch('openedx.core.lib.request_utils.log')
     def test_process_exception_not_matching_expected_errors(self, mock_logger, mock_set_custom_attribute):
-        ExpectedErrorMiddleware('mock-response').process_exception(self.mock_request, self.mock_exception)
+        ExpectedErrorMiddleware(get_response='mock-response').process_exception(self.mock_request, self.mock_exception)
 
         mock_logger.info.assert_not_called()
         mock_set_custom_attribute.assert_called_once_with('checked_error_expected_from', 'middleware')
@@ -283,7 +283,7 @@ class TestExpectedErrorMiddleware(unittest.TestCase):
     @patch('openedx.core.lib.request_utils.set_custom_attribute')
     @patch('openedx.core.lib.request_utils.log')
     def test_process_exception_expected_error_with_defaults(self, mock_logger, mock_set_custom_attribute):
-        ExpectedErrorMiddleware('mock-response').process_exception(self.mock_request, self.mock_exception)
+        ExpectedErrorMiddleware(get_response='mock-response').process_exception(self.mock_request, self.mock_exception)
 
         mock_logger.info.assert_not_called()
         mock_set_custom_attribute.assert_has_calls(
@@ -312,8 +312,8 @@ class TestExpectedErrorMiddleware(unittest.TestCase):
         mock_first_exception = self.mock_exception
         mock_second_exception = mock_first_exception if use_same_exception else CustomError2("Oops")
 
-        ExpectedErrorMiddleware('mock-response').process_exception(self.mock_request, mock_first_exception)
-        ExpectedErrorMiddleware('mock-response').process_exception(self.mock_request, mock_second_exception)
+        ExpectedErrorMiddleware(get_response='mock-response').process_exception(self.mock_request, mock_first_exception)
+        ExpectedErrorMiddleware(get_response='mock-response').process_exception(self.mock_request, mock_second_exception)
 
         expected_calls = [
             call('checked_error_expected_from', 'middleware'),
@@ -338,7 +338,7 @@ class TestExpectedErrorMiddleware(unittest.TestCase):
     @patch('openedx.core.lib.request_utils.set_custom_attribute')
     def test_process_exception_with_plain_exception(self, mock_set_custom_attribute):
         mock_exception = Exception("Oops")
-        ExpectedErrorMiddleware('mock-response').process_exception(self.mock_request, mock_exception)
+        ExpectedErrorMiddleware(get_response='mock-response').process_exception(self.mock_request, mock_exception)
 
         mock_set_custom_attribute.assert_has_calls([
             call('error_expected', True),
@@ -367,7 +367,7 @@ class TestExpectedErrorMiddleware(unittest.TestCase):
             'LOG_STACK_TRACE': log_stack_trace,
             'REASON_EXPECTED': 'Because',
         }]):
-            ExpectedErrorMiddleware('mock-response').process_exception(self.mock_request, self.mock_exception)
+            ExpectedErrorMiddleware(get_response='mock-response').process_exception(self.mock_request, self.mock_exception)
 
         if log_error:
             exc_info = self.mock_exception if log_stack_trace else None

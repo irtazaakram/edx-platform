@@ -26,7 +26,7 @@ class TestAppVersionUpgradeMiddleware(CacheIsolationTestCase):
 
     def setUp(self):
         super().setUp()
-        self.middleware = AppVersionUpgrade('mock-response')
+        self.middleware = AppVersionUpgrade(get_response='mock-response')
         self.set_app_version_config()
 
     def set_app_version_config(self):

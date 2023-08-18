@@ -49,7 +49,7 @@ ENABLE_AUTHN_MICROFRONTEND['ENABLE_AUTHN_MICROFRONTEND'] = True
 
 
 def process_request(request):
-    middleware = SessionMiddleware('mock-response')
+    middleware = SessionMiddleware(get_response='mock-response')
     middleware.process_request(request)
     request.session.save()
 

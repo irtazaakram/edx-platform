@@ -18,7 +18,7 @@ class TagsMiddlewareTest(TestCase):
     """
     def setUp(self):
         super().setUp()
-        self.middleware = UserTagsEventContextMiddleware('mock-response')
+        self.middleware = UserTagsEventContextMiddleware(get_response='mock-response')
         self.user = UserFactory.create()
         self.other_user = UserFactory.create()
 

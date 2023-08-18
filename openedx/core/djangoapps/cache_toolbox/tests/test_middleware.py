@@ -67,7 +67,7 @@ class CachedAuthMiddlewareTestCase(TestCase):
         self.request.COOKIES[settings.SESSION_COOKIE_NAME] = str(safe_cookie_data)
         self.client.response.cookies[settings.SESSION_COOKIE_NAME] = session_id
         self.client.response.cookies['edx-jwt-cookie-header-payload'] = 'test-jwt-payload'
-        SafeSessionMiddleware('mock-response').process_request(self.request)
+        SafeSessionMiddleware(get_response='mock-response').process_request(self.request)
 
         # asserts that user, session, and JWT cookies exist
         assert self.request.session.get(SESSION_KEY) is not None
@@ -76,8 +76,8 @@ class CachedAuthMiddlewareTestCase(TestCase):
         assert self.client.response.cookies.get('edx-jwt-cookie-header-payload').value == 'test-jwt-payload'
 
         with patch.object(User, 'get_session_auth_hash', return_value='abc123'):
-            CacheBackedAuthenticationMiddleware('mock-response').process_request(self.request)
-            SafeSessionMiddleware('mock-response').process_response(self.request, self.client.response)
+            CacheBackedAuthenticationMiddleware(get_response='mock-response').process_request(self.request)
+            SafeSessionMiddleware(get_response='mock-response').process_response(self.request, self.client.response)
 
         # asserts that user, session, and JWT cookies do not exist
         assert self.request.session.get(SESSION_KEY) is None

@@ -34,8 +34,8 @@ class ThirdPartyAuthMiddlewareTestCase(TestCase):
         exception.response = HttpResponse(status=502)
 
         # Add error message for error in auth pipeline
-        MessageMiddleware('mock-response').process_request(request)
-        response = ExceptionMiddleware('mock-response').process_exception(
+        MessageMiddleware(get_response='mock-response').process_request(request)
+        response = ExceptionMiddleware(get_response='mock-response').process_exception(
             request, exception
         )
         target_url = response.url
