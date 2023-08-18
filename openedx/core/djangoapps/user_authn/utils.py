@@ -10,7 +10,7 @@ from urllib.parse import urlparse  # pylint: disable=import-error
 from uuid import uuid4  # lint-amnesty, pylint: disable=unused-import
 
 from django.conf import settings
-from django.utils.http import url_has_allowed_host_and_scheme
+from django.utils import http
 from oauth2_provider.models import Application
 from rest_framework.status import HTTP_408_REQUEST_TIMEOUT
 
