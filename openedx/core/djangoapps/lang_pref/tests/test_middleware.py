@@ -37,8 +37,8 @@ class TestUserPreferenceMiddleware(CacheIsolationTestCase):
 
     def setUp(self):
         super().setUp()
-        self.middleware = LanguagePreferenceMiddleware(get_response='mock-response')
-        self.session_middleware = SessionMiddleware(get_response='mock-response')
+        self.middleware = LanguagePreferenceMiddleware(lambda request: None)
+        self.session_middleware = SessionMiddleware(lambda request: None)
         self.user = UserFactory.create()
         self.anonymous_user = AnonymousUserFactory()
         self.request = RequestFactory().get('/somewhere')

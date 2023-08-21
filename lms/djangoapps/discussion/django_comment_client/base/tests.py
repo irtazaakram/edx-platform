@@ -1952,7 +1952,7 @@ class UsersEndpointTestCase(ForumsEnableMixin, SharedModuleStoreTestCase, MockRe
 class SegmentIOForumThreadViewedEventTestCase(SegmentIOTrackingTestCaseBase):
 
     def _raise_navigation_event(self, label, include_name):
-        middleware = TrackMiddleware(get_response='mock-response')
+        middleware = TrackMiddleware(lambda request: None)
         kwargs = {'label': label}
         if include_name:
             kwargs['name'] = 'edx.bi.app.navigation.screen'

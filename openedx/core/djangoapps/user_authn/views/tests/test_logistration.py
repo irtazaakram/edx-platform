@@ -337,7 +337,7 @@ class LoginAndRegistrationTest(ThirdPartyAuthTestMixin, UrlResetMixin, ModuleSto
     ):
         params = []
         request = RequestFactory().get(reverse(url_name), params, HTTP_ACCEPT='text/html')
-        SessionMiddleware(get_response='mock-response').process_request(request)
+        SessionMiddleware(lambda request: None).process_request(request)
         request.user = AnonymousUser()
 
         self.enable_saml()
@@ -353,7 +353,7 @@ class LoginAndRegistrationTest(ThirdPartyAuthTestMixin, UrlResetMixin, ModuleSto
                               '["invalid_response"] [SAML Response must contain 1 assertion]'
 
         # Add error message for error in auth pipeline
-        MessageMiddleware(get_response='mock-response').process_request(request)
+        MessageMiddleware(lambda request: None).process_request(request)
         messages.error(request, dummy_error_message, extra_tags='social-auth')
 
         # Simulate a running pipeline

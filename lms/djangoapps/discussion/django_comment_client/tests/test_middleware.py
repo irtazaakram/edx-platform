@@ -12,7 +12,7 @@ class AjaxExceptionTestCase(TestCase):  # lint-amnesty, pylint: disable=missing-
 
     def setUp(self):
         super().setUp()
-        self.a = middleware.AjaxExceptionMiddleware(get_response='mock-response')
+        self.a = middleware.AjaxExceptionMiddleware(lambda request: None)
         self.request1 = django.http.HttpRequest()
         self.request0 = django.http.HttpRequest()
         self.exception1 = comment_client.CommentClientRequestError('{}', 401)
