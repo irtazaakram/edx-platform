@@ -607,9 +607,9 @@ def create_user_profile_context(request, course_key, user_id):
         add_courseware_context(threads, course, request.user)
 
         # TODO: LEARNER-3854: If we actually implement Learner Analytics code, this
-        #   code was original protected to not run in user_profile() if request.accepts("application/json").
+        #   code was original protected to not run in user_profile() if is_ajax().
         #   Someone should determine if that is still necessary (i.e. was that ever
-        #   called as request.accepts("application/json")) and clean this up as necessary.
+        #   called as is_ajax()) and clean this up as necessary.
         user_roles = django_user.roles.filter(
             course_id=course.id
         ).order_by("name").values_list("name", flat=True).distinct()
