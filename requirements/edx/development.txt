@@ -747,7 +747,7 @@ edx-drf-extensions==8.9.1
     #   edx-when
     #   edxval
     #   openedx-learning
-edx-enterprise==4.0.17
+edx-enterprise==4.0.18
     # via
     #   -c requirements/edx/../constraints.txt
     #   -r requirements/edx/doc.txt
@@ -1304,6 +1304,7 @@ openedx-filters==1.5.0
     #   lti-consumer-xblock
 openedx-learning==0.1.5
     # via
+    #   -c requirements/edx/../constraints.txt
     #   -r requirements/edx/doc.txt
     #   -r requirements/edx/testing.txt
 openedx-mongodbproxy==0.2.0
@@ -1698,6 +1699,7 @@ recommender-xblock==2.0.1
     #   -r requirements/edx/testing.txt
 redis==5.0.0
     # via
+    #   -c requirements/edx/../constraints.txt
     #   -r requirements/edx/doc.txt
     #   -r requirements/edx/testing.txt
     #   walrus
