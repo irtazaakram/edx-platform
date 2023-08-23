@@ -77,7 +77,9 @@ class CachedAuthMiddlewareTestCase(TestCase):
 
         with patch.object(User, 'get_session_auth_hash', return_value='abc123'):
             CacheBackedAuthenticationMiddleware(get_response=lambda request: None).process_request(self.request)
-            SafeSessionMiddleware(get_response=lambda request: None).process_response(self.request, self.client.response)
+            SafeSessionMiddleware(get_response=lambda request: None).process_response(
+                self.request, self.client.response
+            )
 
         # asserts that user, session, and JWT cookies do not exist
         assert self.request.session.get(SESSION_KEY) is None
