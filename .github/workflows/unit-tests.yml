@@ -117,7 +117,7 @@ jobs:
     if: (github.repository == 'edx/edx-platform-private') || (github.repository == 'openedx/edx-platform' && (startsWith(github.base_ref, 'open-release') == false))
     needs:
       - run-tests
-    runs-on: ubuntu-latest
+    runs-on: [ "ubuntu-20.04" ]
     steps:
       - name: Decide whether the needed jobs succeeded or failed
         # uses: re-actors/alls-green@v1.2.1
@@ -127,6 +127,7 @@ jobs:
 
   compile-warnings-report:
     runs-on: [ "ubuntu-20.04" ]
+    if: (github.repository == 'edx/edx-platform-private') || (github.repository == 'openedx/edx-platform' && (startsWith(github.base_ref, 'open-release') == false))
     needs: [ run-tests ]
     steps:
       - uses: actions/checkout@v4
@@ -155,7 +156,8 @@ jobs:
   # Combine and upload coverage reports.
   coverage:
     needs: run-tests
-    runs-on: ubuntu-latest
+    if: (github.repository == 'edx/edx-platform-private') || (github.repository == 'openedx/edx-platform' && (startsWith(github.base_ref, 'open-release') == false))
+    runs-on: [ "ubuntu-20.04" ]
     strategy:
       matrix:
         python-version:
