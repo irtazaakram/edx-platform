@@ -269,15 +269,15 @@ class TestCsrfCrossDomainCookieMiddleware(TestCase):
         """Check that the cross-domain CSRF cookie was sent. """
         if is_set:
             assert self.COOKIE_NAME in response.cookies
-            cookie_header = str(response.cookies[self.COOKIE_NAME])
-            # lint-amnesty, pylint: disable=bad-option-value, unicode-format-string
+            cookie_header = response.cookies[self.COOKIE_NAME].output(header='').strip()
+
             expected = 'Set-Cookie: {name}={value}; Domain={domain};'.format(
                 name=self.COOKIE_NAME,
                 value=self.COOKIE_VALUE,
                 domain=self.COOKIE_DOMAIN
             )
             assert expected in cookie_header
-            # added lower function because in python 3 the value of cookie_header has Secure and secure in python 2
-            assert 'Max-Age=31449600; Path=/; secure'.lower() in cookie_header.lower()
+            # Check for 'Max-Age=31449600; Path=/; secure' in a case-insensitive manner
+            assert 'max-age=31449600; path=/; secure' in cookie_header.lower()
         else:
             assert self.COOKIE_NAME not in response.cookies
