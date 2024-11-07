@@ -90,7 +90,6 @@ class TestProgramListing(ProgramsApiConfigMixin, SharedModuleStoreTestCase):
         for key, value in subset.items():
             assert key in superset and superset[key] == value, f"{key}: {value} not found in superset or does not match"
 
-
     def test_login_required(self, mock_get_programs):
         """
         Verify that login is required to access the page.

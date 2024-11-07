@@ -91,7 +91,6 @@ class ContentLibrariesRestApiTest(APITransactionTestCase):
             assert key in big_dict, f"Missing key: {key}"
             assert big_dict[key] == value, f"Value for key {key} does not match: expected {value}, got {big_dict[key]}"
 
-
     def assertOrderEqual(self, libraries_list, expected_order):
         """
         Assert that the provided list of libraries match the order of expected

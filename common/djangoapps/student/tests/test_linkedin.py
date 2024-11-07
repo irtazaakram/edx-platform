@@ -53,7 +53,6 @@ class LinkedInAddToProfileUrlTests(TestCase):
 
         self.assertEqual(actual_url, expected_url)
 
-
     @ddt.data(
         ('honor', 'Honor+Code+Credential+for+Test+Course+%E2%98%83'),
         ('verified', 'Verified+Credential+for+Test+Course+%E2%98%83'),

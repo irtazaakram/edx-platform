@@ -269,7 +269,7 @@ class TestCsrfCrossDomainCookieMiddleware(TestCase):
         """Check that the cross-domain CSRF cookie was sent. """
         if is_set:
             assert self.COOKIE_NAME in response.cookies
-            cookie_header = response.cookies[self.COOKIE_NAME].output(header='').strip()
+            cookie_header = str(response.cookies[self.COOKIE_NAME])
 
             expected = 'Set-Cookie: {name}={value}; Domain={domain};'.format(
                 name=self.COOKIE_NAME,

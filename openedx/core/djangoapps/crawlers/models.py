@@ -45,8 +45,10 @@ class CrawlersConfig(ConfigurationModel):
         if not req_user_agent or not crawler_agents:
             return False
 
-        # In Python 3, req_user_agent should already be a string, so we don't need to check for bytes.
-        # Ensure crawler_agents are stripped of whitespace.
+        # Decode req_user_agent if it's bytes, so we can work with consistent string types.
+        if isinstance(req_user_agent, bytes):
+            req_user_agent = req_user_agent.decode('iso-8859-1')
+
         crawler_agents = [crawler_agent.strip() for crawler_agent in crawler_agents]
 
         # We perform prefix matching of the crawler agent here so that we don't
