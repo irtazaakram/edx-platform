@@ -864,13 +864,11 @@ class CourseFields:  # lint-amnesty, pylint: disable=missing-class-docstring
         help=_(
             "Enter the proctoring provider you want to use for this course run. "
             "Choose from the following options: {available_providers}."),
-        help_format_args=dict(
+        help_format_args = {
             # Put the available providers into a format variable so that translators
             # don't translate them.
-            available_providers=(
-                ', '.join(get_available_providers())
-            ),
-        ),
+            "available_providers": ", ".join(get_available_providers()),
+        },
         scope=Scope.settings,
         deprecated=EXAM_SETTINGS_HTML_VIEW_ENABLED
     )

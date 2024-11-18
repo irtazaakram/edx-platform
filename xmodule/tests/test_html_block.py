@@ -77,7 +77,7 @@ class HtmlBlockCourseApiTestCase(unittest.TestCase):
         field_data = DictFieldData({'data': html})
         module_system = get_test_system()
         block = HtmlBlock(module_system, field_data, Mock())
-        assert block.student_view_data() == dict(enabled=True, html=html)
+        assert block.student_view_data() == {"enabled": True, "html": html}
 
     @ddt.data(
         STUDENT_VIEW,

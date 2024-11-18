@@ -167,7 +167,7 @@ class ImportExportReportGen(ReportGenerator):
                                 value = 0
                             else:
                                 value = (per_amount[modulestore] - per_phase['0'][modulestore]) / float(amount)
-                        row.append(f"{value}")
+                        row.append(f"{value}")  # pylint: disable=possibly-used-before-assignment
                     phase_table.add_row(row)
 
                 # Add the table title and the table.
@@ -282,7 +282,7 @@ if click is not None:
         elif data_type == 'find':
             f_gen = FindReportGen(db_name)
             html = f_gen.generate_html()
-        click.echo(html.tostring(), file=outfile)
+        click.echo(html.tostring(), file=outfile)  # pylint: disable=possibly-used-before-assignment
 
 if __name__ == '__main__':
     if click is not None:

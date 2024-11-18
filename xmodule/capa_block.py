@@ -1049,7 +1049,7 @@ class ProblemBlock(
         """
         Return True/False to indicate whether to show the "Reset" button.
         """
-        is_survey_question = (self.max_attempts == 0)
+        is_survey_question = self.max_attempts == 0
 
         # If the problem is closed (and not a survey question with max_attempts==0),
         # then do NOT show the reset button.
@@ -1077,7 +1077,7 @@ class ProblemBlock(
         if self.force_save_button:
             return not self.closed()
         else:
-            is_survey_question = (self.max_attempts == 0)
+            is_survey_question = self.max_attempts == 0
             needs_reset = self.is_submitted() and self.rerandomize == RANDOMIZATION.ALWAYS
 
             # If the student has unlimited attempts, and their answers

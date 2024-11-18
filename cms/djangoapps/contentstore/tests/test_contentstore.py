@@ -1923,13 +1923,13 @@ class RerunCourseTest(ContentStoreTestCase):
     def test_rerun_course_success(self):
         source_course = CourseFactory.create(default_store=ModuleStoreEnum.Type.split)
         create_video(
-            dict(
-                edx_video_id="tree-hugger",
-                courses=[str(source_course.id)],
-                status='test',
-                duration=2,
-                encoded_videos=[]
-            )
+            {
+                "edx_video_id": "tree-hugger",
+                "courses": [str(source_course.id)],
+                "status": "test",
+                "duration": 2,
+                "encoded_videos": []
+            }
         )
         destination_course_key = self.post_rerun_request(source_course.id)
         self.verify_rerun_course(source_course.id, destination_course_key, self.destination_course_data['display_name'])

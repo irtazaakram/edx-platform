@@ -390,8 +390,8 @@ class LegacyLibraryContentBlock(ItemBankMixin, XModuleToXBlockMixin, XBlock):
         """
         If source library or capa_type have been edited, upgrade library & sync automatically.
         """
-        source_lib_changed = (self.source_library_id != old_metadata.get("source_library_id", ""))
-        capa_filter_changed = (self.capa_type != old_metadata.get("capa_type", ANY_CAPA_TYPE_VALUE))
+        source_lib_changed = self.source_library_id != old_metadata.get("source_library_id", "")
+        capa_filter_changed = self.capa_type != old_metadata.get("capa_type", ANY_CAPA_TYPE_VALUE)
         if source_lib_changed or capa_filter_changed:
             try:
                 self.sync_from_library(upgrade_to_latest=True)

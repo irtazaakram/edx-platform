@@ -212,8 +212,8 @@ class TabsAPITests(CourseTestCase):
         self.check_invalid_response(resp)
 
     @ddt.data(
-        dict(is_hidden=None),
-        dict(is_hidden="abc"),
+        {"is_hidden": None},
+        {"is_hidden": 'abc'},
         {},
     )
     def test_toggle_tab_invalid_visibility(self, invalid_visibility):

@@ -186,12 +186,12 @@ class XQueueService:
         """
         relative_xqueue_callback_url = reverse(
             'xqueue_callback',
-            kwargs=dict(
-                course_id=str(self._block.scope_ids.usage_id.context_key),
-                userid=str(self._block.scope_ids.user_id),
-                mod_id=str(self._block.scope_ids.usage_id),
-                dispatch=dispatch,
-            ),
+            kwargs = {
+                "course_id": str(self._block.scope_ids.usage_id.context_key),
+                "userid": str(self._block.scope_ids.user_id),
+                "mod_id": str(self._block.scope_ids.usage_id),
+                "dispatch": dispatch,
+            },
         )
         xqueue_callback_url_prefix = settings.XQUEUE_INTERFACE.get('callback_url', settings.LMS_ROOT_URL)
         return xqueue_callback_url_prefix + relative_xqueue_callback_url

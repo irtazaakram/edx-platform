@@ -473,7 +473,7 @@ class LibrarySearchIndexer(SearchIndexerBase):
     @classmethod
     def _id_modifier(cls, usage_id):
         """ Modifies usage_id to submit to index """
-        return usage_id.replace(library_key=(usage_id.library_key.replace(version_guid=None, branch=None)))
+        return usage_id.replace(library_key=usage_id.library_key.replace(version_guid=None, branch=None))
 
     @classmethod
     def do_library_reindex(cls, modulestore, library_key):

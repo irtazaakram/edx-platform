@@ -136,7 +136,7 @@ class ItemBankMixin(
         valid_block_keys = {(c.block_type, c.block_id) for c in children}
 
         # Remove any selected blocks that are no longer valid:
-        invalid_block_keys = (selected_keys - valid_block_keys)
+        invalid_block_keys = selected_keys - valid_block_keys
         if invalid_block_keys:
             selected_keys -= invalid_block_keys
 

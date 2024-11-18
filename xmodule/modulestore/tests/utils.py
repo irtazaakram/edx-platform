@@ -245,12 +245,12 @@ class MongoModulestoreBuilder(StoreBuilderBase):
             contentstore: The contentstore that this modulestore should use to store
                 all of its assets.
         """
-        doc_store_config = dict(
-            db=f'modulestore{THIS_UUID}',
-            collection='xmodule',
-            asset_collection='asset_metadata',
-            **COMMON_DOCSTORE_CONFIG
-        )
+        doc_store_config = {
+            "db": f"modulestore{THIS_UUID}",
+            "collection": "xmodule",
+            "asset_collection": "asset_metadata",
+            **COMMON_DOCSTORE_CONFIG,
+        }
 
         # Set up a temp directory for storing filesystem content created during import
         fs_root = mkdtemp()
@@ -293,11 +293,11 @@ class VersioningModulestoreBuilder(StoreBuilderBase):
             contentstore: The contentstore that this modulestore should use to store
                 all of its assets.
         """
-        doc_store_config = dict(
-            db=f'modulestore{THIS_UUID}',
-            collection='split_module',
-            **COMMON_DOCSTORE_CONFIG
-        )
+        doc_store_config = {
+            "db": f"modulestore{THIS_UUID}",
+            "collection": "split_module",
+            **COMMON_DOCSTORE_CONFIG,
+        }
         # Set up a temp directory for storing filesystem content created during import
         fs_root = mkdtemp()
 

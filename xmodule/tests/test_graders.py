@@ -21,8 +21,13 @@ class GradesheetTest(unittest.TestCase):
 
     def test_weighted_grading(self):
         scores = []
-        agg_fields = dict(first_attempted=None)
-        prob_fields = dict(raw_earned=0, raw_possible=0, weight=0, first_attempted=None)
+        agg_fields = {"first_attempted": None}
+        prob_fields = {
+            "raw_earned": 0,
+            "raw_possible": 0,
+            "weight": 0,
+            "first_attempted": None,
+        }
 
         # No scores
         all_total, graded_total = aggregate_scores(scores)
