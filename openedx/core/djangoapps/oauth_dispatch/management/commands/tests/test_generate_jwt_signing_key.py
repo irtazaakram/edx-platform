@@ -93,9 +93,7 @@ class TestGenerateJwtSigningKey(TestCase):
     )
     @ddt.unpack
     def test_command(self, add_previous_public_keys, provide_key_id, key_id_size, strip_key_prefix):
-        command_options = {
-            "add_previous_public_keys": add_previous_public_keys,
-        }
+        command_options = {"add_previous_public_keys": add_previous_public_keys}
         if provide_key_id:
             command_options['key_id'] = TEST_KEY_IDENTIFIER
         if key_id_size:

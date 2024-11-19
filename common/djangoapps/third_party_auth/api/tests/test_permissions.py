@@ -108,16 +108,9 @@ class ThirdPartyAuthPermissionTest(TestCase):
             "filters": ["tpa_provider:some_tpa_provider", "tpa_provider:another_tpa_provider"],
             "expected_response": 200,
         },
-
         # invalid provider filters
-        {
-            "filters": ["tpa_provider:another_tpa_provider"],
-            "expected_response": 403,
-        },
-        {
-            "filters": [],
-            "expected_response": 403,
-        },
+        {"filters": ["tpa_provider:another_tpa_provider"], "expected_response": 403},
+        {"filters": [], "expected_response": 403},
     )
     @ddt.unpack
     def test_jwt_org_filters(self, filters, expected_response):

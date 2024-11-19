@@ -103,9 +103,7 @@ class CourseQualityView(DeveloperErrorViewMixin, GenericAPIView):
             # Added for EDUCATOR-3660
             course_key_harvard = str(course_key) == 'course-v1:HarvardX+SW12.1x+2016'
 
-            response = {
-                "is_self_paced": course.self_paced,
-            }
+            response = {"is_self_paced": course.self_paced}
             if get_bool_param(request, 'sections', all_requested):
                 response.update(
                     {"sections": _execute_method_and_log_time(course_key_harvard, self._sections_quality, course)}

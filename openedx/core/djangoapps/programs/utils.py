@@ -755,16 +755,9 @@ class ProgramDataExtender:
                 if is_anonymous or ALWAYS_CALCULATE_PROGRAM_PRICE_AS_ANONYMOUS_USER.is_enabled():
                     # The bundle uuid is necessary to see the program's discounted price
                     if bundle_uuid:
-                        params = {
-                            "sku": skus,
-                            "is_anonymous": True,
-                            "bundle": bundle_uuid,
-                        }
+                        params = {"sku": skus, "is_anonymous": True, "bundle": bundle_uuid}
                     else:
-                        params = {
-                            "sku": skus,
-                            "is_anonymous": True,
-                        }
+                        params = {"sku": skus, "is_anonymous": True}
                 else:
                     if bundle_uuid:
                         params = {
@@ -773,10 +766,7 @@ class ProgramDataExtender:
                             "bundle": bundle_uuid,
                         }
                     else:
-                        params = {
-                            "sku": skus,
-                            "username": self.user.username,
-                        }
+                        params = {"sku": skus, "username": self.user.username}
                 response = api_client.get(api_url, params=params)
                 response.raise_for_status()
                 discount_data = response.json()

@@ -857,23 +857,19 @@ class TestGetHtmlMethod(BaseTestVideoXBlock):
         encoded_videos = []
         for profile, extension in [("desktop_webm", "webm"), ("desktop_mp4", "mp4")]:
             create_profile(profile)
-            encoded_videos.append(
-                {
-                    'url': f"http://fake-video.edx.org/{edx_video_id}.{extension}",
-                    'file_size': 9000,
-                    'bitrate': 42,
-                    'profile': profile,
-                }
-            )
-        result = create_video(
-            {
-                'client_video_id': 'A Client Video id',
-                'duration': 111.0,
-                'edx_video_id': edx_video_id,
-                'status': 'test',
-                'encoded_videos': encoded_videos,
-            }
-        )
+            encoded_videos.append({
+                'url': f"http://fake-video.edx.org/{edx_video_id}.{extension}",
+                'file_size': 9000,
+                'bitrate': 42,
+                'profile': profile,
+            })
+        result = create_video({
+            'client_video_id': 'A Client Video id',
+            'duration': 111.0,
+            'edx_video_id': edx_video_id,
+            'status': 'test',
+            'encoded_videos': encoded_videos,
+        })
         assert result == edx_video_id
         return encoded_videos
 

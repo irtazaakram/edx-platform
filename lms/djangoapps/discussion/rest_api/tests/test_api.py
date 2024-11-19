@@ -4179,23 +4179,14 @@ class CourseTopicsV2Test(ModuleStoreTestCase):
         # and one active topic return zero stats for testing.
         self.topic_stats = {
             **{
-                topic_id: {
-                    'discussion': random.randint(0, 10),
-                    'question': random.randint(0, 10)
-                }
+                topic_id: {"discussion": random.randint(0, 10), "question": random.randint(0, 10)}
                 for topic_id in self.all_topic_ids
             },
-            deleted_topic_ids[0]: {
-                'discussion': 0,
-                'question': 0
-            },
-            self.topic_ids[0]: {
-                'discussion': 0,
-                'question': 0
-            },
+            deleted_topic_ids[0]: {"discussion": 0, "question": 0},
+            self.topic_ids[0]: {"discussion": 0, "question": 0},
         }
         patcher = mock.patch(
-            'lms.djangoapps.discussion.rest_api.api.get_course_commentable_counts',
+            "lms.djangoapps.discussion.rest_api.api.get_course_commentable_counts",
             mock.Mock(return_value=self.topic_stats),
         )
         patcher.start()

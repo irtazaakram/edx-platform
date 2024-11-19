@@ -213,7 +213,7 @@ class TabsAPITests(CourseTestCase):
 
     @ddt.data(
         {"is_hidden": None},
-        {"is_hidden": 'abc'},
+        {"is_hidden": "abc"},
         {},
     )
     def test_toggle_tab_invalid_visibility(self, invalid_visibility):

@@ -74,35 +74,23 @@ class CourseValidationView(DeveloperErrorViewMixin, GenericAPIView):
 
         store = modulestore()
         with store.bulk_operations(course_key):
-            course = store.get_course(course_key, depth=self._required_course_depth(request, all_requested))
+            course = store.get_course(
+                course_key, depth=self._required_course_depth(request, all_requested)
+            )
 
-            response = {
-                "is_self_paced": course.self_paced,
-            }
-            if get_bool_param(request, 'dates', all_requested):
-                response.update(
-                    dates=self._dates_validation(course)
-                )
-            if get_bool_param(request, 'assignments', all_requested):
-                response.update(
-                    assignments=self._assignments_validation(course, request)
-                )
-            if get_bool_param(request, 'grades', all_requested):
-                response.update(
-                    grades=self._grades_validation(course)
-                )
-            if get_bool_param(request, 'certificates', all_requested):
-                response.update(
-                    certificates=self._certificates_validation(course)
-                )
-            if get_bool_param(request, 'updates', all_requested):
-                response.update(
-                    updates=self._updates_validation(course, request)
-                )
-            if get_bool_param(request, 'proctoring', all_requested):
-                response.update(
-                    proctoring=self._proctoring_validation(course)
-                )
+            response = {"is_self_paced": course.self_paced}
+            if get_bool_param(request, "dates", all_requested):
+                response.update({"dates": self._dates_validation(course)})
+            if get_bool_param(request, "assignments", all_requested):
+                response.update({"assignments": self._assignments_validation(course, request)})
+            if get_bool_param(request, "grades", all_requested):
+                response.update({"grades": self._grades_validation(course)})
+            if get_bool_param(request, "certificates", all_requested):
+                response.update({"certificates": self._certificates_validation(course)})
+            if get_bool_param(request, "updates", all_requested):
+                response.update({"updates": self._updates_validation(course, request)})
+            if get_bool_param(request, "proctoring", all_requested):
+                response.update({"proctoring": self._proctoring_validation(course)})
 
         return Response(response)
 
@@ -222,9 +210,7 @@ class CourseValidationView(DeveloperErrorViewMixin, GenericAPIView):
     def _updates_validation(self, course, request):
         updates_usage_key = course.id.make_usage_key('course_info', 'updates')
         updates = get_course_updates(updates_usage_key, provided_id=None, user_id=request.user.id)
-        return {
-            "has_update": len(updates) > 0,
-        }
+        return {"has_update": len(updates) > 0}
 
     def _get_assignments(self, course):  # lint-amnesty, pylint: disable=missing-function-docstring
         store = modulestore()
