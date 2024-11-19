@@ -1090,7 +1090,7 @@ class CourseAccessRole(models.Model):
         Overriding eq b/c the django impl relies on the primary key which requires fetch. sometimes we
         just want to compare roles w/o doing another fetch.
         """
-        return type(self) == type(other) and self._key == other._key  # lint-amnesty, pylint: disable=protected-access, unidiomatic-typecheck
+        return isinstance(other, type(self)) and self._key == other._key
 
     def __hash__(self):
         return hash(self._key)

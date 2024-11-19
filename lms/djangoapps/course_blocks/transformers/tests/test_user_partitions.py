@@ -324,19 +324,19 @@ class MergedGroupAccessTestData(UserPartitionTestMixin, CourseStructureTestCase)
                 '#type': 'vertical',
                 '#ref': 'B',
                 '#parents': ['A'],
-                'metadata': {'group_access': {1: [1], 2:[3], 3:[]}},
+                'metadata': {'group_access': {1: [1], 2: [3], 3: []}},
             },
             {
                 '#type': 'vertical',
                 '#ref': 'C',
                 '#parents': ['A'],
-                'metadata': {'group_access': {1: [2], 2:[2], 3:[]}},
+                'metadata': {'group_access': {1: [2], 2: [2], 3: []}},
             },
             {
                 '#type': 'vertical',
                 '#ref': 'D',
                 '#parents': ['A'],
-                'metadata': {'group_access': {1: [3], 2:[1], 3:[]}},
+                'metadata': {'group_access': {1: [3], 2: [1], 3: []}},
             },
             {
                 '#type': 'vertical',

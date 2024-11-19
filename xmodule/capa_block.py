@@ -998,7 +998,7 @@ class ProblemBlock(
     def handle_fatal_lcp_error(self, error):  # lint-amnesty, pylint: disable=missing-function-docstring
         log.exception(f"LcpFatalError Encountered for {str(self.location)}")
         if error:
-            return(
+            return (
                 HTML('<p>Error formatting HTML for problem:</p><p><pre style="color:red">{msg}</pre></p>').format(
                     msg=str(error))
             )
@@ -1719,7 +1719,7 @@ class ProblemBlock(
                     try:
                         val = json.loads(data[key])
                     # If the submission wasn't deserializable, raise an error.
-                    except(KeyError, ValueError):
+                    except (KeyError, ValueError):
                         raise ValueError(  # lint-amnesty, pylint: disable=raise-missing-from
                             f"Invalid submission: {data[key]} for {key}"
                         )

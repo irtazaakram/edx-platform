@@ -1166,7 +1166,7 @@ class TestItemCrud(SplitModuleTest):
         # check that course version changed and course's previous is the other one
         assert new_block.location.course == 'GreekHero'
         assert new_block.location.version_guid != premod_course.location.version_guid
-        assert locator.version_guid is None,\
+        assert locator.version_guid is None, \
             'Version inadvertently filled in'  # lint-amnesty, pylint: disable=no-member
         current_course = modulestore().get_course(locator)
         assert new_block.location.version_guid == current_course.location.version_guid
@@ -2001,9 +2001,9 @@ class TestPublish(SplitModuleTest):
             pub_copy = modulestore().get_item(dest_course_loc.make_usage_key(expected.type, expected.id))
             # everything except previous_version & children should be the same
             assert source.category == pub_copy.category
-            assert source.update_version == pub_copy.source_version,\
+            assert source.update_version == pub_copy.source_version, \
                 f"Versions don't match for {expected}: {source.update_version} != {pub_copy.update_version}"
-            assert self.user_id == pub_copy.edited_by,\
+            assert self.user_id == pub_copy.edited_by, \
                 f'{pub_copy.location} edited_by {pub_copy.edited_by} not {self.user_id}'
             for field in source.fields.values():
                 if field.name == 'children':

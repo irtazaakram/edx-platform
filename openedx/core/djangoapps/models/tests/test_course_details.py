@@ -51,9 +51,9 @@ class CourseDetailsTestCase(ModuleStoreTestCase):
             assert details.start_date.tzinfo is not None
             assert details.end_date is None, ('end date somehow initialized ' + str(details.end_date))
             assert details.enrollment_start == course.enrollment_start, wrong_enrollment_start_msg
-            assert details.enrollment_end is None,\
+            assert details.enrollment_end is None, \
                 ('enrollment_end date somehow initialized ' + str(details.enrollment_end))
-            assert details.certificate_available_date is None,\
+            assert details.certificate_available_date is None, \
                 ('certificate_available_date date somehow initialized ' + str(details.certificate_available_date))
             assert details.syllabus is None, ('syllabus somehow initialized' + str(details.syllabus))
             assert details.intro_video is None, ('intro_video somehow initialized' + str(details.intro_video))

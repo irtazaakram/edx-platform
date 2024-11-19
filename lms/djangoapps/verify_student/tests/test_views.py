@@ -961,7 +961,7 @@ class TestPayAndVerifyView(UrlResetMixin, ModuleStoreTestCase, XssTestMixin, Tes
         soup = BeautifulSoup(markup=response.content, features="lxml")
         pay_and_verify_div = soup.find(id="pay-and-verify-container")
 
-        assert pay_and_verify_div is not None,\
+        assert pay_and_verify_div is not None, \
             "Could not load pay and verify flow data.  Maybe this isn't the pay and verify page?"
 
         return {

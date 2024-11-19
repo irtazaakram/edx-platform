@@ -186,7 +186,7 @@ class XQueueService:
         """
         relative_xqueue_callback_url = reverse(
             'xqueue_callback',
-            kwargs = {
+            kwargs={
                 "course_id": str(self._block.scope_ids.usage_id.context_key),
                 "userid": str(self._block.scope_ids.user_id),
                 "mod_id": str(self._block.scope_ids.usage_id),

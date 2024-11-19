@@ -780,7 +780,7 @@ class CertificatesViewsTests(CommonCertificatesTestCase, CacheIsolationTestCase)
                 'description': 'Description 0',
                 'signatories': [],
                 'version': 1,
-                'is_active':True
+                'is_active': True
             }
         ]
         self.course.certificates = {'certificates': test_certificates}

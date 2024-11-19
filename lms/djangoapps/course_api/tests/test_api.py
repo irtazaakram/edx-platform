@@ -221,7 +221,7 @@ class TestGetCourseListMultipleCourses(CourseListTestMixin, ModuleStoreTestCase)
         ]
         for filter_, expected_courses in test_cases:
             filtered_courses = self._make_api_call(self.staff_user, self.staff_user, filter_=filter_)
-            assert {course.id for course in filtered_courses} == {course.id for course in expected_courses},\
+            assert {course.id for course in filtered_courses} == {course.id for course in expected_courses}, \
                 f'testing course_api.api.list_courses with filter_={filter_}'
 
     def test_permissions(self):
