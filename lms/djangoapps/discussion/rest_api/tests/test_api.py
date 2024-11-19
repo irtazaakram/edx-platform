@@ -4137,7 +4137,7 @@ class CourseTopicsV2Test(ModuleStoreTestCase):
             parent_location=self.sequential.location,
             category='vertical',
             display_name='staff-vertical-1',
-            metadata=dict(visible_to_staff_only=True),
+            metadata={"visible_to_staff_only": True},
         )
         self.course_key = course_key = self.course.id
         self.config = DiscussionsConfiguration.objects.create(context_key=course_key, provider_type=Provider.OPEN_EDX)
@@ -4178,10 +4178,21 @@ class CourseTopicsV2Test(ModuleStoreTestCase):
         # Set up topic stats for all topics, but have one deleted topic
         # and one active topic return zero stats for testing.
         self.topic_stats = {
-            **{topic_id: dict(discussion=random.randint(0, 10), question=random.randint(0, 10))
-               for topic_id in self.all_topic_ids},
-            deleted_topic_ids[0]: dict(discussion=0, question=0),
-            self.topic_ids[0]: dict(discussion=0, question=0),
+            **{
+                topic_id: {
+                    'discussion': random.randint(0, 10),
+                    'question': random.randint(0, 10)
+                }
+                for topic_id in self.all_topic_ids
+            },
+            deleted_topic_ids[0]: {
+                'discussion': 0,
+                'question': 0
+            },
+            self.topic_ids[0]: {
+                'discussion': 0,
+                'question': 0
+            },
         }
         patcher = mock.patch(
             'lms.djangoapps.discussion.rest_api.api.get_course_commentable_counts',

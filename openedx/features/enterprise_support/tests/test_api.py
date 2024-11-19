@@ -870,7 +870,7 @@ class TestEnterpriseApi(EnterpriseServiceMockMixin, CacheIsolationTestCase):
 
         # Call the wrapped function
         args = (mock.MagicMock(), 'course-id', 'another arg', 'and another')
-        kwargs = dict(a=1, b=2, c=3)
+        kwargs = {"a": 1, "b": 2, "c": 3}
         response = view_func(*args, **kwargs)
 
         # If consent required, then the response should be a redirect to the consent URL, and the view function would
@@ -1068,7 +1068,7 @@ class TestEnterpriseApi(EnterpriseServiceMockMixin, CacheIsolationTestCase):
         else:
             assert notification_string == ''
 
-    @override_settings(FEATURES=dict(ENABLE_ENTERPRISE_INTEGRATION=False))
+    @override_settings(FEATURES={"ENABLE_ENTERPRISE_INTEGRATION": False})
     def test_utils_with_enterprise_disabled(self):
         """
         Test that disabling the enterprise integration flag causes

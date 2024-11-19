@@ -190,7 +190,7 @@ def _sync_children(
     except ItemNotFoundError:
         task.status.fail(f"Requested library {library_key} not found.")
         return
-    filter_children = (dest_block.capa_type != ANY_CAPA_TYPE_VALUE)
+    filter_children = dest_block.capa_type != ANY_CAPA_TYPE_VALUE
     if filter_children:
         # Apply simple filtering based on CAPA problem types:
         source_blocks.extend(_problem_type_filter(store, library, dest_block.capa_type))

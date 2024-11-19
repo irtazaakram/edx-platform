@@ -72,13 +72,30 @@ class TestGenerateJwtSigningKey(TestCase):
             assert len(key_id) == (key_id_size or 8)
 
     @ddt.data(
-        dict(add_previous_public_keys=True, provide_key_id=False, key_id_size=None, strip_key_prefix=True),
-        dict(add_previous_public_keys=True, provide_key_id=False, key_id_size=16, strip_key_prefix=False),
-        dict(add_previous_public_keys=False, provide_key_id=True, key_id_size=None, strip_key_prefix=False),
+        {
+            "add_previous_public_keys": True,
+            "provide_key_id": False,
+            "key_id_size": None,
+            "strip_key_prefix": True,
+        },
+        {
+            "add_previous_public_keys": True,
+            "provide_key_id": False,
+            "key_id_size": 16,
+            "strip_key_prefix": False,
+        },
+        {
+            "add_previous_public_keys": False,
+            "provide_key_id": True,
+            "key_id_size": None,
+            "strip_key_prefix": False,
+        },
     )
     @ddt.unpack
     def test_command(self, add_previous_public_keys, provide_key_id, key_id_size, strip_key_prefix):
-        command_options = dict(add_previous_public_keys=add_previous_public_keys)
+        command_options = {
+            "add_previous_public_keys": add_previous_public_keys,
+        }
         if provide_key_id:
             command_options['key_id'] = TEST_KEY_IDENTIFIER
         if key_id_size:

@@ -45,11 +45,13 @@ class TestCreateJWTs(AccessTokenMixin, TestCase):
         client = self._create_client(oauth_adapter, client_restricted, grant_type=grant_type)
         expires_in = 60 * 60
         expires = now() + timedelta(seconds=expires_in)
-        token_dict = dict(
-            access_token=oauth_adapter.create_access_token_for_test('token', client, self.user, expires),
-            expires_in=expires_in,
-            scope=' '.join(self.default_scopes)
-        )
+        token_dict = token_dict = {
+            "access_token": oauth_adapter.create_access_token_for_test(
+                "token", client, self.user, expires
+            ),
+            "expires_in": expires_in,
+            "scope": " ".join(self.default_scopes),
+        }
         return token_dict
 
     def _create_jwt_for_token(

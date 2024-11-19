@@ -83,7 +83,7 @@ class GraderTest(unittest.TestCase):
         def percent_graded(self):
             return compute_percent(self.graded_total.earned, self.graded_total.possible)
 
-    common_fields = dict(graded=True, first_attempted=datetime.now())
+    common_fields = {"graded": True, "first_attempted": datetime.now()}
     test_gradesheet = {
         'Homework': {
             'hw1': MockGrade(AggregatedScore(tw_earned=2, tw_possible=20.0, **common_fields), display_name='hw1'),

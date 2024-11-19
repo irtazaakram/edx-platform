@@ -206,12 +206,12 @@ class BlockStructureStore:
         Returns the version-relevant data for the given block, including the
         current schema state of the Transformers and BlockStructure classes.
         """
-        return dict(
-            data_version=getattr(root_block, 'course_version', None),
-            data_edit_timestamp=getattr(root_block, 'subtree_edited_on', None),
-            transformers_schema_version=TransformerRegistry.get_write_version_hash(),
-            block_structure_schema_version=str(BlockStructureBlockData.VERSION),
-        )
+        return {
+            "data_version": getattr(root_block, "course_version", None),
+            "data_edit_timestamp": getattr(root_block, "subtree_edited_on", None),
+            "transformers_schema_version": TransformerRegistry.get_write_version_hash(),
+            "block_structure_schema_version": str(BlockStructureBlockData.VERSION),
+        }
 
     @staticmethod
     def _version_data_of_model(bs_model):

@@ -110,7 +110,7 @@ class TestUserEnrollmentApi(UrlResetMixin, MobileAPITestCase, MobileAuthUserTest
     ALLOW_ACCESS_TO_NON_VISIBLE_COURSE = True
     NEXT_WEEK = datetime.datetime.now(pytz.UTC) + datetime.timedelta(days=7)
     LAST_WEEK = datetime.datetime.now(pytz.UTC) - datetime.timedelta(days=7)
-    THREE_YEARS_AGO = now() - datetime.timedelta(days=(365 * 3))
+    THREE_YEARS_AGO = now() - datetime.timedelta(days=365 * 3)
     ADVERTISED_START = "Spring 2016"
     ENABLED_SIGNALS = ['course_published']
     DATES = {

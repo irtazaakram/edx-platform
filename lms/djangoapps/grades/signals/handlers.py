@@ -234,19 +234,19 @@ def enqueue_subsection_update(sender, **kwargs):  # pylint: disable=unused-argum
     if not context_key.is_course:
         return  # If it's not a course, it has no subsections, so skip the subsection grading update
     recalculate_subsection_grade_v3.apply_async(
-        kwargs=dict(
-            user_id=kwargs['user_id'],
-            anonymous_user_id=kwargs.get('anonymous_user_id'),
-            course_id=kwargs['course_id'],
-            usage_id=kwargs['usage_id'],
-            only_if_higher=kwargs.get('only_if_higher'),
-            expected_modified_time=to_timestamp(kwargs['modified']),
-            score_deleted=kwargs.get('score_deleted', False),
-            event_transaction_id=str(get_event_transaction_id()),
-            event_transaction_type=str(get_event_transaction_type()),
-            score_db_table=kwargs['score_db_table'],
-            force_update_subsections=kwargs.get('force_update_subsections', False),
-        ),
+        kwargs={
+            "user_id": kwargs["user_id"],
+            "anonymous_user_id": kwargs.get("anonymous_user_id"),
+            "course_id": kwargs["course_id"],
+            "usage_id": kwargs["usage_id"],
+            "only_if_higher": kwargs.get("only_if_higher"),
+            "expected_modified_time": to_timestamp(kwargs["modified"]),
+            "score_deleted": kwargs.get("score_deleted", False),
+            "event_transaction_id": str(get_event_transaction_id()),
+            "event_transaction_type": str(get_event_transaction_type()),
+            "score_db_table": kwargs["score_db_table"],
+            "force_update_subsections": kwargs.get("force_update_subsections", False),
+        },
         countdown=RECALCULATE_GRADE_DELAY_SECONDS,
     )
 
@@ -269,10 +269,7 @@ def recalculate_course_and_subsection_grades(sender, user, course_key, countdown
     """
     recalculate_course_and_subsection_grades_for_user.apply_async(
         countdown=countdown,
-        kwargs=dict(
-            user_id=user.id,
-            course_key=str(course_key)
-        )
+        kwargs={"user_id": user.id, "course_key": str(course_key)}
     )
 
 

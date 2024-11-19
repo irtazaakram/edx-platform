@@ -21,9 +21,9 @@ class EntitlementsSerializerTests(ModuleStoreTestCase):
     """
 
     def test_data(self):
-        entitlement = CourseEntitlementFactory()
+        entitlement = CourseEntitlementFactory()  # pylint: disable=possibly-used-before-assignment
         request = RequestFactory().get('')
-        serializer = CourseEntitlementSerializer(entitlement, context={'request': request})
+        serializer = CourseEntitlementSerializer(entitlement, context={'request': request})  # pylint: disable=possibly-used-before-assignment
 
         expected = {
             'user': entitlement.user.username,

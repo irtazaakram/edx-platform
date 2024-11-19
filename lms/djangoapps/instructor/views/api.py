@@ -477,7 +477,7 @@ class RegisterAndEnrollStudents(APIView):
                     })
                     course_mode = default_course_mode
 
-                email_params = get_email_params(course, True, secure=request.is_secure())
+                email_params = get_email_params(course, True, secure=request.is_secure())  # pylint: disable=possibly-used-before-assignment
                 try:
                     validate_email(email)  # Raises ValidationError if invalid
                 except ValidationError:
@@ -2630,8 +2630,13 @@ def _list_report_downloads(request, course_id):
 
     response_payload = {
         'downloads': [
-            dict(name=name, url=url, link=HTML('<a href="{}">{}</a>').format(HTML(url), Text(name)))
-            for name, url in report_store.links_for(course_id) if report_name is None or name == report_name
+            {
+                'name': name,
+                'url': url,
+                'link': HTML('<a href="{}">{}</a>').format(HTML(url), Text(name))
+            }
+            for name, url in report_store.links_for(course_id)
+            if report_name is None or name == report_name
         ]
     }
     return JsonResponse(response_payload)
@@ -2651,7 +2656,11 @@ def list_financial_report_downloads(_request, course_id):
 
     response_payload = {
         'downloads': [
-            dict(name=name, url=url, link=HTML('<a href="{}">{}</a>').format(HTML(url), Text(name)))
+            {
+                'name': name,
+                'url': url,
+                'link': HTML('<a href="{}">{}</a>').format(HTML(url), Text(name))
+            }
             for name, url in report_store.links_for(course_id)
         ]
     }
@@ -3225,7 +3234,7 @@ def enable_certificate_generation(request, course_id=None):
 
     """
     course_key = CourseKey.from_string(course_id)
-    is_enabled = (request.POST.get('certificates-enabled', 'false') == 'true')
+    is_enabled = request.POST.get('certificates-enabled', 'false') == 'true'
     certs_api.set_cert_generation_enabled(course_key, is_enabled)
     return redirect(_instructor_dash_url(course_key, section='certificates'))
 

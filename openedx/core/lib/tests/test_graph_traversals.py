@@ -71,25 +71,25 @@ class TestGraphTraversals(TestCase):
     def test_pre_order(self):
         assert list(
             traverse_pre_order(start_node='b1',
-                               get_children=(lambda node: self.parent_to_children_map[node]),
-                               filter_func=(lambda node: (node != 'd3')))
+                               get_children=lambda node: self.parent_to_children_map[node],
+                               filter_func=lambda node: (node != 'd3'))
         ) == ['b1', 'c1', 'd1', 'e1', 'd2', 'e2', 'f1', 'c2']
 
     def test_post_order(self):
         assert list(
             traverse_post_order(
                 start_node='b1',
-                get_children=(lambda node: self.parent_to_children_map[node]),
-                filter_func=(lambda node: (node != 'd3')))
+                get_children=lambda node: self.parent_to_children_map[node],
+                filter_func=lambda node: (node != 'd3'))
         ) == ['e1', 'd1', 'f1', 'e2', 'd2', 'c1', 'c2', 'b1']
 
     def test_topological(self):
         assert list(
             traverse_topologically(
                 start_node='b1',
-                get_children=(lambda node: self.parent_to_children_map[node]),
-                get_parents=(lambda node: self.child_to_parents_map[node]),
-                filter_func=(lambda node: (node != 'd3')))
+                get_children=lambda node: self.parent_to_children_map[node],
+                get_parents=lambda node: self.child_to_parents_map[node],
+                filter_func=lambda node: (node != 'd3'))
         ) == ['b1', 'c1', 'd1', 'd2', 'e1', 'e2', 'f1', 'c2']
 
     def test_topological_yield_descendants(self):
@@ -164,6 +164,6 @@ class TestGraphTraversals(TestCase):
             assert list(
                 traverse_topologically(
                     start_node='root',
-                    get_children=(lambda node: parent_to_children[node]),
-                    get_parents=(lambda node: child_to_parents[node]))
+                    get_children=lambda node: parent_to_children[node],
+                    get_parents=lambda node: child_to_parents[node])
             ) == ['root', 'A', 'D', 'B', 'E', 'F', 'J', 'K', 'M', 'N', 'G', 'C', 'H', 'L', 'O', 'P', 'I']

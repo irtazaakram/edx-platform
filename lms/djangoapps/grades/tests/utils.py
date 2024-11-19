@@ -19,13 +19,13 @@ def mock_passing_grade(letter_grade='Pass', percent=0.75, last_updated=None):
     """
     Mock the grading function to always return a passing grade.
     """
-    passing_grade_fields = dict(
-        letter_grade=letter_grade,
-        percent=percent,
-        passed=letter_grade is not None,
-        attempted=True,
-        last_updated=last_updated,
-    )
+    passing_grade_fields = {
+        "letter_grade": letter_grade,
+        "percent": percent,
+        "passed": letter_grade is not None,
+        "attempted": True,
+        "last_updated": last_updated,
+    }
     with patch('lms.djangoapps.grades.course_grade_factory.CourseGradeFactory.read') as mock_grade_read:
         mock_grade_read.return_value = MagicMock(**passing_grade_fields)
         with patch('lms.djangoapps.grades.course_grade.CourseGrade.update') as mock_grade_update:

@@ -111,7 +111,7 @@ def profile_distribution(course_id, feature):
             raw_choices = UserProfile.LEVEL_OF_EDUCATION_CHOICES
 
         # short name and display name (full) of the choices.
-        choices = list(raw_choices) + [('no_data', 'No Data')]
+        choices = list(raw_choices) + [('no_data', 'No Data')]  # pylint: disable=possibly-used-before-assignment
 
         def get_filter(feature, value):
             """ Get the orm filter parameters for a feature. """

@@ -1792,7 +1792,7 @@ class TestReverifyView(TestVerificationBase):
         attempt.approve()
 
         days_good_for = settings.VERIFY_STUDENT["DAYS_GOOD_FOR"]
-        attempt.expiration_date = now() - timedelta(days=(days_good_for + 1))
+        attempt.expiration_date = now() - timedelta(days=days_good_for + 1)
         attempt.save()
 
         # Allow the student to re-verify

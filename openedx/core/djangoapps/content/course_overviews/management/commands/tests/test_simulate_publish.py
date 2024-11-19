@@ -89,16 +89,16 @@ class TestSimulatePublish(SharedModuleStoreTestCase):
             name_from_fn(self.sample_receiver_1),
             name_from_fn(self.sample_receiver_2),
         ]
-        default_options = dict(
-            show_receivers=False,
-            dry_run=False,
-            receivers=default_receivers,
-            courses=None,
-            delay=0,
-            force_lms=False,
-            skip_ccx=False,
-            args_from_database=False
-        )
+        default_options = {
+            "show_receivers": False,
+            "dry_run": False,
+            "receivers": default_receivers,
+            "courses": None,
+            "delay": 0,
+            "force_lms": False,
+            "skip_ccx": False,
+            "args_from_database": False,
+        }
         default_options.update(kwargs)
         return default_options
 

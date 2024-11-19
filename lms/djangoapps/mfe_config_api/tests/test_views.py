@@ -62,44 +62,40 @@ class MFEConfigTestCase(APITestCase):
 
     @ddt.unpack
     @ddt.data(
-        dict(
-            mfe_config={},
-            mfe_config_overrides={},
-            expected_response={},
-        ),
-        dict(
-            mfe_config={"EXAMPLE_VAR": "value"},
-            mfe_config_overrides={},
-            expected_response={"EXAMPLE_VAR": "value"},
-        ),
-        dict(
-            mfe_config={},
-            mfe_config_overrides={"mymfe": {"EXAMPLE_VAR": "mymfe_value"}},
-            expected_response={"EXAMPLE_VAR": "mymfe_value"},
-        ),
-        dict(
-            mfe_config={"EXAMPLE_VAR": "value"},
-            mfe_config_overrides={"mymfe": {"EXAMPLE_VAR": "mymfe_value"}},
-            expected_response={"EXAMPLE_VAR": "mymfe_value"},
-        ),
-        dict(
-            mfe_config={"EXAMPLE_VAR": "value", "OTHER": "other"},
-            mfe_config_overrides={"mymfe": {"EXAMPLE_VAR": "mymfe_value"}},
-            expected_response={"EXAMPLE_VAR": "mymfe_value", "OTHER": "other"},
-        ),
-        dict(
-            mfe_config={"EXAMPLE_VAR": "value"},
-            mfe_config_overrides={"yourmfe": {"EXAMPLE_VAR": "yourmfe_value"}},
-            expected_response={"EXAMPLE_VAR": "value"},
-        ),
-        dict(
-            mfe_config={"EXAMPLE_VAR": "value"},
-            mfe_config_overrides={
+        {"mfe_config": {}, "mfe_config_overrides": {}, "expected_response": {}},
+        {
+            "mfe_config": {"EXAMPLE_VAR": "value"},
+            "mfe_config_overrides": {},
+            "expected_response": {"EXAMPLE_VAR": "value"},
+        },
+        {
+            "mfe_config": {},
+            "mfe_config_overrides": {"mymfe": {"EXAMPLE_VAR": "mymfe_value"}},
+            "expected_response": {"EXAMPLE_VAR": "mymfe_value"},
+        },
+        {
+            "mfe_config": {"EXAMPLE_VAR": "value"},
+            "mfe_config_overrides": {"mymfe": {"EXAMPLE_VAR": "mymfe_value"}},
+            "expected_response": {"EXAMPLE_VAR": "mymfe_value"},
+        },
+        {
+            "mfe_config": {"EXAMPLE_VAR": "value", "OTHER": "other"},
+            "mfe_config_overrides": {"mymfe": {"EXAMPLE_VAR": "mymfe_value"}},
+            "expected_response": {"EXAMPLE_VAR": "mymfe_value", "OTHER": "other"},
+        },
+        {
+            "mfe_config": {"EXAMPLE_VAR": "value"},
+            "mfe_config_overrides": {"yourmfe": {"EXAMPLE_VAR": "yourmfe_value"}},
+            "expected_response": {"EXAMPLE_VAR": "value"},
+        },
+        {
+            "mfe_config": {"EXAMPLE_VAR": "value"},
+            "mfe_config_overrides": {
                 "yourmfe": {"EXAMPLE_VAR": "yourmfe_value"},
                 "mymfe": {"EXAMPLE_VAR": "mymfe_value"},
             },
-            expected_response={"EXAMPLE_VAR": "mymfe_value"},
-        ),
+            "expected_response": {"EXAMPLE_VAR": "mymfe_value"},
+        },
     )
     @patch("lms.djangoapps.mfe_config_api.views.configuration_helpers")
     def test_get_mfe_config_with_queryparam_multiple_configs(

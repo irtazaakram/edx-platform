@@ -34,7 +34,7 @@ class ThirdPartyAuthPermissionTest(TestCase):
 
     def _create_request(self, auth_header=None):
         url = '/'
-        extra = dict(HTTP_AUTHORIZATION=auth_header) if auth_header else {}
+        extra = {"HTTP_AUTHORIZATION": auth_header} if auth_header else {}
         return RequestFactory().get(url, **extra)
 
     def _create_session(self, request, user):
@@ -65,16 +65,9 @@ class ThirdPartyAuthPermissionTest(TestCase):
 
     @ddt.data(
         # unrestricted (for example, jwt cookies)
-        dict(
-            is_restricted=False,
-            expected_response=403,
-        ),
-
+        {"is_restricted": False, "expected_response": 403},
         # restricted (note: further test cases for scopes and filters are in tests below)
-        dict(
-            is_restricted=True,
-            expected_response=403,
-        ),
+        {"is_restricted": True, "expected_response": 403},
     )
     @ddt.unpack
     def test_jwt_without_scopes_and_filters(
@@ -94,12 +87,12 @@ class ThirdPartyAuthPermissionTest(TestCase):
 
     @ddt.data(
         # valid scopes
-        dict(scopes=['tpa:read'], expected_response=200),
-        dict(scopes=['tpa:read', 'another_scope'], expected_response=200),
+        {"scopes": ['tpa:read'], "expected_response": 200},
+        {"scopes": ['tpa:read', 'another_scope'], "expected_response": 200},
 
         # invalid scopes
-        dict(scopes=[], expected_response=403),
-        dict(scopes=['another_scope'], expected_response=403),
+        {"scopes": [], "expected_response": 403},
+        {"scopes": ['another_scope'], "expected_response": 403},
     )
     @ddt.unpack
     def test_jwt_scopes(self, scopes, expected_response):
@@ -111,20 +104,20 @@ class ThirdPartyAuthPermissionTest(TestCase):
 
     @ddt.data(
         # valid provider filters
-        dict(
-            filters=['tpa_provider:some_tpa_provider', 'tpa_provider:another_tpa_provider'],
-            expected_response=200,
-        ),
+        {
+            "filters": ["tpa_provider:some_tpa_provider", "tpa_provider:another_tpa_provider"],
+            "expected_response": 200,
+        },
 
         # invalid provider filters
-        dict(
-            filters=['tpa_provider:another_tpa_provider'],
-            expected_response=403,
-        ),
-        dict(
-            filters=[],
-            expected_response=403,
-        ),
+        {
+            "filters": ["tpa_provider:another_tpa_provider"],
+            "expected_response": 403,
+        },
+        {
+            "filters": [],
+            "expected_response": 403,
+        },
     )
     @ddt.unpack
     def test_jwt_org_filters(self, filters, expected_response):

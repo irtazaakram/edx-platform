@@ -56,13 +56,13 @@ class BlockStructureModelTestCase(TestCase):
         """
         Returns the parameters for creating a BlockStructureModel.
         """
-        return dict(
-            data_usage_key=self.usage_key,
-            data_version='DV',
-            data_edit_timestamp=now(),
-            transformers_schema_version='TV',
-            block_structure_schema_version=str(1),
-        )
+        return {
+            "data_usage_key": self.usage_key,
+            "data_version": "DV",
+            "data_edit_timestamp": now(),
+            "transformers_schema_version": "TV",
+            "block_structure_schema_version": str(1),
+        }
 
     def _verify_update_or_create_call(self, serialized_data, mock_log=None, expect_created=None):
         """
@@ -96,7 +96,7 @@ class BlockStructureModelTestCase(TestCase):
         assert 'Read' in mock_log.info.call_args[0][1]
 
         # update entry
-        self.params.update(dict(data_version='new version'))
+        self.params.update({"data_version": 'new version'})
         updated_serialized_data = 'updated data'
         updated_bsm = self._verify_update_or_create_call(updated_serialized_data, mock_log, expect_created=False)
         assert bsm.data.name != updated_bsm.data.name

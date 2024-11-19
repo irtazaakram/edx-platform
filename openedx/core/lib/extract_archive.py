@@ -81,7 +81,7 @@ def _checkmembers(members: Union[List[ZipInfo], List[TarInfo]], base: str):
         elif isinstance(finfo, TarInfo):
             filename = finfo.name
             _check_tarinfo(finfo, base)
-        if _is_bad_path(filename, base):
+        if _is_bad_path(filename, base):  # pylint: disable=possibly-used-before-assignment
             log.debug("File %r is blocked (illegal path)", filename)
             raise SuspiciousOperation("Illegal path")
 

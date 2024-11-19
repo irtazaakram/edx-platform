@@ -85,16 +85,16 @@ class _DispatchingViewTestCase(TestCase):
     def setUp(self):
         super().setUp()
         self.TEST_PASSWORD = 'Password1234'
-        self.dot_adapter = adapters.DOTAdapter()
+        self.dot_adapter = adapters.DOTAdapter()  # pylint: disable=possibly-used-before-assignment
         self.user = UserFactory(password=self.TEST_PASSWORD)
         self.dot_app = self.dot_adapter.create_public_client(
             name='test dot application',
             user=self.user,
-            redirect_uri=DUMMY_REDIRECT_URL,
+            redirect_uri=DUMMY_REDIRECT_URL,  # pylint: disable=possibly-used-before-assignment
             client_id='dot-app-client-id',
         )
 
-        self.dot_app_access = models.ApplicationAccess.objects.create(
+        self.dot_app_access = models.ApplicationAccess.objects.create(  # pylint: disable=possibly-used-before-assignment
             application=self.dot_app,
             scopes=['grades:read'],
         )
@@ -133,7 +133,7 @@ class TestAccessTokenView(AccessTokenLoginMixin, mixins.AccessTokenMixin, _Dispa
     def setUp(self):
         super().setUp()
         self.url = reverse('access_token')
-        self.view_class = views.AccessTokenView
+        self.view_class = views.AccessTokenView  # pylint: disable=possibly-used-before-assignment
 
     def _post_body(self, user, client, token_type=None, scope=None, asymmetric_jwt=None):
         """

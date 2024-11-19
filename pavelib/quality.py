@@ -83,7 +83,7 @@ def _get_pep8_violations(clean=True):
     where violations_string is a string of all PEP 8 violations found, separated
     by new lines.
     """
-    report_dir = (Env.REPORT_DIR / 'pep8')
+    report_dir = Env.REPORT_DIR / 'pep8'
     if clean:
         report_dir.rmtree(ignore_errors=True)
     report_dir.makedirs_p()
@@ -155,7 +155,7 @@ def run_eslint(options):
     If limit option is passed, fails build if more violations than the limit are found.
     """
 
-    eslint_report_dir = (Env.REPORT_DIR / "eslint")
+    eslint_report_dir = Env.REPORT_DIR / "eslint"
     eslint_report = eslint_report_dir / "eslint.report"
     _prepare_report_dir(eslint_report_dir)
     violations_limit = int(getattr(options, 'limit', -1))
@@ -197,7 +197,7 @@ def _get_stylelint_violations():
     """
     Returns the number of Stylelint violations.
     """
-    stylelint_report_dir = (Env.REPORT_DIR / "stylelint")
+    stylelint_report_dir = Env.REPORT_DIR / "stylelint"
     stylelint_report = stylelint_report_dir / "stylelint.report"
     _prepare_report_dir(stylelint_report_dir)
     formatter = 'node_modules/stylelint-formatter-pretty'
@@ -280,7 +280,7 @@ def run_xsslint(options):
         )
 
     xsslint_script = "xss_linter.py"
-    xsslint_report_dir = (Env.REPORT_DIR / "xsslint")
+    xsslint_report_dir = Env.REPORT_DIR / "xsslint"
     xsslint_report = xsslint_report_dir / "xsslint.report"
     _prepare_report_dir(xsslint_report_dir)
 
@@ -316,7 +316,7 @@ def run_xsslint(options):
             )
         )
 
-    metrics_report = (Env.METRICS_DIR / "xsslint")
+    metrics_report = Env.METRICS_DIR / "xsslint"
     # Record the metric
     _write_metric(metrics_str, metrics_report)
     # Print number of violations to log.
@@ -519,7 +519,7 @@ def run_pii_check(options):
     Guarantee that all Django models are PII-annotated.
     """
     pii_report_name = 'pii'
-    default_report_dir = (Env.REPORT_DIR / pii_report_name)
+    default_report_dir = Env.REPORT_DIR / pii_report_name
     report_dir = getattr(options, 'report_dir', default_report_dir)
     output_file = os.path.join(report_dir, 'pii_check_{}.report')
     env_report = []

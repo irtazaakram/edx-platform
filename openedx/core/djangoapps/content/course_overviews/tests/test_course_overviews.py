@@ -539,8 +539,8 @@ class CourseOverviewTestCase(CatalogIntegrationMixin, ModuleStoreTestCase, Cache
 
         test_cases = (
             (None, {non_mobile_course.id, mobile_course.id}),
-            (dict(mobile_available=True), {mobile_course.id}),
-            (dict(mobile_available=False), {non_mobile_course.id}),
+            ({"mobile_available": True}, {mobile_course.id}),
+            ({"mobile_available": False}, {non_mobile_course.id}),
         )
 
         for filter_, expected_courses in test_cases:

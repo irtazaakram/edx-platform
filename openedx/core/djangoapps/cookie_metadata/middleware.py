@@ -91,7 +91,7 @@ class CookieNameChange:
                     expand_settings["current"] not in request.COOKIES
                     and alt_cookie_in_request
                 ):
-                    request.COOKIES[expand_settings["current"]] = alt_cookie_value
+                    request.COOKIES[expand_settings["current"]] = alt_cookie_value  # pylint: disable=possibly-used-before-assignment
                     set_custom_attribute("cookie.change_name", 1)
 
         response = self.get_response(request)
