@@ -366,7 +366,7 @@ def _get_user_certificate(request, user, course_key, course_overview, preview_mo
         user_certificate = GeneratedCertificate(
             mode=preview_mode,
             verify_uuid=str(uuid4().hex),
-            modified_date=modified_date,
+            modified_date=modified_date,  # pylint: disable=possibly-used-before-assignment
             created_date=datetime.now().date(),
         )
     elif certificates_viewable_for_course(course_overview):

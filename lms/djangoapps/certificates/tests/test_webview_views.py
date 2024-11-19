@@ -438,11 +438,11 @@ class CertificatesViewsTests(CommonCertificatesTestCase, CacheIsolationTestCase)
         """
         self._add_course_certificates(count=1, signatory_count=1, is_active=True)
         test_url = get_certificate_url(course_id=self.cert.course_id, uuid=self.cert.verify_uuid)
-        social_sharing_settings = dict(
-            CERTIFICATE_FACEBOOK=facebook_sharing,
-            CERTIFICATE_TWITTER=twitter_sharing,
-            CERTIFICATE_LINKEDIN=linkedin_sharing,
-        )
+        social_sharing_settings = {
+            'CERTIFICATE_FACEBOOK': facebook_sharing,
+            'CERTIFICATE_TWITTER': twitter_sharing,
+            'CERTIFICATE_LINKEDIN': linkedin_sharing,
+        }
         with with_site_configuration_context(
             configuration={
                 'platform_name': 'My Platform Site',
@@ -463,10 +463,10 @@ class CertificatesViewsTests(CommonCertificatesTestCase, CacheIsolationTestCase)
         self._add_course_certificates(count=1, signatory_count=1, is_active=True)
         test_url = get_certificate_url(course_id=self.cert.course_id, uuid=self.cert.verify_uuid)
         facebook_text = "Facebook text on Test Site"
-        social_sharing_settings = dict(
-            CERTIFICATE_FACEBOOK=True,
-            CERTIFICATE_FACEBOOK_TEXT=facebook_text,
-        )
+        social_sharing_settings = {
+            'CERTIFICATE_FACEBOOK': True,
+            'CERTIFICATE_FACEBOOK_TEXT': facebook_text,
+        }
         with with_site_configuration_context(
             configuration={
                 'SOCIAL_SHARING_SETTINGS': social_sharing_settings,
@@ -483,10 +483,10 @@ class CertificatesViewsTests(CommonCertificatesTestCase, CacheIsolationTestCase)
         self._add_course_certificates(count=1, signatory_count=1, is_active=True)
         test_url = get_certificate_url(course_id=self.cert.course_id, uuid=self.cert.verify_uuid)
         twitter_text = "Twitter text on Test Site"
-        social_sharing_settings = dict(
-            CERTIFICATE_TWITTER=True,
-            CERTIFICATE_TWITTER_TEXT=twitter_text,
-        )
+        social_sharing_settings = {
+            'CERTIFICATE_TWITTER': True,
+            'CERTIFICATE_TWITTER_TEXT': twitter_text,
+        }
         with with_site_configuration_context(
             configuration={
                 'SOCIAL_SHARING_SETTINGS': social_sharing_settings,
@@ -530,13 +530,13 @@ class CertificatesViewsTests(CommonCertificatesTestCase, CacheIsolationTestCase)
         "CERTIFICATE_FACEBOOK": True,
     })
     @with_site_configuration(
-        configuration=dict(
-            platform_name='My Platform Site',
-            SITE_NAME='test_site.localhost',
-            urls=dict(
-                ABOUT='https://www.test-site.org/about-us',
-            ),
-        ),
+        configuration={
+            'platform_name': 'My Platform Site',
+            'SITE_NAME': 'test_site.localhost',
+            'urls': {
+                'ABOUT': 'https://www.test-site.org/about-us',
+            },
+        }
     )
     def test_rendering_maximum_data(self):
         """

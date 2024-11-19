@@ -21,7 +21,7 @@ aiohappyeyeballs==2.4.3
     #   -r requirements/edx/doc.txt
     #   -r requirements/edx/testing.txt
     #   aiohttp
-aiohttp==3.11.2
+aiohttp==3.11.4
     # via
     #   -r requirements/edx/doc.txt
     #   -r requirements/edx/testing.txt
@@ -142,14 +142,14 @@ boto==2.49.0
     # via
     #   -r requirements/edx/doc.txt
     #   -r requirements/edx/testing.txt
-boto3==1.35.63
+boto3==1.35.64
     # via
     #   -r requirements/edx/doc.txt
     #   -r requirements/edx/testing.txt
     #   django-ses
     #   fs-s3fs
     #   ora2
-botocore==1.35.63
+botocore==1.35.64
     # via
     #   -r requirements/edx/doc.txt
     #   -r requirements/edx/testing.txt
@@ -931,7 +931,7 @@ future==1.0.0
     #   -r requirements/edx/doc.txt
     #   -r requirements/edx/testing.txt
     #   pyjwkest
-geoip2==4.8.0
+geoip2==4.8.1
     # via
     #   -r requirements/edx/doc.txt
     #   -r requirements/edx/testing.txt
@@ -1296,7 +1296,7 @@ mysqlclient==2.2.6
     # via
     #   -r requirements/edx/doc.txt
     #   -r requirements/edx/testing.txt
-newrelic==10.2.0
+newrelic==10.3.0
     # via
     #   -r requirements/edx/doc.txt
     #   -r requirements/edx/testing.txt
@@ -1711,7 +1711,7 @@ pytest-django==4.9.0
     # via -r requirements/edx/testing.txt
 pytest-json-report==1.5.0
     # via -r requirements/edx/testing.txt
-pytest-metadata==1.8.0
+pytest-metadata==3.1.1
     # via
     #   -r requirements/edx/testing.txt
     #   pytest-json-report
@@ -2058,7 +2058,7 @@ staff-graded-xblock==2.3.0
     # via
     #   -r requirements/edx/doc.txt
     #   -r requirements/edx/testing.txt
-starlette==0.41.2
+starlette==0.41.3
     # via
     #   -r requirements/edx/testing.txt
     #   fastapi

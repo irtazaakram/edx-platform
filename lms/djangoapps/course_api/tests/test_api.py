@@ -216,8 +216,8 @@ class TestGetCourseListMultipleCourses(CourseListTestMixin, ModuleStoreTestCase)
 
         test_cases = [
             (None, [alternate_course, self.course]),
-            (dict(mobile_available=True), [alternate_course]),
-            (dict(mobile_available=False), [self.course]),
+            ({"mobile_available": True}, [alternate_course]),
+            ({"mobile_available": False}, [self.course]),
         ]
         for filter_, expected_courses in test_cases:
             filtered_courses = self._make_api_call(self.staff_user, self.staff_user, filter_=filter_)

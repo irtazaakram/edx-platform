@@ -858,21 +858,21 @@ class TestGetHtmlMethod(BaseTestVideoXBlock):
         for profile, extension in [("desktop_webm", "webm"), ("desktop_mp4", "mp4")]:
             create_profile(profile)
             encoded_videos.append(
-                dict(
-                    url=f"http://fake-video.edx.org/{edx_video_id}.{extension}",
-                    file_size=9000,
-                    bitrate=42,
-                    profile=profile,
-                )
+                {
+                    'url': f"http://fake-video.edx.org/{edx_video_id}.{extension}",
+                    'file_size': 9000,
+                    'bitrate': 42,
+                    'profile': profile,
+                }
             )
         result = create_video(
-            dict(
-                client_video_id='A Client Video id',
-                duration=111.0,
-                edx_video_id=edx_video_id,
-                status='test',
-                encoded_videos=encoded_videos,
-            )
+            {
+                'client_video_id': 'A Client Video id',
+                'duration': 111.0,
+                'edx_video_id': edx_video_id,
+                'status': 'test',
+                'encoded_videos': encoded_videos,
+            }
         )
         assert result == edx_video_id
         return encoded_videos
@@ -1784,12 +1784,12 @@ class VideoBlockTest(TestCase, VideoBlockTestBase):
         self.addCleanup(shutil.rmtree, self.temp_dir)
 
     def get_video_transcript_data(self, video_id, language_code='en', file_format='srt', provider='Custom'):
-        return dict(
-            video_id=video_id,
-            language_code=language_code,
-            provider=provider,
-            file_format=file_format,
-        )
+        return {
+            'video_id': video_id,
+            'language_code': language_code,
+            'provider': provider,
+            'file_format': file_format,
+        }
 
     def test_get_context(self):
         """"

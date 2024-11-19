@@ -14,7 +14,7 @@ aiohappyeyeballs==2.4.3
     # via
     #   -r requirements/edx/base.txt
     #   aiohttp
-aiohttp==3.11.2
+aiohttp==3.11.4
     # via
     #   -r requirements/edx/base.txt
     #   geoip2
@@ -104,13 +104,13 @@ bleach[css]==6.2.0
     #   xblock-poll
 boto==2.49.0
     # via -r requirements/edx/base.txt
-boto3==1.35.63
+boto3==1.35.64
     # via
     #   -r requirements/edx/base.txt
     #   django-ses
     #   fs-s3fs
     #   ora2
-botocore==1.35.63
+botocore==1.35.64
     # via
     #   -r requirements/edx/base.txt
     #   boto3
@@ -677,7 +677,7 @@ future==1.0.0
     # via
     #   -r requirements/edx/base.txt
     #   pyjwkest
-geoip2==4.8.0
+geoip2==4.8.1
     # via -r requirements/edx/base.txt
 gitdb==4.0.11
     # via gitpython
@@ -932,7 +932,7 @@ multidict==6.1.0
     #   yarl
 mysqlclient==2.2.6
     # via -r requirements/edx/base.txt
-newrelic==10.2.0
+newrelic==10.3.0
     # via
     #   -r requirements/edx/base.txt
     #   edx-django-utils

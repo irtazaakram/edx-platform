@@ -210,8 +210,8 @@ class CourseListViewTestCaseMultipleCourses(CourseApiTestViewMixin, ModuleStoreT
 
         test_cases = [
             (None, [alternate_course, self.course]),
-            (dict(mobile=True), [alternate_course]),
-            (dict(mobile=False), [self.course]),
+            ({"mobile": True}, [alternate_course]),
+            ({"mobile": False}, [self.course]),
         ]
         for filter_, expected_courses in test_cases:
             params = {'username': self.staff_user.username}

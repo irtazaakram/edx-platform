@@ -10,7 +10,7 @@ acid-xblock==0.4.1
     # via -r requirements/edx/kernel.in
 aiohappyeyeballs==2.4.3
     # via aiohttp
-aiohttp==3.11.2
+aiohttp==3.11.4
     # via
     #   geoip2
     #   openai
@@ -70,13 +70,13 @@ bleach[css]==6.2.0
     #   xblock-poll
 boto==2.49.0
     # via -r requirements/edx/kernel.in
-boto3==1.35.63
+boto3==1.35.64
     # via
     #   -r requirements/edx/kernel.in
     #   django-ses
     #   fs-s3fs
     #   ora2
-botocore==1.35.63
+botocore==1.35.64
     # via
     #   -r requirements/edx/kernel.in
     #   boto3
@@ -580,7 +580,7 @@ fs-s3fs==0.1.8
     #   openedx-django-pyfs
 future==1.0.0
     # via pyjwkest
-geoip2==4.8.0
+geoip2==4.8.1
     # via -r requirements/edx/kernel.in
 glob2==0.7
     # via -r requirements/edx/kernel.in
@@ -773,7 +773,7 @@ multidict==6.1.0
     #   yarl
 mysqlclient==2.2.6
     # via -r requirements/edx/kernel.in
-newrelic==10.2.0
+newrelic==10.3.0
     # via edx-django-utils
 nh3==0.2.18
     # via -r requirements/edx/kernel.in
