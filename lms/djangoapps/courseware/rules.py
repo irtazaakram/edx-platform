@@ -118,7 +118,7 @@ class HasStaffAccessToContent(Rule):
         elif isinstance(instance, str):
             course_key = CourseKey.from_string(instance)
 
-        return self.filter(user, CourseOverview.objects.filter(id=course_key)).exists()
+        return self.filter(user, CourseOverview.objects.filter(id=course_key)).exists()  # pylint: disable=possibly-used-before-assignment
 
     def query(self, user):
         """

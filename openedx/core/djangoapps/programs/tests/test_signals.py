@@ -48,13 +48,13 @@ class CertAwardedReceiverTest(TestCase):
         """
         DRY helper.
         """
-        return dict(
-            sender=self.__class__,
-            user=UserFactory.create(username=TEST_USERNAME),
-            course_key=TEST_COURSE_KEY,
-            mode="test-mode",
-            status="test-status",
-        )
+        return {
+            "sender": self.__class__,
+            "user": UserFactory.create(username=TEST_USERNAME),
+            "course_key": TEST_COURSE_KEY,
+            "mode": "test-mode",
+            "status": "test-status",
+        }
 
     def test_signal_received(self, mock_is_learner_issuance_enabled, mock_task):  # pylint: disable=unused-argument
         """
@@ -113,13 +113,13 @@ class CertChangedReceiverTest(TestCase):
         """
         DRY helper.
         """
-        return dict(
-            sender=self.__class__,
-            user=self.user,
-            course_key=TEST_COURSE_KEY,
-            mode="test-mode",
-            status="test-status",
-        )
+        return {
+            "sender": self.__class__,
+            "user": self.user,
+            "course_key": TEST_COURSE_KEY,
+            "mode": "test-mode",
+            "status": "test-status",
+        }
 
     def test_signal_received(self, mock_is_learner_issuance_enabled, mock_task):  # pylint: disable=unused-argument
         """
@@ -190,13 +190,13 @@ class CertRevokedReceiverTest(TestCase):
         """
         DRY helper.
         """
-        return dict(
-            sender=self.__class__,
-            user=UserFactory.create(username=TEST_USERNAME),
-            course_key=TEST_COURSE_KEY,
-            mode="test-mode",
-            status="test-status",
-        )
+        return {
+            "sender": self.__class__,
+            "user": UserFactory.create(username=TEST_USERNAME),
+            "course_key": TEST_COURSE_KEY,
+            "mode": "test-mode",
+            "status": "test-status",
+        }
 
     def test_signal_received(self, mock_is_learner_issuance_enabled, mock_task):  # pylint: disable=unused-argument
         """

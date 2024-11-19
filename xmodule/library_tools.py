@@ -105,11 +105,11 @@ class LegacyLibraryToolsService:
         # These race conditions lead to failed imports of library content from course import.
         # See: TNL-11339, https://github.com/openedx/edx-platform/issues/34029 for more info.
         library_tasks.sync_from_library.apply(
-            kwargs=dict(
-                user_id=self.user_id,
-                dest_block_id=str(dest_block.scope_ids.usage_id),
-                library_version=library_version,
-            ),
+            kwargs={
+                "user_id": self.user_id,
+                "dest_block_id": str(dest_block.scope_ids.usage_id),
+                "library_version": library_version,
+            },
         )
 
     def trigger_duplication(

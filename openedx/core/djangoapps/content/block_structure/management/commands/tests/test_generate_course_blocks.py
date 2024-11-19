@@ -99,7 +99,7 @@ class TestGenerateCourseBlocks(ModuleStoreTestCase):
     )
     @ddt.unpack
     def test_enqueue(self, enqueue_task, force_update, routing_key):
-        command_options = dict(all_courses=True, enqueue_task=enqueue_task, force_update=force_update)
+        command_options = {"all_courses": True, "enqueue_task": enqueue_task, "force_update": force_update}
         if enqueue_task and routing_key:
             command_options['routing_key'] = routing_key
 

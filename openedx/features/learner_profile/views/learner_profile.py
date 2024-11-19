@@ -77,7 +77,7 @@ def learner_profile_context(request, profile_username, user_is_staff):
     profile_user = User.objects.get(username=profile_username)
     logged_in_user = request.user
 
-    own_profile = (logged_in_user.username == profile_username)
+    own_profile = logged_in_user.username == profile_username
 
     account_settings_data = get_account_settings(request, [profile_username])[0]
 

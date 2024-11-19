@@ -122,7 +122,7 @@ class TestContentstore(unittest.TestCase):
         unknown_asset = self.course1_key.make_asset_key('asset', 'no_such_file.gif')
         with pytest.raises(NotFoundError):
             self.contentstore.find(unknown_asset)
-        assert self.contentstore.find(unknown_asset, throw_on_not_found=False) is None,\
+        assert self.contentstore.find(unknown_asset, throw_on_not_found=False) is None, \
             f'Found unknown asset {unknown_asset}'
 
     @ddt.data(True, False)

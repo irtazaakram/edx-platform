@@ -960,5 +960,5 @@ class CourseOverviewAccessTestCase(ModuleStoreTestCase):
                 num_queries = 0
 
         course_overview = CourseOverview.get_from_id(course.id)
-        with self.assertNumQueries(num_queries, table_ignorelist=QUERY_COUNT_TABLE_IGNORELIST):
+        with self.assertNumQueries(num_queries, table_ignorelist=QUERY_COUNT_TABLE_IGNORELIST):  # pylint: disable=possibly-used-before-assignment
             bool(access.has_access(user, 'see_exists', course_overview, course_key=course.id))

@@ -55,7 +55,7 @@ class TestRetryFailedPhotoVerifications(MockS3Boto3Mixin, TestVerificationBase):
     def add_test_config_for_retry_verification(self):
         """Setups verification retry configuration."""
         config = SSPVerificationRetryConfig.current()
-        config.arguments = ('--verification-ids 1 2 3')
+        config.arguments = '--verification-ids 1 2 3'
         config.enabled = True
         config.save()
 

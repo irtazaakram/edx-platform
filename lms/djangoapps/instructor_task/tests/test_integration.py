@@ -199,11 +199,12 @@ class TestRescoringTask(TestIntegrationTask):
     RescoreTestData = namedtuple('RescoreTestData', 'edit, new_expected_scores, new_expected_max')
 
     @ddt.data(
-        RescoreTestData(edit=dict(correct_answer=OPTION_2), new_expected_scores=(0, 1, 1, 2), new_expected_max=2),
-        RescoreTestData(edit=dict(num_inputs=2), new_expected_scores=(2, 1, 1, 0), new_expected_max=4),
-        RescoreTestData(edit=dict(num_inputs=4), new_expected_scores=(2, 1, 1, 0), new_expected_max=8),
-        RescoreTestData(edit=dict(num_responses=4), new_expected_scores=(2, 1, 1, 0), new_expected_max=4),
-        RescoreTestData(edit=dict(num_inputs=2, num_responses=4), new_expected_scores=(2, 1, 1, 0), new_expected_max=8),
+        RescoreTestData(edit={'correct_answer': OPTION_2}, new_expected_scores=(0, 1, 1, 2), new_expected_max=2),
+        RescoreTestData(edit={'num_inputs': 2}, new_expected_scores=(2, 1, 1, 0), new_expected_max=4),
+        RescoreTestData(edit={'num_inputs': 4}, new_expected_scores=(2, 1, 1, 0), new_expected_max=8),
+        RescoreTestData(edit={'num_responses': 4}, new_expected_scores=(2, 1, 1, 0), new_expected_max=4),
+        RescoreTestData(edit={
+            'num_inputs': 2, 'num_responses': 4}, new_expected_scores=(2, 1, 1, 0), new_expected_max=8),
     )
     @ddt.unpack
     def test_rescoring_option_problem(self, problem_edit, new_expected_scores, new_expected_max):
@@ -221,7 +222,7 @@ class TestRescoringTask(TestIntegrationTask):
 
     @ddt.data(
         RescoreTestData(edit={}, new_expected_scores=(2, 1, 1, 0), new_expected_max=2),
-        RescoreTestData(edit=dict(correct_answer=OPTION_2), new_expected_scores=(2, 1, 1, 2), new_expected_max=2),
+        RescoreTestData(edit={"correct_answer": OPTION_2}, new_expected_scores=(2, 1, 1, 2), new_expected_max=2),
     )
     @ddt.unpack
     def test_rescoring_if_higher(self, problem_edit, new_expected_scores, new_expected_max):
@@ -234,7 +235,7 @@ class TestRescoringTask(TestIntegrationTask):
         Specifically tests rescore when the previous and new raw scores are equal. In this case, the scores should
         be updated.
         """
-        problem_edit = dict(num_inputs=2)  # this change to the problem means the problem will now have a max score of 4
+        problem_edit = {"num_inputs": 2}  # this change to the problem means the problem will now have a max score of 4
         unchanged_max = 2
         new_max = 4
         problem_url_name = 'H1P1'

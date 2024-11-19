@@ -203,7 +203,7 @@ class Command(BaseCommand):
             api_url = urljoin(f"{api_base_url}/", "pathways/")
             next_page = 1
             while next_page:
-                response = client.get(api_url, params=dict(exclude_utm=1, page=next_page))
+                response = client.get(api_url, params={"exclude_utm": 1, "page": next_page})
                 response.raise_for_status()
                 new_pathways = response.json()
                 pathways.extend(new_pathways['results'])

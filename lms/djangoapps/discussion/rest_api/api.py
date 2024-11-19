@@ -866,7 +866,7 @@ def _serialize_discussion_entities(request, context, discussion_entities, reques
             serialized_entity = ThreadSerializer(entity, context=context).data
         elif discussion_entity_type == DiscussionEntity.comment:
             serialized_entity = CommentSerializer(entity, context=context).data
-        results.append(serialized_entity)
+        results.append(serialized_entity)  # pylint: disable=possibly-used-before-assignment
 
         if include_profile_image:
             if serialized_entity['author'] and serialized_entity['author'] not in usernames:
@@ -1010,7 +1010,7 @@ def get_thread_list(
         if view in ["unread", "unanswered", "unresponded"]:
             query_params[view] = "true"
         else:
-            ValidationError({
+            raise ValidationError({
                 "view": [f"Invalid value. '{view}' must be 'unread' or 'unanswered'"]
             })
 

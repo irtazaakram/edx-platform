@@ -24,12 +24,12 @@ class TestOAuthDispatchAPI(TestCase):
     """ Tests for oauth_dispatch's api.py module. """
     def setUp(self):
         super().setUp()
-        self.adapter = DOTAdapter()
+        self.adapter = DOTAdapter()  # pylint: disable=possibly-used-before-assignment
         self.user = UserFactory()
         self.client = self.adapter.create_public_client(
             name='public app',
             user=self.user,
-            redirect_uri=DUMMY_REDIRECT_URL,
+            redirect_uri=DUMMY_REDIRECT_URL,  # pylint: disable=possibly-used-before-assignment
             client_id='public-client-id',
         )
 
@@ -40,7 +40,7 @@ class TestOAuthDispatchAPI(TestCase):
         assert stored_access_token.application.user.id == expected_client.user.id
 
     def test_create_token_success(self):
-        token = api.create_dot_access_token(HttpRequest(), self.user, self.client)
+        token = api.create_dot_access_token(HttpRequest(), self.user, self.client)  # pylint: disable=possibly-used-before-assignment
         assert token['access_token']
         assert token['refresh_token']
         self.assertDictContainsSubset(

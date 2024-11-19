@@ -48,10 +48,10 @@ class LmsXBlockAppConfig(XBlockAppConfig):
         Get the LearningCoreXBlockRuntime parameters appropriate for viewing and/or
         editing XBlock content in the LMS
         """
-        return dict(
-            student_data_mode=StudentDataMode.Persisted,
-            authored_data_mode=AuthoredDataMode.STRICTLY_PUBLISHED,
-        )
+        return {
+            "student_data_mode": StudentDataMode.Persisted,
+            "authored_data_mode": AuthoredDataMode.STRICTLY_PUBLISHED
+        }
 
     def get_site_root_url(self):
         """
@@ -71,10 +71,7 @@ class StudioXBlockAppConfig(XBlockAppConfig):
         Get the LearningCoreXBlockRuntime parameters appropriate for viewing and/or
         editing XBlock content in Studio
         """
-        return dict(
-            student_data_mode=StudentDataMode.Ephemeral,
-            authored_data_mode=AuthoredDataMode.DEFAULT_DRAFT,
-        )
+        return {"student_data_mode": StudentDataMode.Ephemeral, "authored_data_mode": AuthoredDataMode.DEFAULT_DRAFT}
 
     def get_site_root_url(self):
         """

@@ -138,7 +138,7 @@ def _get_flag_overrides(course_or_org: FlagOverride):
         one_override = flag_overrides.setdefault(
             override.waffle_flag, OrderedDict()
         ).setdefault(
-            override_match_val, OrderedDict()
+            override_match_val, OrderedDict()  # pylint: disable=possibly-used-before-assignment
         )
         # data is reverse ordered by date, so the first record is the current record
         if override_key not in one_override:

@@ -181,7 +181,7 @@ class CourseApiTestViews(BaseCoursewareTests, MasqueradeMixin):
                 assert response.data['verification_status'] == 'none'
 
                 request = RequestFactory().request()
-                cert_url = get_certificate_url(course_id=self.course.id, uuid=cert.verify_uuid)
+                cert_url = get_certificate_url(course_id=self.course.id, uuid=cert.verify_uuid)  # pylint: disable=possibly-used-before-assignment
                 linkedin_url_params = {
                     'name': '{platform_name} Verified Certificate for {course_name}'.format(
                         platform_name=settings.PLATFORM_NAME, course_name=self.course.display_name,

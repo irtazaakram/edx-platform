@@ -157,7 +157,7 @@ def track_created_event(request, event_name, course, obj, data):
 
 
 def add_truncated_title_to_event_data(event_data, full_title):
-    event_data['title_truncated'] = (len(full_title) > TRACKING_MAX_FORUM_TITLE)
+    event_data['title_truncated'] = len(full_title) > TRACKING_MAX_FORUM_TITLE
     event_data['title'] = full_title[:TRACKING_MAX_FORUM_TITLE]
 
 

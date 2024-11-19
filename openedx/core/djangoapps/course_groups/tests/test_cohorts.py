@@ -257,7 +257,7 @@ class TestCohorts(ModuleStoreTestCase):
         assert cohorts.get_cohort(user, course.id).id == cohort.id, 'user should be assigned to the correct cohort'
 
         assert cohorts.get_cohort(other_user, course.id).id == cohorts\
-            .get_cohort_by_name(course.id, cohorts.DEFAULT_COHORT_NAME).id,\
+            .get_cohort_by_name(course.id, cohorts.DEFAULT_COHORT_NAME).id, \
             'other_user should be assigned to the default cohort'
 
     def test_get_cohort_preassigned_user(self):
@@ -411,7 +411,7 @@ class TestCohorts(ModuleStoreTestCase):
 
         assert cohorts.get_cohort(user2, course.id).name == 'AutoGroup', 'user2 should be assigned to AutoGroups'
 
-        assert cohorts.get_cohort(user1, course.id).name == 'AutoGroup',\
+        assert cohorts.get_cohort(user1, course.id).name == 'AutoGroup', \
             'user1 should still be in originally placed cohort'
 
     def test_cohorting_with_no_auto_cohorts(self):
@@ -446,7 +446,7 @@ class TestCohorts(ModuleStoreTestCase):
         )
 
         assert cohorts.get_cohort(user1, course.id).name == cohorts\
-            .get_cohort_by_name(course.id, cohorts.DEFAULT_COHORT_NAME).name,\
+            .get_cohort_by_name(course.id, cohorts.DEFAULT_COHORT_NAME).name, \
             'user1 should still be in the default cohort'
 
         assert cohorts.get_cohort(user2, course.id).id == cohorts\

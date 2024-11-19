@@ -189,8 +189,8 @@ class InheritingFieldDataTest(unittest.TestCase):
         parent_block = self.get_block_using_split_kvs(
             block_type="library_content",
             block_id="parent",
-            fields=dict(inherited="changed!"),
-            defaults=dict(inherited="parent's default"),
+            fields={"inherited": 'changed!'},
+            defaults={"inherited": "parent's default"},
         )
         assert parent_block.inherited == 'changed!'
 
@@ -211,8 +211,8 @@ class InheritingFieldDataTest(unittest.TestCase):
         parent_block = self.get_block_using_split_kvs(
             block_type="library_content",
             block_id="parent",
-            fields=dict(inherited="changed!"),
-            defaults=dict(inherited="parent's default"),
+            fields={"inherited": 'changed!'},
+            defaults={"inherited": "parent's default"},
         )
         assert parent_block.inherited == 'changed!'
 
@@ -220,7 +220,7 @@ class InheritingFieldDataTest(unittest.TestCase):
             block_type="library_content",
             block_id="parent",
             fields={},
-            defaults=dict(inherited="child's default"),
+            defaults={"inherited": "child's default"},
         )
         child.parent = parent_block.location
         assert child.inherited == "child's default"

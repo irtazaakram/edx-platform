@@ -224,7 +224,7 @@ class PageLevelMessages(UserMessageCollection):
                     notice_type = getattr(UserMessageType, notice_type_str, UserMessageType.INFO)
 
                 msgs.append(UserMessage(
-                    type=notice_type,
+                    type=notice_type,  # pylint: disable=possibly-used-before-assignment
                     message_html=str(cls.get_message_html(Text(notice_message))),
                 ))
         except BaseException as e:

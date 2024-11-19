@@ -1320,7 +1320,7 @@ class CourseDiscussionSettingsAPIView(DeveloperErrorViewMixin, APIView):
     permission_classes = (permissions.IsAuthenticated, IsStaffOrAdmin)
 
     def _get_request_kwargs(self, course_id):
-        return dict(course_id=course_id)
+        return {"course_id": course_id}
 
     def get(self, request, course_id):
         """
@@ -1443,7 +1443,7 @@ class CourseDiscussionRolesAPIView(DeveloperErrorViewMixin, APIView):
     permission_classes = (permissions.IsAuthenticated, permissions.IsAdminUser)
 
     def _get_request_kwargs(self, course_id, rolename):
-        return dict(course_id=course_id, rolename=rolename)
+        return {"course_id": course_id, "rolename": rolename}
 
     def get(self, request, course_id, rolename):
         """

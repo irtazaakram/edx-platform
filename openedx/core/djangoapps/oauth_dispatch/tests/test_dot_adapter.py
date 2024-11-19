@@ -30,12 +30,12 @@ class DOTAdapterTestCase(TestCase):
     """
     def setUp(self):
         super().setUp()
-        self.adapter = DOTAdapter()
+        self.adapter = DOTAdapter()  # pylint: disable=possibly-used-before-assignment
         self.user = UserFactory()
         self.public_client = self.adapter.create_public_client(
             name='public app',
             user=self.user,
-            redirect_uri=DUMMY_REDIRECT_URL,
+            redirect_uri=DUMMY_REDIRECT_URL,  # pylint: disable=possibly-used-before-assignment
             client_id='public-client-id',
         )
         self.confidential_client = self.adapter.create_confidential_client(
@@ -47,10 +47,10 @@ class DOTAdapterTestCase(TestCase):
         self.restricted_client = self.adapter.create_confidential_client(
             name='restricted app',
             user=self.user,
-            redirect_uri=DUMMY_REDIRECT_URL2,
+            redirect_uri=DUMMY_REDIRECT_URL2,  # pylint: disable=possibly-used-before-assignment
             client_id='restricted-client-id',
         )
-        self.restricted_app = RestrictedApplication.objects.create(application=self.restricted_client)
+        self.restricted_app = RestrictedApplication.objects.create(application=self.restricted_client)  # pylint: disable=possibly-used-before-assignment
 
     def test_restricted_app_unicode(self):
         """

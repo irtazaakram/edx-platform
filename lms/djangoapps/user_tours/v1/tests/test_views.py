@@ -64,7 +64,7 @@ class TestUserTourView(TestCase):
             response = self.client.get(url)
         elif method == 'PATCH':
             response = self.client.patch(url, data={})
-        assert response.status_code == status.HTTP_401_UNAUTHORIZED
+        assert response.status_code == status.HTTP_401_UNAUTHORIZED  # pylint: disable=possibly-used-before-assignment
 
     def test_get_success(self):
         """ Test GET request for a user. """

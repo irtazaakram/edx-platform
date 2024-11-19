@@ -37,7 +37,7 @@ class CountryMiddleware(MiddlewareMixin):
 
         old_ip_address = request.session.get('ip_address', None)
 
-        if not new_ip_address and old_ip_address:
+        if not new_ip_address and old_ip_address:  # pylint: disable=possibly-used-before-assignment
             del request.session['ip_address']
             del request.session['country_code']
         elif new_ip_address != old_ip_address and new_ip_address_obj.is_global:

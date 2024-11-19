@@ -41,7 +41,7 @@ class UserTagsEventContextMiddleware(MiddlewareMixin):
                 context['course_user_tags'] = dict(
                     UserCourseTag.objects.filter(
                         user=request.user.pk,
-                        course_id=course_key,
+                        course_id=course_key,  # pylint: disable=possibly-used-before-assignment
                     ).values_list('key', 'value')
                 )
             else:

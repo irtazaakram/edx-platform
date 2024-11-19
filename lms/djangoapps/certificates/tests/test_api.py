@@ -471,11 +471,11 @@ class CertificateGetTests(SharedModuleStoreTestCase):
         """
         Test the get_certificate_url with a web cert course
         """
-        expected_url = reverse("certificates:render_cert_by_uuid", kwargs=dict(certificate_uuid=self.uuid))
+        expected_url = reverse("certificates:render_cert_by_uuid", kwargs={"certificate_uuid": self.uuid})
         cert_url = get_certificate_url(user_id=self.student.id, course_id=self.web_cert_course.id, uuid=self.uuid)
         assert expected_url == cert_url
 
-        expected_url = reverse("certificates:render_cert_by_uuid", kwargs=dict(certificate_uuid=self.uuid))
+        expected_url = reverse("certificates:render_cert_by_uuid", kwargs={"certificate_uuid": self.uuid})
 
         cert_url = get_certificate_url(user_id=self.student.id, course_id=self.web_cert_course.id, uuid=self.uuid)
         assert expected_url == cert_url

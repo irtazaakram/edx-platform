@@ -233,7 +233,7 @@ class ScheduleCourseNextSectionUpdate(ScheduleMessageBaseTask):  # lint-amnesty,
     @classmethod
     def enqueue(cls, site, current_date, day_offset, override_recipient_email=None):  # lint-amnesty, pylint: disable=missing-function-docstring
         set_code_owner_attribute_from_module(__name__)
-        target_datetime = (current_date - datetime.timedelta(days=day_offset))
+        target_datetime = current_date - datetime.timedelta(days=day_offset)
 
         if not cls.is_enqueue_enabled(site):
             cls.log_info('Message queuing disabled for site %s', site.domain)

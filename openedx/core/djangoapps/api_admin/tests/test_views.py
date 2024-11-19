@@ -189,7 +189,7 @@ class ApiRequestStatusViewTest(ApiAdminTest):
         applications = Application.objects.filter(user=self.user)
         if application_exists and new_application_created:
             assert applications.count() == 1
-            assert old_application != applications[0]
+            assert old_application != applications[0]  # pylint: disable=possibly-used-before-assignment
         elif application_exists:
             assert applications.count() == 1
             assert old_application == applications[0]

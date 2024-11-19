@@ -148,16 +148,6 @@ openai<=0.28.1
 # Issue for unpinning: https://github.com/openedx/edx-platform/issues/35267
 path<16.12.0
 
-# Date: 2022-08-03
-# pycodestyle==2.9.0 generates false positive error E275.
-# Constraint can be removed once the issue https://github.com/PyCQA/pycodestyle/issues/1090 is fixed.
-pycodestyle<2.9.0
-
-# Date: 2021-07-12
-# Issue for unpinning: https://github.com/openedx/edx-platform/issues/33560
-pylint<2.16.0 # greater version failing quality test. Fix them in seperate ticket.
-astroid<2.14.0
-
 # Date: 2021-08-25
 # At the time of writing this comment, we do not know whether py2neo>=2022
 # will support our currently-deployed Neo4j version (3.5).
@@ -177,7 +167,3 @@ pymongo<4.4.1
 # We are pinning this until after all the smaller migrations get handled and then we can migrate this all at once.
 # Issue for unpinning: https://github.com/edx/edx-arch-experiments/issues/760
 social-auth-app-django<=5.4.1
-
-# # Date: 2024-10-14
-# # The edx-enterprise is currently using edx-rest-api-client==5.7.1, which needs to be updated first.
-# edx-rest-api-client==5.7.1

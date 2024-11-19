@@ -152,23 +152,21 @@ class TeamsConfigTests(TestCase):
         "team_sets": [],
     }
     INPUT_DATA_4 = {
-        "team_sets": [dict(id="test-teamset", name="test", description="test")]
+        "team_sets": [{"id": 'test-teamset', "name": 'test', "description": 'test'}]
     }
     OUTPUT_DATA_4 = {
         # If teamsets are provided, but a value for "enabled" isn't, then the presence of teamsets indicates that
         # teams should be considered enabled, and the "enabled" field should be set to True.
         "enabled": True,
         "max_team_size": DEFAULT_COURSE_RUN_MAX_TEAM_SIZE,
-        "team_sets": [
-            dict(
-                id="test-teamset",
-                name="test",
-                description="test",
-                type="open",
-                max_team_size=None,
-                user_partition_id=None
-            ),
-        ],
+        "team_sets": [{
+            "id": "test-teamset",
+            "name": "test",
+            "description": "test",
+            "type": "open",
+            "max_team_size": None,
+            "user_partition_id": None,
+        }],
     }
 
     @ddt.data(

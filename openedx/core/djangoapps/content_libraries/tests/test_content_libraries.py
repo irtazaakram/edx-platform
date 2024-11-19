@@ -1087,9 +1087,9 @@ class ContentLibraryXBlockValidationTest(APITestCase):
     """Tests only focused on service validation, no Learning Core interactions here."""
 
     @ddt.data(
-        (URL_BLOCK_METADATA_URL, dict(block_key='totally_invalid_key')),
-        (URL_BLOCK_RENDER_VIEW, dict(block_key='totally_invalid_key', view_name='random')),
-        (URL_BLOCK_GET_HANDLER_URL, dict(block_key='totally_invalid_key', handler_name='random')),
+        (URL_BLOCK_METADATA_URL, {"block_key": 'totally_invalid_key'}),
+        (URL_BLOCK_RENDER_VIEW, {"block_key": 'totally_invalid_key', "view_name": 'random'}),
+        (URL_BLOCK_GET_HANDLER_URL, {"block_key": 'totally_invalid_key', "handler_name": 'random'}),
     )
     @ddt.unpack
     def test_invalid_key(self, endpoint, endpoint_parameters):
@@ -1102,10 +1102,10 @@ class ContentLibraryXBlockValidationTest(APITestCase):
     def test_xblock_handler_invalid_key(self):
         """This endpoint is tested separately from the previous ones as it's not a DRF endpoint."""
         client = Client()
-        response = client.get(URL_BLOCK_XBLOCK_HANDLER.format(**dict(
-            block_key='totally_invalid_key',
-            handler_name='random',
-            user_id='random',
-            secure_token='random',
-        )))
+        response = client.get(URL_BLOCK_XBLOCK_HANDLER.format(**{
+            "block_key": "totally_invalid_key",
+            "handler_name": "random",
+            "user_id": "random",
+            "secure_token": "random",
+        }))
         self.assertEqual(response.status_code, 404)

@@ -27,7 +27,7 @@ def update_block_structure_on_course_publish(sender, course_key, **kwargs):  # p
         return
 
     update_course_in_cache_v2.apply_async(
-        kwargs=dict(course_id=str(course_key)),
+        kwargs={"course_id": str(course_key)},
         countdown=settings.BLOCK_STRUCTURES_SETTINGS['COURSE_PUBLISH_TASK_DELAY'],
     )
 

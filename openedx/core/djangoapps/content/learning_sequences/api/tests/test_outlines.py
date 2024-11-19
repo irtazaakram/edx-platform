@@ -1064,7 +1064,7 @@ class SpecialExamsTestCase(OutlineProcessorTestCase):  # lint-amnesty, pylint: d
         for sequence_key in self.get_sequence_keys(exclude=[self.seq_normal_key]):
             assert sequence_key in student_details.special_exam_attempts.sequences
             attempt_summary = student_details.special_exam_attempts.sequences[sequence_key]
-            assert type(attempt_summary) == dict  # lint-amnesty, pylint: disable=unidiomatic-typecheck
+            assert isinstance(attempt_summary, dict)
             assert attempt_summary["summary"]["usage_key"] == str(sequence_key)
 
     @patch.dict(settings.FEATURES, {'ENABLE_SPECIAL_EXAMS': False})
@@ -1101,7 +1101,7 @@ class SpecialExamsTestCase(OutlineProcessorTestCase):  # lint-amnesty, pylint: d
         # Ensure that exam type is correct for proctored exam
         assert self.seq_proctored_exam_key in student_details.special_exam_attempts.sequences
         attempt_summary = student_details.special_exam_attempts.sequences[self.seq_proctored_exam_key]
-        assert type(attempt_summary) == dict  # lint-amnesty, pylint: disable=unidiomatic-typecheck
+        assert isinstance(attempt_summary, dict)
         assert attempt_summary["short_description"] == "Proctored Exam"
 
 
@@ -1262,7 +1262,7 @@ class SequentialVisibilityTestCase(CacheIsolationTestCase):
                 assert len(user_course_outline.sections) == 3
                 assert len(user_course_outline.sequences) == 6
                 assert all([(seq.usage_key in user_course_outline.accessible_sequences) for seq in  # lint-amnesty, pylint: disable=use-a-generator
-                            user_course_outline.sequences.values()]),\
+                            user_course_outline.sequences.values()]), \
                     'Sequences should be accessible to all users for a public course'
 
     @override_waffle_flag(COURSE_ENABLE_UNENROLLED_ACCESS_FLAG, active=True)
@@ -1287,11 +1287,11 @@ class SequentialVisibilityTestCase(CacheIsolationTestCase):
                 ]
 
                 if user in [self.anonymous_user, self.unenrolled_student]:
-                    assert all((not is_accessible) for is_accessible in is_sequence_accessible),\
+                    assert all((not is_accessible) for is_accessible in is_sequence_accessible), \
                         "Sequences shouldn't be accessible to anonymous or " \
                         "non-enrolled students for a public_outline course"
                 else:
-                    assert all(is_sequence_accessible),\
+                    assert all(is_sequence_accessible), \
                         'Sequences should be accessible to enrolled, staff users for a public_outline course'
 
     @override_waffle_flag(COURSE_ENABLE_UNENROLLED_ACCESS_FLAG, active=True)
@@ -1313,13 +1313,13 @@ class SequentialVisibilityTestCase(CacheIsolationTestCase):
                 ]
 
                 if user in [self.anonymous_user, self.unenrolled_student]:
-                    assert (len(user_course_outline.sections) == len(user_course_outline.sequences) == 0),\
+                    assert (len(user_course_outline.sections) == len(user_course_outline.sequences) == 0), \
                         'No section of a private course should be visible to anonymous or non-enrolled student'
                 else:
                     # Enrolled or Staff User
                     assert len(user_course_outline.sections) == 3
                     assert len(user_course_outline.sequences) == 6
-                    assert all(is_sequence_accessible),\
+                    assert all(is_sequence_accessible), \
                         'Sequences should be accessible to enrolled, staff users for a public_outline course'
 
 

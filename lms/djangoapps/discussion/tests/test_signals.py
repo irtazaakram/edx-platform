@@ -85,7 +85,7 @@ class CoursePublishHandlerTestCase(ModuleStoreTestCase):
     ENABLED_SIGNALS = ['course_published']
 
     def test_discussion_id_map_updates_on_publish(self):
-        course_key_args = dict(org='org', course='number', run='run')
+        course_key_args = {"org": 'org', "course": 'number', "run": 'run'}
         course_key = self.store.make_course_key(**course_key_args)
 
         # create course

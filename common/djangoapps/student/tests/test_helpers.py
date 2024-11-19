@@ -121,7 +121,7 @@ class TestLoginHelper(TestCase):
                 req = self.request.get(settings.LOGIN_URL + f"?next={next_url}")
             elif method == 'POST':
                 req = self.request.post(settings.LOGIN_URL, {'next': next_url})
-            req.META["HTTP_ACCEPT"] = "text/html"
+            req.META["HTTP_ACCEPT"] = "text/html"  # pylint: disable=possibly-used-before-assignment
             self._add_session(req)
             next_page = get_next_url_for_login_page(req)
             assert next_page == expected_url
@@ -129,7 +129,7 @@ class TestLoginHelper(TestCase):
         with override_settings(FEATURES=dict(settings.FEATURES, THIRD_PARTY_AUTH_HINT=tpa_hint)):
             validate_login()
 
-        with with_site_configuration_context(configuration=dict(THIRD_PARTY_AUTH_HINT=tpa_hint)):
+        with with_site_configuration_context(configuration={"THIRD_PARTY_AUTH_HINT": tpa_hint}):
             validate_login()
 
     @skip_unless_lms

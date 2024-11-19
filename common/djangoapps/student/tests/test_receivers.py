@@ -64,7 +64,7 @@ class ReceiversTest(SharedModuleStoreTestCase):
 
         # Send a VERIFIED_NAME_APPROVED signal where the profile name matches the name
         # change request
-        VERIFIED_NAME_APPROVED.send(sender=None, user_id=user.id, profile_name=new_name)
+        VERIFIED_NAME_APPROVED.send(sender=None, user_id=user.id, profile_name=new_name)  # pylint: disable=possibly-used-before-assignment
 
         # Assert that the pending name change was deleted and the profile name was updated
         assert PendingNameChange.objects.count() == 0

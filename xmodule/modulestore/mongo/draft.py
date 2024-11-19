@@ -35,7 +35,7 @@ def wrap_draft(item):
     Sets `item.is_draft` to `True` if the item is DRAFT, and `False` otherwise.
     Sets the item's location to the non-draft location in either case.
     """
-    item.is_draft = (item.location.branch == MongoRevisionKey.draft)
+    item.is_draft = item.location.branch == MongoRevisionKey.draft
     item.location = item.location.replace(revision=MongoRevisionKey.published)
     return item
 

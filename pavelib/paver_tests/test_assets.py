@@ -51,60 +51,66 @@ class TestDeprecatedPaverAssets(TestCase):
         del os.environ['NO_PREREQ_INSTALL']
 
     @ddt.data(
-        dict(
-            task_name='pavelib.assets.compile_sass',
-            args=[],
-            kwargs={},
-            expected=["npm run compile-sass --"],
-        ),
-        dict(
-            task_name='pavelib.assets.compile_sass',
-            args=[],
-            kwargs={"system": "lms,studio"},
-            expected=["npm run compile-sass --"],
-        ),
-        dict(
-            task_name='pavelib.assets.compile_sass',
-            args=[],
-            kwargs={"debug": True},
-            expected=["npm run compile-sass-dev --"],
-        ),
-        dict(
-            task_name='pavelib.assets.compile_sass',
-            args=[],
-            kwargs={"system": "lms"},
-            expected=["npm run compile-sass -- --skip-cms"],
-        ),
-        dict(
-            task_name='pavelib.assets.compile_sass',
-            args=[],
-            kwargs={"system": "studio"},
-            expected=["npm run compile-sass -- --skip-lms"],
-        ),
-        dict(
-            task_name='pavelib.assets.compile_sass',
-            args=[],
-            kwargs={"system": "cms", "theme_dirs": f"{REPO_ROOT}/common/test,{REPO_ROOT}/themes"},
-            expected=[
+        {
+            "task_name": "pavelib.assets.compile_sass",
+            "args": [],
+            "kwargs": {},
+            "expected": ["npm run compile-sass --"],
+        },
+        {
+            "task_name": "pavelib.assets.compile_sass",
+            "args": [],
+            "kwargs": {"system": "lms,studio"},
+            "expected": ["npm run compile-sass --"],
+        },
+        {
+            "task_name": "pavelib.assets.compile_sass",
+            "args": [],
+            "kwargs": {"debug": True},
+            "expected": ["npm run compile-sass-dev --"],
+        },
+        {
+            "task_name": "pavelib.assets.compile_sass",
+            "args": [],
+            "kwargs": {"system": "lms"},
+            "expected": ["npm run compile-sass -- --skip-cms"],
+        },
+        {
+            "task_name": "pavelib.assets.compile_sass",
+            "args": [],
+            "kwargs": {"system": "studio"},
+            "expected": ["npm run compile-sass -- --skip-lms"],
+        },
+        {
+            "task_name": "pavelib.assets.compile_sass",
+            "args": [],
+            "kwargs": {
+                "system": "cms",
+                "theme_dirs": f"{REPO_ROOT}/common/test,{REPO_ROOT}/themes",
+            },
+            "expected": [
                 "npm run compile-sass -- --skip-lms " +
                 f"--theme-dir {REPO_ROOT}/common/test --theme-dir {REPO_ROOT}/themes"
             ],
-        ),
-        dict(
-            task_name='pavelib.assets.compile_sass',
-            args=[],
-            kwargs={"theme_dirs": f"{REPO_ROOT}/common/test,{REPO_ROOT}/themes", "themes": "red-theme,test-theme"},
-            expected=[
+        },
+        {
+            "task_name": "pavelib.assets.compile_sass",
+            "args": [],
+            "kwargs": {
+                "theme_dirs": f"{REPO_ROOT}/common/test,{REPO_ROOT}/themes",
+                "themes": "red-theme,test-theme",
+            },
+            "expected": [
                 "npm run compile-sass -- " +
                 f"--theme-dir {REPO_ROOT}/common/test --theme-dir {REPO_ROOT}/themes " +
                 "--theme red-theme --theme test-theme"
             ],
-        ),
-        dict(
-            task_name='pavelib.assets.update_assets',
-            args=["lms", "studio", "--settings=fake.settings"],
-            kwargs={},
-            expected=[
+        },
+        {
+            "task_name": "pavelib.assets.update_assets",
+            "args": ["lms", "studio", "--settings=fake.settings"],
+            "kwargs": {},
+            "expected": [
                 (
                     "WEBPACK_CONFIG_PATH=webpack.fake.config.js " +
                     "NODE_ENV=production " +
@@ -121,7 +127,7 @@ class TestDeprecatedPaverAssets(TestCase):
                     "( ./manage.py cms --settings=fake.settings collectstatic --noinput )"
                 ),
             ],
-        ),
+        },
     )
     @ddt.unpack
     @patch.object(pavelib.assets, 'sh')

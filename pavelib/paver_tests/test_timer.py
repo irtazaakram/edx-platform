@@ -88,7 +88,7 @@ class TimedDecoratorTests(TestCase):
 
     @patch.object(timer, 'PAVER_TIMER_LOG', '/tmp/some-log')
     def test_arguments(self):
-        messages = self.get_log_messages(args=(1, 'foo'), kwargs=dict(bar='baz'))
+        messages = self.get_log_messages(args=(1, 'foo'), kwargs={"bar": 'baz'})
         assert len(messages) == 1
 
         assert 'args' in messages[0] and messages[0]['args'] == [repr(1), repr('foo')]

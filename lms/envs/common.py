@@ -1274,13 +1274,14 @@ OAUTH2_PROVIDER = {
     # 3 months and then we expire refresh tokens using edx_clear_expired_tokens (length is mobile app driven)
     'REFRESH_TOKEN_EXPIRE_SECONDS': 7776000,
     'SCOPES_BACKEND_CLASS': 'openedx.core.djangoapps.oauth_dispatch.scopes.ApplicationModelScopes',
-    'SCOPES': dict(OAUTH2_DEFAULT_SCOPES, **{
+    'SCOPES': {
+        **OAUTH2_DEFAULT_SCOPES,
         'certificates:read': _('Retrieve your course certificates'),
         'grades:read': _('Retrieve your grades for your enrolled courses'),
         'tpa:read': _('Retrieve your third-party authentication username mapping'),
         # user_id is added in code as a default scope for JWT cookies and all password grant_type JWTs
         'user_id': _('Know your user identifier'),
-    }),
+    },
     'DEFAULT_SCOPES': OAUTH2_DEFAULT_SCOPES,
     'REQUEST_APPROVAL_PROMPT': 'auto_even_if_expired',
     'ERROR_RESPONSE_WITH_SCOPES': True,
@@ -2952,7 +2953,7 @@ HEARTBEAT_CELERY_ROUTING_KEY = HIGH_PRIORITY_QUEUE
 # .. setting_description: Stores all the settings used by block structures and block structure
 #   related tasks. See BLOCK_STRUCTURES_SETTINGS[XXX] documentation for details of each setting.
 #   For more information, check https://github.com/openedx/edx-platform/pull/13388.
-BLOCK_STRUCTURES_SETTINGS = dict(
+BLOCK_STRUCTURES_SETTINGS = {
     # .. setting_name: BLOCK_STRUCTURES_SETTINGS['COURSE_PUBLISH_TASK_DELAY']
     # .. setting_default: 30
     # .. setting_description: Delay, in seconds, after a new edit of a course is published before
@@ -2960,14 +2961,14 @@ BLOCK_STRUCTURES_SETTINGS = dict(
     #   the latest changes when there are secondary reads in sharded mongoDB clusters.
     #   For more information, check https://github.com/openedx/edx-platform/pull/13388 and
     #   https://github.com/openedx/edx-platform/pull/14571.
-    COURSE_PUBLISH_TASK_DELAY=30,
+    'COURSE_PUBLISH_TASK_DELAY': 30,
 
     # .. setting_name: BLOCK_STRUCTURES_SETTINGS['TASK_DEFAULT_RETRY_DELAY']
     # .. setting_default: 30
     # .. setting_description: Delay, in seconds, between retry attempts if a block structure task
     #   fails. For more information, check https://github.com/openedx/edx-platform/pull/13388 and
     #   https://github.com/openedx/edx-platform/pull/14571.
-    TASK_DEFAULT_RETRY_DELAY=30,
+    'TASK_DEFAULT_RETRY_DELAY': 30,
 
     # .. setting_name: BLOCK_STRUCTURES_SETTINGS['TASK_MAX_RETRIES']
     # .. setting_default: 5
@@ -2976,8 +2977,8 @@ BLOCK_STRUCTURES_SETTINGS = dict(
     #   the celery task, or wait for it to be triggered again.
     #   For more information, check https://github.com/openedx/edx-platform/pull/13388 and
     #   https://github.com/openedx/edx-platform/pull/14571.
-    TASK_MAX_RETRIES=5,
-)
+    'TASK_MAX_RETRIES': 5,
+}
 
 ################################ Bulk Email ###################################
 
@@ -3859,35 +3860,34 @@ TIME_ZONE_DISPLAYED_FOR_DEADLINES = 'UTC'
 
 ########################## VIDEO IMAGE STORAGE ############################
 
-VIDEO_IMAGE_SETTINGS = dict(
-    VIDEO_IMAGE_MAX_BYTES=2 * 1024 * 1024,    # 2 MB
-    VIDEO_IMAGE_MIN_BYTES=2 * 1024,       # 2 KB
+VIDEO_IMAGE_SETTINGS = {
+    'VIDEO_IMAGE_MAX_BYTES': 2 * 1024 * 1024,    # 2 MB
+    'VIDEO_IMAGE_MIN_BYTES': 2 * 1024,       # 2 KB
     # Backend storage
     # STORAGE_CLASS='storages.backends.s3boto3.S3Boto3Storage',
-    # STORAGE_KWARGS=dict(bucket='video-image-bucket'),
-    STORAGE_KWARGS=dict(
-        location=MEDIA_ROOT,
-    ),
-    DIRECTORY_PREFIX='video-images/',
-    BASE_URL=MEDIA_URL,
-
-)
+    # STORAGE_KWARGS={'bucket': 'video-image-bucket'},
+    'STORAGE_KWARGS': {
+        'location': MEDIA_ROOT,
+    },
+    'DIRECTORY_PREFIX': 'video-images/',
+    'BASE_URL': MEDIA_URL,
+}
 
 VIDEO_IMAGE_MAX_AGE = 31536000
 
 ########################## VIDEO TRANSCRIPTS STORAGE ############################
 
-VIDEO_TRANSCRIPTS_SETTINGS = dict(
-    VIDEO_TRANSCRIPTS_MAX_BYTES=3 * 1024 * 1024,    # 3 MB
+VIDEO_TRANSCRIPTS_SETTINGS = {
+    'VIDEO_TRANSCRIPTS_MAX_BYTES': 3 * 1024 * 1024,    # 3 MB
     # Backend storage
     # STORAGE_CLASS='storages.backends.s3boto3.S3Boto3Storage',
-    # STORAGE_KWARGS=dict(bucket='video-transcripts-bucket'),
-    STORAGE_KWARGS=dict(
-        location=MEDIA_ROOT,
-    ),
-    DIRECTORY_PREFIX='video-transcripts/',
-    BASE_URL=MEDIA_URL,
-)
+    # STORAGE_KWARGS={'bucket': 'video-transcripts-bucket'},
+    'STORAGE_KWARGS': {
+        'location': MEDIA_ROOT,
+    },
+    'DIRECTORY_PREFIX': 'video-transcripts/',
+    'BASE_URL': MEDIA_URL,
+}
 
 VIDEO_TRANSCRIPTS_MAX_AGE = 31536000
 

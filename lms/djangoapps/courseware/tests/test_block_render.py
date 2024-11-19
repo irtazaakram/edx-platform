@@ -231,12 +231,12 @@ class BlockRenderTestCase(SharedModuleStoreTestCase, LoginEnrollmentTestCase):
         # Construct a 'standard' xqueue_callback url
         self.callback_url = reverse(
             'xqueue_callback',
-            kwargs=dict(
-                course_id=str(self.course_key),
-                userid=str(self.mock_user.id),
-                mod_id=self.mock_block.id,
-                dispatch=self.dispatch
-            )
+            kwargs={
+                'course_id': str(self.course_key),
+                'userid': str(self.mock_user.id),
+                'mod_id': self.mock_block.id,
+                'dispatch': self.dispatch,
+            }
         )
 
     def tearDown(self):
@@ -2533,7 +2533,7 @@ class TestFilteredChildren(SharedModuleStoreTestCase):
             key = obj.scope_ids.usage_id
         elif isinstance(obj, UsageKey):
             key = obj
-        if key == self.parent.scope_ids.usage_id:  # lint-amnesty, pylint: disable=no-member
+        if key == self.parent.scope_ids.usage_id:  # lint-amnesty, pylint: disable=no-member, possibly-used-before-assignment
             return AccessResponse(True)
         return AccessResponse(key == self.children_for_user[user])
 

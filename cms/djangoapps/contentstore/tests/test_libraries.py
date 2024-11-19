@@ -745,7 +745,7 @@ class TestLibraryAccess(LibraryTestCase):
             'duplicate_source_locator': str(block.location),
         })
         self.assertIn(response.status_code, (200, 403))  # 400 would be ambiguous
-        duplicate_action_allowed = (response.status_code == 200)
+        duplicate_action_allowed = response.status_code == 200
         self.assertEqual(duplicate_action_allowed, expected_result)
 
     @ddt.data(

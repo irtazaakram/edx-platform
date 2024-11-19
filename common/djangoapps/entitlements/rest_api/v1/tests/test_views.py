@@ -77,7 +77,7 @@ class EntitlementViewSetTest(ModuleStoreTestCase):
         """
         Assert that a policy is equal to the default Course Entitlement Policy.
         """
-        default_policy = CourseEntitlementPolicy()
+        default_policy = CourseEntitlementPolicy()  # pylint: disable=possibly-used-before-assignment
         assert policy.expiration_period == default_policy.expiration_period
         assert policy.refund_period == default_policy.refund_period
         assert policy.regain_period == default_policy.regain_period
@@ -124,7 +124,7 @@ class EntitlementViewSetTest(ModuleStoreTestCase):
         not_staff_user = UserFactory()
         self.client.login(username=not_staff_user.username, password=TEST_PASSWORD)
 
-        course_entitlement = CourseEntitlementFactory.create()
+        course_entitlement = CourseEntitlementFactory.create()  # pylint: disable=possibly-used-before-assignment
         url = reverse(self.ENTITLEMENTS_DETAILS_PATH, args=[str(course_entitlement.uuid)])
 
         response = self.client.delete(
@@ -145,11 +145,11 @@ class EntitlementViewSetTest(ModuleStoreTestCase):
         assert response.status_code == 201
         results = response.data
 
-        course_entitlement = CourseEntitlement.objects.get(
+        course_entitlement = CourseEntitlement.objects.get(  # pylint: disable=possibly-used-before-assignment
             user=self.user,
             course_uuid=course_uuid
         )
-        assert results == CourseEntitlementSerializer(course_entitlement).data
+        assert results == CourseEntitlementSerializer(course_entitlement).data  # pylint: disable=possibly-used-before-assignment
 
     def test_add_duplicate_entitlement(self):
         """
@@ -293,7 +293,7 @@ class EntitlementViewSetTest(ModuleStoreTestCase):
         policy_site = SiteFactory.create()
         policy = CourseEntitlementPolicy.objects.create(mode=None, site=policy_site)
 
-        set_entitlement_policy(course_entitlement, policy_site)
+        set_entitlement_policy(course_entitlement, policy_site)  # pylint: disable=possibly-used-before-assignment
         assert course_entitlement.policy == policy
 
     def test_set_policy_match_site_over_mode(self):
@@ -767,7 +767,7 @@ class EntitlementViewSetTest(ModuleStoreTestCase):
             'support_details': [
                 {
                     'unenrolled_run': str(enrollment.course.id),
-                    'action': CourseEntitlementSupportDetail.REISSUE,
+                    'action': CourseEntitlementSupportDetail.REISSUE,  # pylint: disable=possibly-used-before-assignment
                     'comments': 'Severe illness.'
                 }
             ]

@@ -362,7 +362,7 @@ class CourseComparisonTest(TestCase):
         elif isinstance(reference_field, ReferenceValueDict):
             expected = {key: extract_key(val) for (key, val) in expected.items()}
             actual = {key: extract_key(val) for (key, val) in actual.items()}
-        assert expected == actual,\
+        assert expected == actual, \
             LazyFormat("Field {} doesn't match between usages {} and {}: {!r} != {!r}",
                        reference_field.name,
                        expected_block.scope_ids.usage_id,
@@ -386,7 +386,7 @@ class CourseComparisonTest(TestCase):
         else:
             expected = field.read_from(expected_block)
             actual = field.read_from(actual_block)
-            assert expected == actual,\
+            assert expected == actual, \
                 LazyFormat("Field {} doesn't match between usages {} and {}: {!r} != {!r}",
                            field.name,
                            expected_block.scope_ids.usage_id,

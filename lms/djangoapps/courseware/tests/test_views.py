@@ -302,7 +302,7 @@ class TestJumpTo(ModuleStoreTestCase):
             sequence = BlockFactory.create(category='sequential', parent_location=chapter.location)
             __ = BlockFactory.create(category='vertical', parent_location=sequence.location)
             staff_only_vertical = BlockFactory.create(category='vertical', parent_location=sequence.location,
-                                                      metadata=dict(visible_to_staff_only=True))
+                                                      metadata={"visible_to_staff_only": True})
             __ = BlockFactory.create(category='vertical', parent_location=sequence.location)
 
         usage_key = UsageKey.from_string(str(staff_only_vertical.location)).replace(course_key=course_key)
@@ -1884,9 +1884,7 @@ class ProgressPageShowCorrectnessTests(ProgressPageBaseTests):
         }
         self.create_course(**course_options)
 
-        metadata = dict(
-            show_correctness=show_correctness,
-        )
+        metadata = {"show_correctness": show_correctness}
         if due_date is not None:
             metadata['due'] = due_date
         if graded:
@@ -3198,9 +3196,9 @@ class EnterpriseConsentTestCase(EnterpriseTestConsentRequired, ModuleStoreTestCa
 
         course_id = str(self.course.id)
         for url in (
-                reverse("courseware", kwargs=dict(course_id=course_id)),
-                reverse("progress", kwargs=dict(course_id=course_id)),
-                reverse("student_progress", kwargs=dict(course_id=course_id, student_id=str(self.user.id))),
+            reverse("courseware", kwargs={'course_id': course_id}),
+            reverse("progress", kwargs={'course_id': course_id}),
+            reverse("student_progress", kwargs={'course_id': course_id, 'student_id': str(self.user.id)}),
         ):
             self.verify_consent_required(self.client, url)  # lint-amnesty, pylint: disable=no-value-for-parameter
 

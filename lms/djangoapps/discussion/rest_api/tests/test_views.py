@@ -977,9 +977,9 @@ class CourseTopicsViewV3Test(DiscussionAPIViewTestMixin, CommentsServiceMockMixi
         topic_ids = list(topic_id_query.order_by('ordering'))
         DiscussionTopicLink.objects.bulk_create(topic_links)
         self.topic_stats = {
-            **{topic_id: dict(discussion=random.randint(0, 10), question=random.randint(0, 10))
+            **{topic_id: {"discussion": random.randint(0, 10), "question": random.randint(0, 10)}
                for topic_id in set(topic_ids)},
-            topic_ids[0]: dict(discussion=0, question=0),
+            topic_ids[0]: {"discussion": 0, "question": 0},
         }
         patcher = mock.patch(
             'lms.djangoapps.discussion.rest_api.api.get_course_commentable_counts',

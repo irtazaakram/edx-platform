@@ -65,7 +65,7 @@ class Command(BaseCommand):
         return enrollment_config.csv_file
 
     def handle(self, *args, **options):
-        """ Main handler for the command."""
+        """Main handler for the command."""
         file_path = options.get('csv_file_path', None)
         file_from_database = options['file_from_database']
 
@@ -81,7 +81,7 @@ class Command(BaseCommand):
                 self.change_enrollments(csv_file)
 
         else:
-            CommandError('No file is provided. File is required')
+            raise CommandError('No file is provided. File is required')
 
     def change_enrollments(self, csv_file):
         """ change the enrollments of the learners. """

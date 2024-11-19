@@ -1155,7 +1155,7 @@ class TestCourseExportImport(LibraryTestCase):
             display_name='Test Unit'
         )
         lc_block = self._add_library_content_block(
-            vertical, self.lib_key, publish_item=publish, other_settings=dict(source_library_version=version)
+            vertical, self.lib_key, publish_item=publish, other_settings={"source_library_version": version}
         )
         lc_block.sync_from_library(upgrade_to_latest=True)
 

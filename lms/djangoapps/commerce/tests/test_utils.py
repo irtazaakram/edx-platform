@@ -201,7 +201,7 @@ class RefundUtilMethodTests(ModuleStoreTestCase):
 
     @patch('lms.djangoapps.commerce.utils.is_commerce_service_configured', return_value=False)
     def test_ecommerce_service_not_configured(self, mock_commerce_configured):
-        course_entitlement = CourseEntitlementFactory.create(mode=CourseMode.VERIFIED)
+        course_entitlement = CourseEntitlementFactory.create(mode=CourseMode.VERIFIED)  # pylint: disable=possibly-used-before-assignment
         refund_success = refund_entitlement(course_entitlement)
         assert mock_commerce_configured.is_called
         assert not refund_success

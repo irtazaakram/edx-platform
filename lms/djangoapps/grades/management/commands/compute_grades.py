@@ -139,7 +139,7 @@ class Command(BaseCommand):
             log_level = logging.WARNING
         elif options.get('verbosity') >= 1:
             log_level = logging.INFO
-        log.setLevel(log_level)
+        log.setLevel(log_level)  # pylint: disable=possibly-used-before-assignment
 
     def _latest_settings(self):
         """

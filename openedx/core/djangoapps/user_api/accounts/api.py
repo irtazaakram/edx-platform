@@ -309,7 +309,7 @@ def _does_name_change_require_verification(user_profile, old_name, new_name):
     # at least one seat.
     has_verified_enrollments = len(get_verified_enrollments(user.username)) > 0
 
-    validator = NameChangeValidator(old_names_list, num_passing_certs, old_name, new_name)
+    validator = NameChangeValidator(old_names_list, num_passing_certs, old_name, new_name)  # pylint: disable=possibly-used-before-assignment
 
     return not validator.validate() and has_verified_enrollments
 

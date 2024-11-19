@@ -164,7 +164,7 @@ def preprocess_collection(user, course, collection):
     store = modulestore()
     filtered_collection = []
     cache = {}
-    include_path_info = ('course_structure' not in settings.NOTES_DISABLED_TABS)
+    include_path_info = 'course_structure' not in settings.NOTES_DISABLED_TABS
     with store.bulk_operations(course.id):
         for model in collection:
             update = {

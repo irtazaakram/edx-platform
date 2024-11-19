@@ -23,7 +23,6 @@ cssselect                 # Used to extract HTML fragments via CSS selectors in 
 ddt                       # Run a test case multiple times with different input; used in many, many of our tests
 edx-lint                  # pylint extensions for Open edX repositories
 factory-boy               # Library for creating test fixtures, used in many tests
-# Pinning the freezegun version because 0.3.13 is causing failures which have also been reported on the git repo by public.
 freezegun                 # Allows tests to mock the output of assorted datetime module functions
 httpretty                 # Library for mocking HTTP requests, used in many tests
 import-linter             # Tool for making assertions about which modules can import which others
@@ -36,13 +35,13 @@ pytest-attrib             # Select tests based on attributes
 pytest-cov                # pytest plugin for measuring code coverage
 pytest-django             # Django support for pytest
 pytest-json-report        # Output json formatted warnings after running pytest
-pytest-metadata==1.8.0     # To prevent 'make upgrade' failure, dependency of pytest-json-report
+pytest-metadata           # To prevent 'make upgrade' failure, dependency of pytest-json-report
 pytest-randomly           # pytest plugin to randomly order tests
 pytest-xdist[psutil]      # Parallel execution of tests on multiple CPU cores or hosts
 singledispatch            # Backport of functools.singledispatch from Python 3.4+, used in tests of XBlock rendering
-testfixtures              # Provides a LogCapture utility used by several tests
+testfixtures               # Provides a LogCapture utility used by several tests
 tox                       # virtualenv management for tests
 unidiff                   # Required by coverage_pytest_plugin
-pylint-pytest==0.3.0      # A Pylint plugin to suppress pytest-related false positives.
+pylint-pytest             # A Pylint plugin to suppress pytest-related false positives.
 pact-python               # Library for contract testing
 py                        # Needed for pytest configurations, was previously been fetched through tox

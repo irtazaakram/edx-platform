@@ -879,7 +879,7 @@ class SAMLProviderConfig(ProviderConfig):
 
         conf['x509certMulti'] = {'signing': public_keys}
         conf['x509cert'] = ''
-        conf['url'] = sso_url
+        conf['url'] = sso_url  # pylint: disable=possibly-used-before-assignment
 
         # Add SAMLConfiguration appropriate for this IdP
         conf['saml_sp_configuration'] = (

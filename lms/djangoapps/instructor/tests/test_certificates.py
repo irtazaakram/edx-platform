@@ -405,21 +405,21 @@ class CertificateExceptionViewInstructorApiTest(SharedModuleStoreTestCase):
             course_id=self.course.id,
         )
 
-        self.certificate_exception = dict(
-            created="",
-            notes="Test Notes for Test Certificate Exception",
-            user_email='',
-            user_id='',
-            user_name=str(self.user.username)
-        )
+        self.certificate_exception = {
+            "created": "",
+            "notes": "Test Notes for Test Certificate Exception",
+            "user_email": '',
+            "user_id": '',
+            "user_name": str(self.user.username)
+        }
 
-        self.certificate_exception_in_db = dict(
-            id=certificate_allowlist_item.id,
-            user_name=certificate_allowlist_item.user.username,
-            notes=certificate_allowlist_item.notes,
-            user_email=certificate_allowlist_item.user.email,
-            user_id=certificate_allowlist_item.user.id,
-        )
+        self.certificate_exception_in_db = {
+            "id": certificate_allowlist_item.id,
+            "user_name": certificate_allowlist_item.user.username,
+            "notes": certificate_allowlist_item.notes,
+            "user_email": certificate_allowlist_item.user.email,
+            "user_id": certificate_allowlist_item.user.id,
+        }
 
         # Enable certificate generation
         cache.clear()
@@ -706,13 +706,13 @@ class GenerateCertificatesInstructorApiTest(SharedModuleStoreTestCase):
             course_id=self.course.id,
         )
 
-        self.certificate_exception = dict(
-            id=certificate_exception.id,
-            user_name=certificate_exception.user.username,
-            notes=certificate_exception.notes,
-            user_email=certificate_exception.user.email,
-            user_id=certificate_exception.user.id,
-        )
+        self.certificate_exception = {
+            "id": certificate_exception.id,
+            "user_name": certificate_exception.user.username,
+            "notes": certificate_exception.notes,
+            "user_email": certificate_exception.user.email,
+            "user_id": certificate_exception.user.id,
+        }
 
         # Enable certificate generation
         cache.clear()
@@ -1025,10 +1025,10 @@ class CertificateInvalidationViewTests(SharedModuleStoreTestCase):
             mode='honor',
         )
 
-        self.certificate_invalidation_data = dict(
-            user=self.enrolled_user_1.username,
-            notes=self.notes,
-        )
+        self.certificate_invalidation_data = {
+            "user": self.enrolled_user_1.username,
+            "notes": self.notes,
+        }
 
         # Global staff can see the certificates section
         self.client.login(username=self.global_staff.username, password=self.TEST_PASSWORD)

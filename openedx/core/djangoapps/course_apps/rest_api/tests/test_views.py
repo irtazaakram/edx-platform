@@ -33,7 +33,7 @@ class CourseAppsRestApiTest(SharedModuleStoreTestCase):
         self.user = UserFactory()
         self.client = Client()
         self.client.login(username=self.instructor.username, password=self.TEST_PASSWORD)
-        self.url = reverse("course_apps_api:v1:course_apps", kwargs=dict(course_id=self.course.id))
+        self.url = reverse("course_apps_api:v1:course_apps", kwargs={"course_id": self.course.id})
         CourseStaffRole(self.course.id).add_users(self.instructor)
 
     @contextlib.contextmanager

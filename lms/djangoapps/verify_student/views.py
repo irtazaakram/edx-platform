@@ -382,7 +382,7 @@ class PayAndVerifyView(View):
 
         # Remember whether the user is upgrading
         # so we can fire an analytics event upon payment.
-        request.session['attempting_upgrade'] = (message == self.UPGRADE_MSG)
+        request.session['attempting_upgrade'] = message == self.UPGRADE_MSG
 
         # Determine the photo verification status
         verification_good_until = self._verification_valid_until(request.user)

@@ -790,7 +790,7 @@ def associate_by_email_if_saml(auth_entry, backend, details, user, strategy, *ar
         they should not be prompted for their edX password.
         """
         try:
-            enterprise_customer_user = is_enterprise_customer_user(current_provider.provider_id, current_user)
+            enterprise_customer_user = is_enterprise_customer_user(current_provider.provider_id, current_user)  # pylint: disable=possibly-used-before-assignment
             logger.info(
                 '[Multiple_SSO_SAML_Accounts_Association_to_User] Enterprise user verification:'
                 'User Email: {email}, User ID: {user_id}, Provider ID: {provider_id},'

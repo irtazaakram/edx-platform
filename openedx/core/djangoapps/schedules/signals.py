@@ -66,11 +66,11 @@ def update_schedules_on_course_start_changed(sender, updated_course_overview, pr
         content_availability_date=updated_course_overview.start,
     )
     update_course_schedules.apply_async(
-        kwargs=dict(
-            course_id=str(updated_course_overview.id),
-            new_start_date_str=date.serialize(updated_course_overview.start),
-            new_upgrade_deadline_str=date.serialize(upgrade_deadline),
-        ),
+        kwargs={
+            "course_id": str(updated_course_overview.id),
+            "new_start_date_str": date.serialize(updated_course_overview.start),
+            "new_upgrade_deadline_str": date.serialize(upgrade_deadline),
+        },
     )
 
 

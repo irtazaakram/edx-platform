@@ -45,7 +45,7 @@ class TestCourseEntitlementModelHelpers(ModuleStoreTestCase):
             # This must be in the future to ensure it is returned by downstream code.
             expiration_datetime=now() + timedelta(days=1)
         )
-        entitlement = CourseEntitlementFactory.create(
+        entitlement = CourseEntitlementFactory.create(  # pylint: disable=possibly-used-before-assignment
             mode=CourseMode.VERIFIED,
             user=self.user,
         )
@@ -53,7 +53,7 @@ class TestCourseEntitlementModelHelpers(ModuleStoreTestCase):
 
         assert not CourseEnrollment.is_enrolled(user=self.user, course_key=course.id)
 
-        CourseEntitlement.check_for_existing_entitlement_and_enroll(
+        CourseEntitlement.check_for_existing_entitlement_and_enroll(  # pylint: disable=possibly-used-before-assignment
             user=self.user,
             course_run_key=course.id,
         )

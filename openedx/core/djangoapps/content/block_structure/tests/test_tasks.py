@@ -21,5 +21,5 @@ class UpdateCourseInCacheTaskTest(ModuleStoreTestCase):
         Ensures that tasks will be retried if IntegrityErrors are encountered.
         """
         mock_update.side_effect = Exception("WHAMMY")
-        update_course_in_cache_v2.apply(kwargs=dict(course_id="invalid_course_key raises exception 12345 meow"))
+        update_course_in_cache_v2.apply(kwargs={"course_id": 'invalid_course_key raises exception 12345 meow'})
         assert mock_retry.called

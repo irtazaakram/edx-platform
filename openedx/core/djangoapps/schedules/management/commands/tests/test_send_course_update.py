@@ -96,12 +96,12 @@ class TestSendCourseUpdate(ScheduleUpsellTestMixin, ScheduleSendEmailTestMixin, 
         offset, target_day, enrollment = self.prepare_course_data()
 
         with patch.object(tasks, 'ace') as mock_ace:
-            self.task().apply(kwargs=dict(
-                site_id=self.site_config.site.id,
-                target_day_str=serialize(target_day),
-                day_offset=offset,
-                bin_num=self._calculate_bin_for_user(enrollment.user),
-            ))
+            self.task().apply(kwargs={
+                "site_id": self.site_config.site.id,
+                "target_day_str": serialize(target_day),
+                "day_offset": offset,
+                "bin_num": self._calculate_bin_for_user(enrollment.user),
+            })
 
             assert mock_ace.send.called
 
@@ -112,10 +112,10 @@ class TestSendCourseUpdate(ScheduleUpsellTestMixin, ScheduleSendEmailTestMixin, 
         """
         offset, target_day, enrollment = self.prepare_course_data(is_self_paced=False)
 
-        self.task().apply(kwargs=dict(
-            site_id=self.site_config.site.id,
-            target_day_str=serialize(target_day),
-            day_offset=offset,
-            bin_num=self._calculate_bin_for_user(enrollment.user),
-        ))
+        self.task().apply(kwargs={
+            "site_id": self.site_config.site.id,
+            "target_day_str": serialize(target_day),
+            "day_offset": offset,
+            "bin_num": self._calculate_bin_for_user(enrollment.user),
+        })
         assert f'{enrollment.course.display_name} Weekly Update' == mail.outbox[0].subject

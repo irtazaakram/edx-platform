@@ -91,7 +91,7 @@ class AuthAndScopesTestMixin:
                 token = self._create_jwt_token(requesting_user, auth_type)
             auth_header = f"JWT {token}"
 
-        extra = dict(HTTP_AUTHORIZATION=auth_header) if auth_header else {}
+        extra = {"HTTP_AUTHORIZATION": auth_header} if auth_header else {}
         return self.client.get(
             url if url else self.get_url(requested_user.username),
             **extra

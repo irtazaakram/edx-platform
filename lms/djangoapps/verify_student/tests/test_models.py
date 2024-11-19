@@ -282,14 +282,14 @@ class TestPhotoVerification(TestVerificationBase, MockS3Boto3Mixin, ModuleStoreT
         assert second_result == first_result
 
         # Test method 'get_initial_verification' returns None after expiration
-        expired_future = now() + timedelta(days=(FAKE_SETTINGS['DAYS_GOOD_FOR'] + 1))
+        expired_future = now() + timedelta(days=FAKE_SETTINGS['DAYS_GOOD_FOR'] + 1)
         with freeze_time(expired_future):
             third_result = SoftwareSecurePhotoVerification.get_initial_verification(user)
             assert third_result is None
 
         # Test method 'get_initial_verification' returns correct attempt after system expiration,
         # but within earliest allowed override.
-        expired_future = now() + timedelta(days=(FAKE_SETTINGS['DAYS_GOOD_FOR'] + 1))
+        expired_future = now() + timedelta(days=FAKE_SETTINGS['DAYS_GOOD_FOR'] + 1)
         earliest_allowed = now() - timedelta(days=1)
         with freeze_time(expired_future):
             fourth_result = SoftwareSecurePhotoVerification.get_initial_verification(user, earliest_allowed)
