@@ -159,7 +159,7 @@ def _prepare_runtime_for_preview(request, block):
     """
 
     course_id = block.location.course_key
-    display_name_only = (block.category == 'static_tab')
+    display_name_only = block.category == 'static_tab'
 
     wrappers = [
         # This wrapper wraps the block in the template specified above

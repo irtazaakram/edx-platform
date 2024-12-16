@@ -74,35 +74,23 @@ class CourseValidationView(DeveloperErrorViewMixin, GenericAPIView):
 
         store = modulestore()
         with store.bulk_operations(course_key):
-            course = store.get_course(course_key, depth=self._required_course_depth(request, all_requested))
-
-            response = dict(
-                is_self_paced=course.self_paced,
+            course = store.get_course(
+                course_key, depth=self._required_course_depth(request, all_requested)
             )
-            if get_bool_param(request, 'dates', all_requested):
-                response.update(
-                    dates=self._dates_validation(course)
-                )
-            if get_bool_param(request, 'assignments', all_requested):
-                response.update(
-                    assignments=self._assignments_validation(course, request)
-                )
-            if get_bool_param(request, 'grades', all_requested):
-                response.update(
-                    grades=self._grades_validation(course)
-                )
-            if get_bool_param(request, 'certificates', all_requested):
-                response.update(
-                    certificates=self._certificates_validation(course)
-                )
-            if get_bool_param(request, 'updates', all_requested):
-                response.update(
-                    updates=self._updates_validation(course, request)
-                )
-            if get_bool_param(request, 'proctoring', all_requested):
-                response.update(
-                    proctoring=self._proctoring_validation(course)
-                )
+
+            response = {"is_self_paced": course.self_paced}
+            if get_bool_param(request, "dates", all_requested):
+                response.update({"dates": self._dates_validation(course)})
+            if get_bool_param(request, "assignments", all_requested):
+                response.update({"assignments": self._assignments_validation(course, request)})
+            if get_bool_param(request, "grades", all_requested):
+                response.update({"grades": self._grades_validation(course)})
+            if get_bool_param(request, "certificates", all_requested):
+                response.update({"certificates": self._certificates_validation(course)})
+            if get_bool_param(request, "updates", all_requested):
+                response.update({"updates": self._updates_validation(course, request)})
+            if get_bool_param(request, "proctoring", all_requested):
+                response.update({"proctoring": self._proctoring_validation(course)})
 
         return Response(response)
 
@@ -113,10 +101,10 @@ class CourseValidationView(DeveloperErrorViewMixin, GenericAPIView):
             return 0
 
     def _dates_validation(self, course):
-        return dict(
-            has_start_date=self._has_start_date(course),
-            has_end_date=course.end is not None,
-        )
+        return {
+            "has_start_date": self._has_start_date(course),
+            "has_end_date": course.end is not None,
+        }
 
     def _assignments_validation(self, course, request):  # lint-amnesty, pylint: disable=missing-function-docstring
         assignments, visible_assignments = self._get_assignments(course)
@@ -193,38 +181,36 @@ class CourseValidationView(DeveloperErrorViewMixin, GenericAPIView):
                         'display_name': parent_assignment.display_name
                     })
 
-        return dict(
-            total_number=len(assignments),
-            total_visible=len(visible_assignments),
-            assignments_with_dates_before_start=assignments_with_dates_before_start,
-            assignments_with_dates_after_end=assignments_with_dates_after_end,
-            assignments_with_ora_dates_before_start=assignments_with_ora_dates_before_start,
-            assignments_with_ora_dates_after_end=assignments_with_ora_dates_after_end,
-        )
+        return {
+            "total_number": len(assignments),
+            "total_visible": len(visible_assignments),
+            "assignments_with_dates_before_start": assignments_with_dates_before_start,
+            "assignments_with_dates_after_end": assignments_with_dates_after_end,
+            "assignments_with_ora_dates_before_start": assignments_with_ora_dates_before_start,
+            "assignments_with_ora_dates_after_end": assignments_with_ora_dates_after_end,
+        }
 
     def _grades_validation(self, course):
         has_grading_policy = self._has_grading_policy(course)
         sum_of_weights = course.grader.sum_of_weights
-        return dict(
-            has_grading_policy=has_grading_policy,
-            sum_of_weights=sum_of_weights,
-        )
+        return {
+            "has_grading_policy": has_grading_policy,
+            "sum_of_weights": sum_of_weights,
+        }
 
     def _certificates_validation(self, course):
         is_activated, certificates = CertificateManager.is_activated(course)
         certificates_enabled = certificates is not None
-        return dict(
-            is_activated=is_activated,
-            has_certificate=certificates_enabled and len(certificates) > 0,
-            is_enabled=certificates_enabled,
-        )
+        return {
+            "is_activated": is_activated,
+            "has_certificate": certificates_enabled and len(certificates) > 0,
+            "is_enabled": certificates_enabled,
+        }
 
     def _updates_validation(self, course, request):
         updates_usage_key = course.id.make_usage_key('course_info', 'updates')
         updates = get_course_updates(updates_usage_key, provided_id=None, user_id=request.user.id)
-        return dict(
-            has_update=len(updates) > 0,
-        )
+        return {"has_update": len(updates) > 0}
 
     def _get_assignments(self, course):  # lint-amnesty, pylint: disable=missing-function-docstring
         store = modulestore()
@@ -336,7 +322,7 @@ class CourseValidationView(DeveloperErrorViewMixin, GenericAPIView):
 
     def _proctoring_validation(self, course):
         # A proctoring escalation email is currently only required for courses using Proctortrack
-        return dict(
-            needs_proctoring_escalation_email=course.proctoring_provider == 'proctortrack',
-            has_proctoring_escalation_email=bool(course.proctoring_escalation_email)
-        )
+        return {
+            "needs_proctoring_escalation_email": course.proctoring_provider == 'proctortrack',
+            "has_proctoring_escalation_email": bool(course.proctoring_escalation_email)
+        }

@@ -270,7 +270,7 @@ class EmailOptInListTest(ModuleStoreTestCase):
             expected_msg_regex = (
                 "^Error: the following arguments are required: OUTPUT_FILENAME, ORG_ALIASES$"
             )
-        with self.assertRaisesRegex(CommandError, expected_msg_regex):
+        with self.assertRaisesRegex(CommandError, expected_msg_regex):  # pylint: disable=possibly-used-before-assignment
             call_command('email_opt_in_list', *args)
 
     def test_file_already_exists(self):

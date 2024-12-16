@@ -549,11 +549,7 @@ def get_certificate_header_context(is_secure=True):
     Return data to be used in Certificate Header,
     data returned should be customized according to the site configuration.
     """
-    data = dict(
-        logo_src=branding_api.get_logo_url(is_secure),
-        logo_url=branding_api.get_base_url(is_secure),
-    )
-
+    data = {"logo_src": branding_api.get_logo_url(is_secure), "logo_url": branding_api.get_base_url(is_secure)}
     return data
 
 

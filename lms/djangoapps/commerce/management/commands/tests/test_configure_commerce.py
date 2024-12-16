@@ -55,5 +55,5 @@ class TestCommerceConfigurationCommand(TestCase):
         This is done to make sure that this command gets updated once site_id field is added to
         CommerceConfiguration model.
         """
-        assert not hasattr(CommerceConfiguration, 'site'),\
+        assert not hasattr(CommerceConfiguration, 'site'), \
             'Update configure_commerce command to account for site specific configurations.'

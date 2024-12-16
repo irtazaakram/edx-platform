@@ -504,7 +504,7 @@ class GradebookView(GradeViewMixin, PaginatedAPIView):
         user_entry['section_breakdown'] = breakdown
         user_entry['progress_page_url'] = reverse(
             'student_progress',
-            kwargs=dict(course_id=str(course.id), student_id=user.id)
+            kwargs={"course_id": str(course.id), "student_id": user.id}
         )
         user_entry['user_id'] = user.id
 
@@ -642,10 +642,7 @@ class GradebookView(GradeViewMixin, PaginatedAPIView):
                 q_objects.append(q_object)
             if request.GET.get('excluded_course_roles'):
                 excluded_course_roles = request.GET.getlist('excluded_course_roles')
-                course_access_role_filters = dict(
-                    user=OuterRef('user'),
-                    course_id=course_key,
-                )
+                course_access_role_filters = {"user": OuterRef('user'), "course_id": course_key}
                 if 'all' not in excluded_course_roles:
                     course_access_role_filters['role__in'] = excluded_course_roles
                 annotations['has_excluded_role'] = Exists(
@@ -919,19 +916,19 @@ class GradebookBulkUpdateView(GradeViewMixin, PaginatedAPIView):
         create_new_event_transaction_id()
 
         recalculate_subsection_grade_v3.apply(
-            kwargs=dict(
-                user_id=subsection_grade_model.user_id,
-                anonymous_user_id=None,
-                course_id=str(subsection_grade_model.course_id),
-                usage_id=str(subsection_grade_model.usage_key),
-                only_if_higher=False,
-                expected_modified_time=to_timestamp(override.modified),
-                score_deleted=False,
-                event_transaction_id=str(get_event_transaction_id()),
-                event_transaction_type=str(get_event_transaction_type()),
-                score_db_table=grades_constants.ScoreDatabaseTableEnum.overrides,
-                force_update_subsections=True,
-            )
+            kwargs={
+                "user_id": subsection_grade_model.user_id,
+                "anonymous_user_id": None,
+                "course_id": str(subsection_grade_model.course_id),
+                "usage_id": str(subsection_grade_model.usage_key),
+                "only_if_higher": False,
+                "expected_modified_time": to_timestamp(override.modified),
+                "score_deleted": False,
+                "event_transaction_id": str(get_event_transaction_id()),
+                "event_transaction_type": str(get_event_transaction_type()),
+                "score_db_table": grades_constants.ScoreDatabaseTableEnum.overrides,
+                "force_update_subsections": True,
+            }
         )
         # Emit events to let our tracking system to know we updated subsection grade
         grades_events.subsection_grade_calculated(subsection_grade_model)

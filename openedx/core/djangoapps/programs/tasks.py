@@ -790,5 +790,5 @@ def update_certificate_available_date_on_course_update(self, course_key):
         new_certificate_available_date = None
 
     update_credentials_course_certificate_configuration_available_date.delay(
-        str(course_key), new_certificate_available_date
+        str(course_key), new_certificate_available_date  # pylint: disable=possibly-used-before-assignment
     )

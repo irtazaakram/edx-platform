@@ -149,7 +149,7 @@ class TestCourseListing(ModuleStoreTestCase):
         # Get all courses which user has access.
         instructor_courses = UserBasedRole(self.user, CourseInstructorRole.ROLE).courses_with_role()
         staff_courses = UserBasedRole(self.user, CourseStaffRole.ROLE).courses_with_role()
-        all_courses = (instructor_courses | staff_courses)
+        all_courses = instructor_courses | staff_courses
 
         # Verify that CCX course exists in access but filtered by `_accessible_courses_list_from_groups`.
         self.assertIn(

@@ -103,26 +103,24 @@ class CourseQualityView(DeveloperErrorViewMixin, GenericAPIView):
             # Added for EDUCATOR-3660
             course_key_harvard = str(course_key) == 'course-v1:HarvardX+SW12.1x+2016'
 
-            response = dict(
-                is_self_paced=course.self_paced,
-            )
+            response = {"is_self_paced": course.self_paced}
             if get_bool_param(request, 'sections', all_requested):
                 response.update(
-                    sections=_execute_method_and_log_time(course_key_harvard, self._sections_quality, course)
+                    {"sections": _execute_method_and_log_time(course_key_harvard, self._sections_quality, course)}
                 )
             if get_bool_param(request, 'subsections', all_requested):
                 response.update(
-                    subsections=_execute_method_and_log_time(
+                    {"subsections": _execute_method_and_log_time(
                         course_key_harvard, self._subsections_quality, course, request
-                    )
+                    )}
                 )
             if get_bool_param(request, 'units', all_requested):
                 response.update(
-                    units=_execute_method_and_log_time(course_key_harvard, self._units_quality, course, request)
+                    {"units": _execute_method_and_log_time(course_key_harvard, self._units_quality, course, request)}
                 )
             if get_bool_param(request, 'videos', all_requested):
                 response.update(
-                    videos=_execute_method_and_log_time(course_key_harvard, self._videos_quality, course)
+                    {"videos": _execute_method_and_log_time(course_key_harvard, self._videos_quality, course)}
                 )
 
         return Response(response)
@@ -142,13 +140,13 @@ class CourseQualityView(DeveloperErrorViewMixin, GenericAPIView):
     def _sections_quality(self, course):
         sections, visible_sections = self._get_sections(course)
         sections_with_highlights = [section for section in visible_sections if section.highlights]
-        return dict(
-            total_number=len(sections),
-            total_visible=len(visible_sections),
-            number_with_highlights=len(sections_with_highlights),
-            highlights_active_for_course=course.highlights_enabled_for_messaging,
-            highlights_enabled=True,  # used to be controlled by a waffle switch, now just always enabled
-        )
+        return {
+            "total_number": len(sections),
+            "total_visible": len(visible_sections),
+            "number_with_highlights": len(sections_with_highlights),
+            "highlights_active_for_course": course.highlights_enabled_for_messaging,
+            "highlights_enabled": True,  # used to be controlled by a waffle switch, now just always enabled
+        }
 
     def _subsections_quality(self, course, request):  # lint-amnesty, pylint: disable=missing-function-docstring
         subsection_unit_dict = self._get_subsections_and_units(course, request)
@@ -160,11 +158,11 @@ class CourseQualityView(DeveloperErrorViewMixin, GenericAPIView):
             )
             num_block_types_per_subsection_dict[subsection_key] = len(set().union(*leaf_block_types_in_subsection))
 
-        return dict(
-            total_visible=len(num_block_types_per_subsection_dict),
-            num_with_one_block_type=list(num_block_types_per_subsection_dict.values()).count(1),
-            num_block_types=self._stats_dict(list(num_block_types_per_subsection_dict.values())),
-        )
+        return {
+            "total_visible": len(num_block_types_per_subsection_dict),
+            "num_with_one_block_type": list(num_block_types_per_subsection_dict.values()).count(1),
+            "num_block_types": self._stats_dict(list(num_block_types_per_subsection_dict.values())),
+        }
 
     def _units_quality(self, course, request):  # lint-amnesty, pylint: disable=missing-function-docstring
         subsection_unit_dict = self._get_subsections_and_units(course, request)
@@ -173,10 +171,10 @@ class CourseQualityView(DeveloperErrorViewMixin, GenericAPIView):
             for unit_dict in subsection_unit_dict.values()
             for unit_info in unit_dict.values()
         ]
-        return dict(
-            total_visible=len(num_leaf_blocks_per_unit),
-            num_blocks=self._stats_dict(num_leaf_blocks_per_unit),
-        )
+        return {
+            "total_visible": len(num_leaf_blocks_per_unit),
+            "num_blocks": self._stats_dict(num_leaf_blocks_per_unit),
+        }
 
     def _videos_quality(self, course):  # lint-amnesty, pylint: disable=missing-function-docstring
         video_blocks_in_course = modulestore().get_items(course.id, qualifiers={'category': 'video'})
@@ -184,12 +182,12 @@ class CourseQualityView(DeveloperErrorViewMixin, GenericAPIView):
         videos_in_val = list(videos)
         video_durations = [video['duration'] for video in videos_in_val]
 
-        return dict(
-            total_number=len(video_blocks_in_course),
-            num_mobile_encoded=len(videos_in_val),
-            num_with_val_id=len([v for v in video_blocks_in_course if v.edx_video_id]),
-            durations=self._stats_dict(video_durations),
-        )
+        return {
+            "total_number": len(video_blocks_in_course),
+            "num_mobile_encoded": len(videos_in_val),
+            "num_with_val_id": len([v for v in video_blocks_in_course if v.edx_video_id]),
+            "durations": self._stats_dict(video_durations),
+        }
 
     @classmethod
     @request_cached()
@@ -212,10 +210,10 @@ class CourseQualityView(DeveloperErrorViewMixin, GenericAPIView):
 
                 for unit in visible_units:
                     leaf_blocks = cls._get_leaf_blocks(unit)
-                    unit_dict[unit.location] = dict(
-                        num_leaf_blocks=len(leaf_blocks),
-                        leaf_block_types={block.location.block_type for block in leaf_blocks},
-                    )
+                    unit_dict[unit.location] = {
+                        "num_leaf_blocks": len(leaf_blocks),
+                        "leaf_block_types": {block.location.block_type for block in leaf_blocks},
+                    }
 
                 subsection_dict[subsection.location] = unit_dict
         return subsection_dict
@@ -259,18 +257,18 @@ class CourseQualityView(DeveloperErrorViewMixin, GenericAPIView):
 
     def _stats_dict(self, data):  # lint-amnesty, pylint: disable=missing-function-docstring
         if not data:
-            return dict(
-                min=None,
-                max=None,
-                mean=None,
-                median=None,
-                mode=None,
-            )
+            return {
+                "min": None,
+                "max": None,
+                "mean": None,
+                "median": None,
+                "mode": None,
+            }
         else:
-            return dict(
-                min=min(data),
-                max=max(data),
-                mean=np.around(np.mean(data)),
-                median=np.around(np.median(data)),
-                mode=stats.mode(data, axis=None)[0],
-            )
+            return {
+                "min": min(data),
+                "max": max(data),
+                "mean": np.around(np.mean(data)),
+                "median": np.around(np.median(data)),
+                "mode": stats.mode(data, axis=None)[0],
+            }

@@ -69,9 +69,9 @@ class TestCourseRunFulfillableForEntitlement(ModuleStoreTestCase):
             enrollment_end_from_now=1
         )
 
-        entitlement = CourseEntitlementFactory.create(mode=CourseMode.VERIFIED)
+        entitlement = CourseEntitlementFactory.create(mode=CourseMode.VERIFIED)  # pylint: disable=possibly-used-before-assignment
 
-        assert is_course_run_entitlement_fulfillable(course_overview.id, entitlement)
+        assert is_course_run_entitlement_fulfillable(course_overview.id, entitlement)  # pylint: disable=possibly-used-before-assignment
 
     def test_course_run_missing_overview_not_fulfillable(self):
         entitlement = CourseEntitlementFactory.create(mode=CourseMode.VERIFIED)

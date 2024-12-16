@@ -32,11 +32,7 @@ def get_data_consent_share_cache_key(user_id, course_id, enterprise_customer_uui
     """
         Returns cache key for data sharing consent needed against user_id, course_id and enterprise_customer_uuid
     """
-    cache_key_params = dict(
-        type='data_sharing_consent_needed',
-        user_id=user_id,
-        course_id=course_id,
-    )
+    cache_key_params = {"type": 'data_sharing_consent_needed', "user_id": user_id, "course_id": course_id}
 
     if enterprise_customer_uuid:
         cache_key_params['enterprise_customer_uuid'] = enterprise_customer_uuid

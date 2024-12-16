@@ -999,7 +999,7 @@ class _BuiltInProblemBlock(
     def handle_fatal_lcp_error(self, error):  # lint-amnesty, pylint: disable=missing-function-docstring
         log.exception(f"LcpFatalError Encountered for {str(self.location)}")
         if error:
-            return(
+            return (
                 HTML('<p>Error formatting HTML for problem:</p><p><pre style="color:red">{msg}</pre></p>').format(
                     msg=str(error))
             )
@@ -1050,7 +1050,7 @@ class _BuiltInProblemBlock(
         """
         Return True/False to indicate whether to show the "Reset" button.
         """
-        is_survey_question = (self.max_attempts == 0)
+        is_survey_question = self.max_attempts == 0
 
         # If the problem is closed (and not a survey question with max_attempts==0),
         # then do NOT show the reset button.
@@ -1078,7 +1078,7 @@ class _BuiltInProblemBlock(
         if self.force_save_button:
             return not self.closed()
         else:
-            is_survey_question = (self.max_attempts == 0)
+            is_survey_question = self.max_attempts == 0
             needs_reset = self.is_submitted() and self.rerandomize == RANDOMIZATION.ALWAYS
 
             # If the student has unlimited attempts, and their answers
@@ -1720,7 +1720,7 @@ class _BuiltInProblemBlock(
                     try:
                         val = json.loads(data[key])
                     # If the submission wasn't deserializable, raise an error.
-                    except(KeyError, ValueError):
+                    except (KeyError, ValueError):
                         raise ValueError(  # lint-amnesty, pylint: disable=raise-missing-from
                             f"Invalid submission: {data[key]} for {key}"
                         )

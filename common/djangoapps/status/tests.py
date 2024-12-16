@@ -36,15 +36,15 @@ class TestStatus(TestCase):
         """Test status messages in a variety of situations."""
 
         # When we don't have any data set.
-        assert get_site_status_msg(None) is None
+        assert get_site_status_msg(None) is None  # pylint: disable=possibly-used-before-assignment
         assert get_site_status_msg(self.course_key) is None
 
-        msg = GlobalStatusMessage.objects.create(message=test_global_message, enabled=True)
+        msg = GlobalStatusMessage.objects.create(message=test_global_message, enabled=True)  # pylint: disable=possibly-used-before-assignment
         msg.save()
 
         assert get_site_status_msg(None) == test_global_message
 
-        course_msg = CourseMessage.objects.create(
+        course_msg = CourseMessage.objects.create(  # pylint: disable=possibly-used-before-assignment
             global_message=msg, message=test_course_message, course_key=self.course_key
         )
         course_msg.save()

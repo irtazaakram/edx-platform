@@ -235,7 +235,7 @@ class DraftVersioningModuleStore(SplitMongoModuleStore, ModuleStoreDraftAndPubli
                     )
 
             self._flag_publish_event(location.course_key)
-            for branch in branches_to_delete:
+            for branch in branches_to_delete:  # pylint: disable=possibly-used-before-assignment
                 branched_location = location.for_branch(branch)
                 super().delete_item(branched_location, user_id)
 

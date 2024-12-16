@@ -361,18 +361,18 @@ class CreateSubsectionGrade(NonZeroSubsectionGrade):
         Returns the parameters for creating/updating the
         persisted model for this subsection grade.
         """
-        return dict(
-            user_id=student.id,
-            usage_key=self.location,
-            course_version=self.course_version,
-            subtree_edited_timestamp=self.subtree_edited_timestamp,
-            earned_all=self.all_total.earned,
-            possible_all=self.all_total.possible,
-            earned_graded=self.graded_total.earned,
-            possible_graded=self.graded_total.possible,
-            visible_blocks=self._get_visible_blocks,
-            first_attempted=self.all_total.first_attempted,
-        )
+        return {
+            "user_id": student.id,
+            "usage_key": self.location,
+            "course_version": self.course_version,
+            "subtree_edited_timestamp": self.subtree_edited_timestamp,
+            "earned_all": self.all_total.earned,
+            "possible_all": self.all_total.possible,
+            "earned_graded": self.graded_total.earned,
+            "possible_graded": self.graded_total.possible,
+            "visible_blocks": self._get_visible_blocks,
+            "first_attempted": self.all_total.first_attempted,
+        }
 
     @property
     def _get_visible_blocks(self):

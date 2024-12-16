@@ -639,10 +639,10 @@ def get_video_transcript_content(edx_video_id, language_code):
                 f"Error getting transcript from edx-val id: {edx_video_id}: language code {language_code}"
             )
             content = '{"start": [1],"end": [2],"text": ["An error occured obtaining the transcript."]}'
-            transcript = dict(
-                file_name='error-{edx_video_id}-{language_code}.srt',
-                content=Transcript.convert(content, 'sjson', 'srt')
-            )
+            transcript = {
+                "file_name": f"error-{edx_video_id}-{language_code}.srt",
+                "content": Transcript.convert(content, "sjson", "srt"),
+            }
     return transcript
 
 
@@ -681,7 +681,10 @@ def convert_video_transcript(file_name, content, output_format):
     filename = f'{basename}.{output_format}'
     converted_transcript = Transcript.convert(content, input_format=input_format, output_format=output_format)
 
-    return dict(filename=filename, content=converted_transcript)
+    return {
+        "filename": filename,
+        "content": converted_transcript,
+    }
 
 
 class Transcript:
@@ -835,7 +838,7 @@ class VideoTranscriptsMixin:
         sub, other_langs = transcripts["sub"], transcripts["transcripts"]
 
         if verify_assets:
-            all_langs = dict(**other_langs)
+            all_langs = {**other_langs}
             if sub:
                 all_langs.update({'en': sub})
 

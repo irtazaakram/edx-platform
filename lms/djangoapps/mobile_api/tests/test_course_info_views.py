@@ -306,7 +306,7 @@ class TestBlocksInfoInCourseView(TestBlocksInCourseView, MilestonesTestCaseMixin
         elif user_role == 'student':
             request_user = self.student_user
 
-        self.request.user = request_user
+        self.request.user = request_user  # pylint: disable=possibly-used-before-assignment
 
         if expected_username == 'student_user':
             mock_user = self.student_user

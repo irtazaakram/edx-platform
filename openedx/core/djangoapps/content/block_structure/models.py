@@ -95,11 +95,11 @@ class CustomizableFileField(models.FileField):
     create new migration files for each configuration change.
     """
     def __init__(self, *args, **kwargs):
-        kwargs.update(dict(
-            upload_to=_path_name,
-            storage=_bs_model_storage(),
-            max_length=500,  # allocate enough for base path + prefix + usage_key + timestamp in filepath
-        ))
+        kwargs.update({
+            "upload_to": _path_name,
+            "storage": _bs_model_storage(),
+            "max_length": 500,  # allocate enough for base path + prefix + usage_key + timestamp in filepath
+        })
         super().__init__(*args, **kwargs)
 
     def deconstruct(self):  # lint-amnesty, pylint: disable=missing-function-docstring

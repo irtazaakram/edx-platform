@@ -507,10 +507,7 @@ class EnrollmentTest(UrlResetMixin, ModuleStoreTestCase, OpenEdxEventsTestMixin)
             )
         CourseEnrollment.enroll(self.user, self.course.id, mode="audit")
 
-        local_task_args = dict(
-            user_id=self.user.id,
-            course_key=str(self.course.id)
-        )
+        local_task_args = {"user_id": self.user.id, "course_key": str(self.course.id)}
 
         with patch(
             'lms.djangoapps.grades.tasks.recalculate_course_and_subsection_grades_for_user.apply_async',

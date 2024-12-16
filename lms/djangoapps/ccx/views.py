@@ -417,7 +417,7 @@ def get_ccx_schedule(course, ccx):
                     'display_name': child.display_name,
                     'category': child.category,
                     'start': start,
-                    'due': due,
+                    'due': due,  # pylint: disable=possibly-used-before-assignment
                     'hidden': hidden,
                 }
             else:

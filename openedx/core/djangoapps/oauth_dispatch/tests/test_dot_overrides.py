@@ -39,7 +39,7 @@ class AuthenticateTestCase(TestCase):
             password=self.TEST_PASSWORD,
             email='darkhelmet@spaceball_one.org',
         )
-        self.validator = EdxOAuth2Validator()
+        self.validator = EdxOAuth2Validator()  # pylint: disable=possibly-used-before-assignment
 
     def test_authenticate_with_username(self):
         user = self.validator._authenticate(username='darkhelmet', password=self.TEST_PASSWORD)
@@ -115,7 +115,7 @@ class CustomAuthorizationViewTestCase(TestCase):
     def setUp(self):
         super().setUp()
         self.TEST_PASSWORD = 'Password1234'
-        self.dot_adapter = adapters.DOTAdapter()
+        self.dot_adapter = adapters.DOTAdapter()  # pylint: disable=possibly-used-before-assignment
         self.user = UserFactory(password=self.TEST_PASSWORD)
         self.client.login(username=self.user.username, password=self.TEST_PASSWORD)
 
@@ -126,15 +126,15 @@ class CustomAuthorizationViewTestCase(TestCase):
         restricted_app = self.dot_adapter.create_confidential_client(
             name='test restricted dot application',
             user=self.user,
-            redirect_uri=DUMMY_REDIRECT_URL,
+            redirect_uri=DUMMY_REDIRECT_URL,  # pylint: disable=possibly-used-before-assignment
             client_id='dot-restricted-app-client-id',
         )
-        models.RestrictedApplication.objects.create(application=restricted_app)
+        models.RestrictedApplication.objects.create(application=restricted_app)  # pylint: disable=possibly-used-before-assignment
         return restricted_app
 
     def _create_expired_token(self, application):
         date_in_the_past = timezone.now() + datetime.timedelta(days=-100)
-        dot_models.AccessToken.objects.create(
+        dot_models.AccessToken.objects.create(  # pylint: disable=possibly-used-before-assignment
             user=self.user,
             token='1234567890',
             application=application,

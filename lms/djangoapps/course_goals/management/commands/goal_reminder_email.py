@@ -215,8 +215,8 @@ class Command(BaseCommand):
                 'goal_count': total_goals,
             }
         )
-        log.info(f'Processing course goals, total goal count {total_goals},'
-                 + f'timestamp: {datetime.now()}, uuid: {session_id}')
+        log.info('Processing course goals, total goal count %d, timestamp: %s, uuid: %s',
+                 total_goals, datetime.now(), session_id)
         for goal in course_goals:
             # emulate a request for waffle's benefit
             with emulate_http_request(site=Site.objects.get_current(), user=goal.user):
@@ -225,8 +225,8 @@ class Command(BaseCommand):
                 else:
                     filtered_count += 1
             if (sent_count + filtered_count) % 10000 == 0:
-                log.info(f'Processing course goals: sent {sent_count} filtered {filtered_count} out of {total_goals},'
-                         + f'timestamp: {datetime.now()}, uuid: {session_id}')
+                log.info('Processing course goals: sent %d filtered %d out of %d, timestamp: %s, uuid: %s',
+                         sent_count, filtered_count, total_goals, datetime.now(), session_id)
 
         tracker.emit(
             'edx.course.goal.email.session_completed',
@@ -238,8 +238,8 @@ class Command(BaseCommand):
                 'emails_filtered': filtered_count,
             }
         )
-        log.info(f'Processing course goals complete: sent {sent_count} emails, filtered out {filtered_count} emails'
-                 + f'timestamp: {datetime.now()}, uuid: {session_id}')
+        log.info('Processing course goals complete: sent %d emails, filtered out %d emails, timestamp: %s, uuid: %s',
+                 sent_count, filtered_count, datetime.now(), session_id)
 
     @staticmethod
     def handle_goal(goal, today, sunday_date, monday_date, session_id):

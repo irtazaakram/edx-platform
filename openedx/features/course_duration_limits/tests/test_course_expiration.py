@@ -65,7 +65,7 @@ class CourseExpirationTestCase(ModuleStoreTestCase, MasqueradeMixin):
             display_name='Test Vertical'
         )
         self.user = UserFactory()
-        self.THREE_YEARS_AGO = now() - timedelta(days=(365 * 3))
+        self.THREE_YEARS_AGO = now() - timedelta(days=365 * 3)
 
         # Make this a verified course so we can test expiration date
         add_course_mode(self.course, mode_slug=CourseMode.AUDIT)

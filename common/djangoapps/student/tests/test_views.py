@@ -51,8 +51,8 @@ from xmodule.modulestore.tests.factories import CourseFactory, BlockFactory  # l
 
 TOMORROW = now() + timedelta(days=1)
 ONE_WEEK_AGO = now() - timedelta(weeks=1)
-THREE_YEARS_FROM_NOW = now() + timedelta(days=(365 * 3))
-THREE_YEARS_AGO = now() - timedelta(days=(365 * 3))
+THREE_YEARS_FROM_NOW = now() + timedelta(days=365 * 3)
+THREE_YEARS_AGO = now() - timedelta(days=365 * 3)
 
 # Name of the method to mock for Content Type Gating.
 GATING_METHOD_NAME = 'openedx.features.content_type_gating.models.ContentTypeGatingConfig.enabled_for_enrollment'
@@ -690,7 +690,7 @@ class StudentDashboardTests(SharedModuleStoreTestCase, MilestonesTestCaseMixin, 
 
     @staticmethod
     def _get_html_for_entitlement_button(course_key: CourseKey):
-        return'''
+        return '''
             <div class="course-info">
             <span class="info-university">{org} - </span>
             <span class="info-course-id">{course}</span>
@@ -869,13 +869,13 @@ class StudentDashboardTests(SharedModuleStoreTestCase, MilestonesTestCaseMixin, 
             html_for_view_buttons.append(
                 self._get_html_for_view_course_button(
                     course_key_string,
-                    course_run_string
+                    course_run_string  # pylint: disable=possibly-used-before-assignment
                 )
             )
             html_for_resume_buttons.append(
                 self._get_html_for_resume_course_button(
                     course_key_string,
-                    last_completed_block_string,
+                    last_completed_block_string,  # pylint: disable=possibly-used-before-assignment
                     course_run_string
                 )
             )

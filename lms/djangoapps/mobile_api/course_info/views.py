@@ -181,11 +181,11 @@ class CourseGoalsRecordUserActivity(APIView):
             log.warning('For this mobile request, user activity is not enabled for this user {} and course {}'.format(
                 str(user_id), str(course_key))
             )
-            return Response(status=(200))
+            return Response(status=200)
 
         # Populate user activity for tracking progress towards a user's course goals
         UserActivity.record_user_activity(user, course_key)
-        return Response(status=(200))
+        return Response(status=200)
 
 
 @view_auth_classes(is_authenticated=False)

@@ -690,10 +690,7 @@ class VideoExportTestCase(VideoBlockTestBase):
         """
         edx_video_id = 'test_edx_video_id'
         mock_val_api.export_to_xml = Mock(
-            return_value=dict(
-                xml=etree.Element('video_asset'),
-                transcripts={}
-            )
+            return_value={"xml": etree.Element('video_asset'), "transcripts": {}}
         )
         self.block.youtube_id_0_75 = 'izygArpw-Qo'
         self.block.youtube_id_1_0 = 'p2Q6BrNhdh8'

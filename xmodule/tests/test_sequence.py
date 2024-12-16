@@ -149,7 +149,7 @@ class SequenceBlockTestCase(XModuleXmlImportTest):
     def test_render_student_view(self, view):
         html = self._get_rendered_view(
             self.sequence_3_1,
-            extra_context=dict(next_url='NextSequential', prev_url='PrevSequential'),
+            extra_context={"next_url": 'NextSequential', "prev_url": 'PrevSequential'},
             view=view
         )
         self._assert_view_at_position(html, expected_position=1)
@@ -171,7 +171,7 @@ class SequenceBlockTestCase(XModuleXmlImportTest):
         with override_waffle_flag(TIMED_EXAM_GATING_WAFFLE_FLAG, active=False):
             self._get_rendered_view(
                 self.sequence_5_1,
-                extra_context=dict(next_url='NextSequential', prev_url='PrevSequential'),
+                extra_context={"next_url": 'NextSequential', "prev_url": 'PrevSequential'},
                 view=STUDENT_VIEW
             )
             mocked_function.assert_not_called()
@@ -179,7 +179,7 @@ class SequenceBlockTestCase(XModuleXmlImportTest):
         with override_waffle_flag(TIMED_EXAM_GATING_WAFFLE_FLAG, active=True):
             self._get_rendered_view(
                 self.sequence_5_1,
-                extra_context=dict(next_url='NextSequential', prev_url='PrevSequential'),
+                extra_context={"next_url": 'NextSequential', "prev_url": 'PrevSequential'},
                 view=STUDENT_VIEW
             )
             mocked_function.assert_called_once()
@@ -199,7 +199,7 @@ class SequenceBlockTestCase(XModuleXmlImportTest):
         ))
         view = self._get_rendered_view(
             self.sequence_5_1,
-            extra_context=dict(next_url='NextSequential', prev_url='PrevSequential'),
+            extra_context={"next_url": 'NextSequential', "prev_url": 'PrevSequential'},
             view=STUDENT_VIEW
         )
         assert 'i_am_gated' in view
@@ -243,7 +243,7 @@ class SequenceBlockTestCase(XModuleXmlImportTest):
             progress_url = 'http://test_progress_link'
             html = self._get_rendered_view(
                 self.sequence_4_1,
-                extra_context=dict(progress_url=progress_url),
+                extra_context={"progress_url": progress_url},
             )
             assert 'hidden_content.html' in html
             assert progress_url in html
@@ -252,7 +252,7 @@ class SequenceBlockTestCase(XModuleXmlImportTest):
         with freeze_time(COURSE_END_DATE):
             html = self._get_rendered_view(
                 self.sequence_4_1,
-                extra_context=dict(specific_masquerade=True),
+                extra_context={"specific_masquerade": True},
             )
             assert 'seq_block.html' in html
             html = self.get_context_dict_from_string(html)
@@ -269,7 +269,7 @@ class SequenceBlockTestCase(XModuleXmlImportTest):
             progress_url = 'http://test_progress_link'
             html = self._get_rendered_view(
                 self.sequence_4_1,
-                extra_context=dict(progress_url=progress_url),
+                extra_context={"progress_url": progress_url},
                 self_paced=True,
             )
             assert 'hidden_content.html' in html
@@ -335,7 +335,7 @@ class SequenceBlockTestCase(XModuleXmlImportTest):
 
         html = self._get_rendered_view(
             self.sequence_1_2,
-            extra_context=dict(next_url='NextSequential', prev_url='PrevSequential'),
+            extra_context={"next_url": 'NextSequential', "prev_url": 'PrevSequential'},
         )
 
         # expect content to be gated, with no banner
@@ -348,7 +348,7 @@ class SequenceBlockTestCase(XModuleXmlImportTest):
 
         html = self._get_rendered_view(
             self.sequence_1_2,
-            extra_context=dict(next_url='NextSequential', prev_url='PrevSequential'),
+            extra_context={"next_url": 'NextSequential', "prev_url": 'PrevSequential'},
         )
         # assert that content and preq banner is shown
         self._assert_prereq(html, self.sequence_1_2)
@@ -360,7 +360,7 @@ class SequenceBlockTestCase(XModuleXmlImportTest):
 
         html = self._get_rendered_view(
             self.sequence_1_2,
-            extra_context=dict(next_url='NextSequential', prev_url='PrevSequential'),
+            extra_context={"next_url": 'NextSequential', "prev_url": 'PrevSequential'},
         )
 
         # assert content shown as normal

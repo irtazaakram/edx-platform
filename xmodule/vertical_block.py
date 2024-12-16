@@ -116,7 +116,7 @@ class VerticalBlock(
             child_block_context = copy(child_context)
             if child in list(child_blocks_to_complete_on_view):
                 child_block_context['wrap_xblock_data'] = {
-                    'mark-completed-on-view-after-delay': complete_on_view_delay
+                    'mark-completed-on-view-after-delay': complete_on_view_delay  # pylint: disable=possibly-used-before-assignment
                 }
             try:
                 # .. filter_implemented_name: VerticalBlockChildRenderStarted

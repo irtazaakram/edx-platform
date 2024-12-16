@@ -57,7 +57,7 @@ class XDomainProxyTest(TestCase):
 
     def _configure(self, is_enabled, whitelist=None):
         """Enable or disable the end-point and configure the whitelist. """
-        config = XDomainProxyConfiguration.current()
+        config = XDomainProxyConfiguration.current()  # pylint: disable=possibly-used-before-assignment
         config.enabled = is_enabled
 
         if whitelist:

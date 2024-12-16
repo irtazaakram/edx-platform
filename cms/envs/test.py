@@ -265,26 +265,27 @@ INSTALLED_APPS += [
 FEATURES['CUSTOM_COURSES_EDX'] = True
 
 ########################## VIDEO IMAGE STORAGE ############################
-VIDEO_IMAGE_SETTINGS = dict(
-    VIDEO_IMAGE_MAX_BYTES=2 * 1024 * 1024,    # 2 MB
-    VIDEO_IMAGE_MIN_BYTES=2 * 1024,       # 2 KB
-    STORAGE_KWARGS=dict(
-        location=MEDIA_ROOT,
-    ),
-    DIRECTORY_PREFIX='video-images/',
-    BASE_URL=MEDIA_URL,
-)
+VIDEO_IMAGE_SETTINGS = {
+    "VIDEO_IMAGE_MAX_BYTES": 2 * 1024 * 1024,  # 2 MB
+    "VIDEO_IMAGE_MIN_BYTES": 2 * 1024,         # 2 KB
+    "STORAGE_KWARGS": {
+        "location": MEDIA_ROOT,
+    },
+    "DIRECTORY_PREFIX": "video-images/",
+    "BASE_URL": MEDIA_URL,
+}
 VIDEO_IMAGE_DEFAULT_FILENAME = 'default_video_image.png'
 
 ########################## VIDEO TRANSCRIPTS STORAGE ############################
-VIDEO_TRANSCRIPTS_SETTINGS = dict(
-    VIDEO_TRANSCRIPTS_MAX_BYTES=3 * 1024 * 1024,    # 3 MB
-    STORAGE_KWARGS=dict(
-        location=MEDIA_ROOT,
-        base_url=MEDIA_URL,
-    ),
-    DIRECTORY_PREFIX='video-transcripts/',
-)
+VIDEO_TRANSCRIPTS_SETTINGS = {
+    "VIDEO_TRANSCRIPTS_MAX_BYTES": 3 * 1024 * 1024,  # 3 MB
+    "STORAGE_KWARGS": {
+        "location": MEDIA_ROOT,
+        "base_url": MEDIA_URL,
+    },
+    "DIRECTORY_PREFIX": "video-transcripts/",
+}
+
 
 ####################### Plugin Settings ##########################
 

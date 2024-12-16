@@ -81,10 +81,7 @@ class Command(BaseCommand):  # lint-amnesty, pylint: disable=missing-class-docst
         if not options['username'] and not options['email']:
             raise CommandError('You must include usernames (-u) or emails (-e) to select users to update')
 
-        enrollment_args = dict(
-            course_id=course_key,
-            mode=options['from_mode']
-        )
+        enrollment_args = {"course_id": course_key, "mode": options['from_mode']}
 
         error_users = []
         success_users = []

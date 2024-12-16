@@ -57,7 +57,7 @@ def edxnotes(request, course_id):
         raise Http404
 
     notes_info = get_notes(request, course)
-    has_notes = (len(notes_info.get('results')) > 0)
+    has_notes = len(notes_info.get('results')) > 0
     context = {
         "course": course,
         "notes_endpoint": reverse("notes", kwargs={"course_id": course_id}),

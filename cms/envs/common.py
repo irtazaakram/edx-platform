@@ -153,20 +153,20 @@ from openedx.core.release import doc_version
 ENABLE_CREDIT_ELIGIBILITY = True
 
 ################################ Block Structures ###################################
-BLOCK_STRUCTURES_SETTINGS = dict(
+BLOCK_STRUCTURES_SETTINGS = {
     # Delay, in seconds, after a new edit of a course is published
     # before updating the block structures cache.  This is needed
     # for a better chance at getting the latest changes when there
     # are secondary reads in sharded mongoDB clusters. See TNL-5041
     # for more info.
-    COURSE_PUBLISH_TASK_DELAY=30,
+    "COURSE_PUBLISH_TASK_DELAY": 30,
 
     # Delay, in seconds, between retry attempts if a task fails.
-    TASK_DEFAULT_RETRY_DELAY=30,
+    "TASK_DEFAULT_RETRY_DELAY": 30,
 
     # Maximum number of retries per task.
-    TASK_MAX_RETRIES=5,
-)
+    "TASK_MAX_RETRIES": 5,
+}
 
 ############################ FEATURE CONFIGURATION #############################
 
@@ -2561,33 +2561,33 @@ DEPRECATED_ADVANCED_COMPONENT_TYPES = []
 
 ########################## VIDEO IMAGE STORAGE ############################
 
-VIDEO_IMAGE_SETTINGS = dict(
-    VIDEO_IMAGE_MAX_BYTES=2 * 1024 * 1024,    # 2 MB
-    VIDEO_IMAGE_MIN_BYTES=2 * 1024,       # 2 KB
+VIDEO_IMAGE_SETTINGS = {
+    "VIDEO_IMAGE_MAX_BYTES": 2 * 1024 * 1024,  # 2 MB
+    "VIDEO_IMAGE_MIN_BYTES": 2 * 1024,         # 2 KB
     # Backend storage
-    # STORAGE_CLASS='storages.backends.s3boto3.S3Boto3Storage',
-    # STORAGE_KWARGS=dict(bucket='video-image-bucket'),
-    STORAGE_KWARGS=dict(
-        location=MEDIA_ROOT,
-    ),
-    DIRECTORY_PREFIX='video-images/',
-    BASE_URL=MEDIA_URL,
-)
+    # "STORAGE_CLASS": "storages.backends.s3boto3.S3Boto3Storage",
+    # "STORAGE_KWARGS": {"bucket": "video-image-bucket"},
+    "STORAGE_KWARGS": {
+        "location": MEDIA_ROOT,
+    },
+    "DIRECTORY_PREFIX": "video-images/",
+    "BASE_URL": MEDIA_URL,
+}
 
 VIDEO_IMAGE_MAX_AGE = 31536000
 
 ########################## VIDEO TRANSCRIPTS STORAGE ############################
-VIDEO_TRANSCRIPTS_SETTINGS = dict(
-    VIDEO_TRANSCRIPTS_MAX_BYTES=3 * 1024 * 1024,    # 3 MB
+VIDEO_TRANSCRIPTS_SETTINGS = {
+    "VIDEO_TRANSCRIPTS_MAX_BYTES": 3 * 1024 * 1024,  # 3 MB
     # Backend storage
-    # STORAGE_CLASS='storages.backends.s3boto3.S3Boto3Storage',
-    # STORAGE_KWARGS=dict(bucket='video-transcripts-bucket'),
-    STORAGE_KWARGS=dict(
-        location=MEDIA_ROOT,
-    ),
-    DIRECTORY_PREFIX='video-transcripts/',
-    BASE_URL=MEDIA_URL,
-)
+    # "STORAGE_CLASS": "storages.backends.s3boto3.S3Boto3Storage",
+    # "STORAGE_KWARGS": {"bucket": "video-transcripts-bucket"},
+    "STORAGE_KWARGS": {
+        "location": MEDIA_ROOT,
+    },
+    "DIRECTORY_PREFIX": "video-transcripts/",
+    "BASE_URL": MEDIA_URL,
+}
 
 VIDEO_TRANSCRIPTS_MAX_AGE = 31536000
 

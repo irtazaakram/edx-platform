@@ -174,21 +174,13 @@ def rescore_problem_module_state(xblock_instance_args, block, student_module, ta
             TASK_LOG.exception(
                 "error processing rescore call for course %(course)s, problem %(loc)s "
                 "and student %(student)s",
-                dict(
-                    course=course_id,
-                    loc=usage_key,
-                    student=student
-                )
+                {"course": course_id, "loc": usage_key, "student": student}
             )
         except StudentInputError:
             TASK_LOG.warning(
                 "error processing rescore call for course %(course)s, problem %(loc)s "
                 "and student %(student)s",
-                dict(
-                    course=course_id,
-                    loc=usage_key,
-                    student=student
-                )
+                {"course": course_id, "loc": usage_key, "student": student}
             )
             return UPDATE_STATUS_FAILED
 
@@ -196,11 +188,7 @@ def rescore_problem_module_state(xblock_instance_args, block, student_module, ta
         TASK_LOG.debug(
             "successfully processed rescore call for course %(course)s, problem %(loc)s "
             "and student %(student)s",
-            dict(
-                course=course_id,
-                loc=usage_key,
-                student=student
-            )
+            {"course": course_id, "loc": usage_key, "student": student}
         )
 
         return UPDATE_STATUS_SUCCEEDED
@@ -276,11 +264,7 @@ def override_score_module_state(xblock_instance_args, block, student_module, tas
         TASK_LOG.debug(
             "successfully processed score override for course %(course)s, problem %(loc)s "
             "and student %(student)s",
-            dict(
-                course=course_id,
-                loc=usage_key,
-                student=student
-            )
+            {"course": course_id, "loc": usage_key, "student": student}
         )
 
         return UPDATE_STATUS_SUCCEEDED

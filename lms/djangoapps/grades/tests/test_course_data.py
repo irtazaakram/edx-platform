@@ -67,10 +67,10 @@ class CourseDataTest(ModuleStoreTestCase):
         )
 
         for kwargs in [
-            dict(course=self.course),
-            dict(collected_block_structure=self.one_true_structure),
-            dict(structure=self.one_true_structure),
-            dict(course_key=self.course.id),
+            {"course": self.course},
+            {"collected_block_structure": self.one_true_structure},
+            {"structure": self.one_true_structure},
+            {"course_key": self.course.id},
         ]:
             course_data = CourseData(self.user, **kwargs)
             assert course_data.course_key == self.course.id

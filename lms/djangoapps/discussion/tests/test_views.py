@@ -592,7 +592,7 @@ class SingleThreadQueryCountTestCase(ForumsEnableMixin, ModuleStoreTestCase):
             """
             Call single_thread and assert that it returns what we expect.
             """
-            with patch.dict("django.conf.settings.FEATURES", dict(ENABLE_ENTERPRISE_INTEGRATION=enterprise_enabled)):
+            with patch.dict("django.conf.settings.FEATURES", {"ENABLE_ENTERPRISE_INTEGRATION": enterprise_enabled}):
                 response = views.single_thread(
                     request,
                     str(course.id),
@@ -2134,9 +2134,9 @@ class EnterpriseConsentTestCase(EnterpriseTestConsentRequired, ForumsEnableMixin
 
         for url in (
                 reverse('forum_form_discussion',
-                        kwargs=dict(course_id=course_id)),
+                        kwargs={"course_id": course_id}),
                 reverse('single_thread',
-                        kwargs=dict(course_id=course_id, discussion_id=self.discussion_id, thread_id=thread_id)),
+                        kwargs={"course_id": course_id, "discussion_id": self.discussion_id, "thread_id": thread_id}),
         ):
             self.verify_consent_required(self.client, url)  # pylint: disable=no-value-for-parameter
 

@@ -105,7 +105,7 @@ class ContentLibrariesRestApiTest(APITransactionTestCase):
         Call a REST API
         """
         response = getattr(self.client, method)(url, data, format="json")
-        assert response.status_code == expect_response,\
+        assert response.status_code == expect_response, \
             'Unexpected response code {}:\n{}'.format(response.status_code, getattr(response, 'data', '(no data)'))
         return response.data
 
@@ -277,7 +277,7 @@ class ContentLibrariesRestApiTest(APITransactionTestCase):
         file_handle = BytesIO(content)
         url = URL_LIB_BLOCK_ASSET_FILE.format(block_key=block_key, file_name=file_name)
         response = self.client.put(url, data={"content": file_handle})
-        assert response.status_code == expect_response,\
+        assert response.status_code == expect_response, \
             'Unexpected response code {}:\n{}'.format(response.status_code, getattr(response, 'data', '(no data)'))
 
     def _delete_library_block_asset(self, block_key, file_name, expect_response=204):

@@ -145,12 +145,12 @@ class Command(BaseCommand):
         client_id = options['client_id']
         client_secret = options['client_secret']
 
-        application_kwargs = dict(
-            redirect_uris=redirect_uris,
-            client_type=client_type,
-            authorization_grant_type=grant_type,
-            skip_authorization=skip_authorization
-        )
+        application_kwargs = {
+            "redirect_uris": redirect_uris,
+            "client_type": client_type,
+            "authorization_grant_type": grant_type,
+            "skip_authorization": skip_authorization,
+        }
         if client_id:
             application_kwargs['client_id'] = client_id
         if client_secret:

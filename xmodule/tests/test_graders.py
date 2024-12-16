@@ -21,8 +21,13 @@ class GradesheetTest(unittest.TestCase):
 
     def test_weighted_grading(self):
         scores = []
-        agg_fields = dict(first_attempted=None)
-        prob_fields = dict(raw_earned=0, raw_possible=0, weight=0, first_attempted=None)
+        agg_fields = {"first_attempted": None}
+        prob_fields = {
+            "raw_earned": 0,
+            "raw_possible": 0,
+            "weight": 0,
+            "first_attempted": None,
+        }
 
         # No scores
         all_total, graded_total = aggregate_scores(scores)
@@ -78,7 +83,7 @@ class GraderTest(unittest.TestCase):
         def percent_graded(self):
             return compute_percent(self.graded_total.earned, self.graded_total.possible)
 
-    common_fields = dict(graded=True, first_attempted=datetime.now())
+    common_fields = {"graded": True, "first_attempted": datetime.now()}
     test_gradesheet = {
         'Homework': {
             'hw1': MockGrade(AggregatedScore(tw_earned=2, tw_possible=20.0, **common_fields), display_name='hw1'),
